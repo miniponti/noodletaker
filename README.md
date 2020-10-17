@@ -13,18 +13,18 @@ La temática del juego es "Japón moderno mezclado con figuras del Japón antigu
 # GAME DESIGN DOCUMENT
 
 ### 1.- Introducción
-#### 1.- Concepto principal
+#### 1.1.- Concepto principal
  NoodleTaker es un juego ambientado en el Japón actual. Un samurái repartidor de noodles está haciendo sus repartos cuando dos ninjas enemigos aparecen para robarle los pedidos y así quedarse ellos con el dinero. Estos dos ninjas compiten el uno contra el otro para llegar a la meta mientras al mismo tiempo escapan del samurái que los persigue para castigarlos.
   
-  2. Características principales
-  	1. Jugabilidad sencilla: el planteamiento de NoodleTaker y sus mecánicas hace que sea sencillo de entender y jugar para cualquier público.
-    	2. Competitividad: NoodleTaker pone a dos jugadores a probar sus habilidades de capacidad de reacción para así superar los obstáculos del juego y conseguir la victoria frente al otro.
-    	3. Rejugabilidad: por su competitividad, su corta duración y la rivalidad que surge entre los jugadores tras jugar las partidas, el juego es altamente rejugable.
-    	4. Dinamismo: la velocidad y los reflejos son un elemento muy importante en el juego, lo que genera dinámicas rápidas y precisas.
-    	5. Número de jugadores: 2
-    	6. No se implementa un sistema de guardado y carga.
+#### 1.2.- Características principales
+1. Jugabilidad sencilla: el planteamiento de NoodleTaker y sus mecánicas hace que sea sencillo de entender y jugar para cualquier público.
+2. Competitividad: NoodleTaker pone a dos jugadores a probar sus habilidades de capacidad de reacción para así superar los obstáculos del juego y conseguir la victoria frente al otro.
+3. Rejugabilidad: por su competitividad, su corta duración y la rivalidad que surge entre los jugadores tras jugar las partidas, el juego es altamente rejugable.
+4. . Dinamismo: la velocidad y los reflejos son un elemento muy importante en el juego, lo que genera dinámicas rápidas y precisas.
+5. Número de jugadores: 2
+ 6. No se implementa un sistema de guardado y carga.
 
-Género
+#### 1.3.- Género
 Runner: el jugador se mueve constantemente por un mapa avanzando de manera horizontal mientras esquiva distintos obstáculos y recoge diversos objetos para ayudarle a avanzar.
 
 Propósito y público específico
