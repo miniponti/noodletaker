@@ -12,8 +12,8 @@ La temática del juego es "Japón moderno mezclado con figuras del Japón antigu
 
 # GAME DESIGN DOCUMENT
 
-## 1.- Introducción
-### 1.- Concepto principal
+### 1.- Introducción
+#### 1.- Concepto principal
  NoodleTaker es un juego ambientado en el Japón actual. Un samurái repartidor de noodles está haciendo sus repartos cuando dos ninjas enemigos aparecen para robarle los pedidos y así quedarse ellos con el dinero. Estos dos ninjas compiten el uno contra el otro para llegar a la meta mientras al mismo tiempo escapan del samurái que los persigue para castigarlos.
   
   2. Características principales
