@@ -139,4 +139,3 @@ Como segundo plan y si él juego adquiere cierta popularidad, se realizará un k
 * **La tarada (Yuno Gasai)**: aparece por detrás y se lleva al ninja a vete tú a saber para qué
 * **Nuru-nuru-nuru-nuru (Koro-Sensei)**: Aparece “Kokoro-Sensei” y ralentiza con un tentáculoº.
 * Sacar el juego también para movil
-![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Framenparados.com%2Fsanji-y-marshall-d-teach-de-one-piece-anunciados-como-luchadores-en-jump-force%2F&psig=AOvVaw3zad3Tsgrie-4OzL4uYyqm&ust=1603298315744000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjrvO3Nw-wCFQAAAAAdAAAAABAD)
