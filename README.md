@@ -30,10 +30,7 @@ Runner: el jugador se mueve constantemente por un mapa avanzando de manera horiz
 #### 1.4.- Propósito y público específico
 El principal propósito de NoodleTaker es conseguir que los jugadores vivan una  experiencia competitiva, pero divertida. Es un juego casual y como tal atraerá a personas de todas las edades que quieran pasar un buen rato con algún amigo, gracias al apartado multijugador. 
 
-#### 1.5.- Plataformas
-PC 
-
-#### 1.6.- Licencia
+#### 1.5.- Licencia
 ___CC BY-NC-SA (Reconocimiento-NoComercial-CompartirIgual).___
 
 Esta licencia permite a otras personas, mezclar, adaptar y construir a partir del proyecto no comercialmente, siempre que se nos acredite y se publique bajo la misma licencia.
