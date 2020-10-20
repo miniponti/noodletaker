@@ -132,7 +132,8 @@ NoodleTaker consta de los siguientes estados:
 ![](concept%20art/interfazDentroJuego.png)
 
 * **Pantalla de fin de juego:** aparece cuando se han superado los 3 niveles. En esta parte hay un botón que dice “Revancha”, lo cual significa que si los dos jugadores siguen disponible, vuelven a empezar una nueva partida y deben recorrer los tres niveles de nuevo con las puntuaciones al estado inicial (cero puntos cada uno).
-Pantalla de nivel completado: sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le hayan impedido seguir jugando. Cuando esto ocurra, aparecen las puntuaciones de los jugadores (según los escenarios que hayan completado cada uno), un botón para avanzar al siguiente escenario y otro botón que permite a los jugadores abandonar la partida.
+
+* **Pantalla de nivel completado: sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le hayan impedido seguir jugando. Cuando esto ocurra, aparecen las puntuaciones de los jugadores (según los escenarios que hayan completado cada uno), un botón para avanzar al siguiente escenario y otro botón que permite a los jugadores abandonar la partida.
 ![](concept%20art/resultados.png)
 
 #### 4.2.- Personajes
