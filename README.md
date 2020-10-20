@@ -150,7 +150,9 @@ Debido a que los objetos que se han diseñado se basan en un sistema de “invoc
 
 #### 4.4.- Escenarios
 Se pretende hacer como mínimo dos escenarios que estén basados en diferentes sitios de Japón, un pueblo típico japonés (barrio residencial) de día y una gran ciudad de noche, por donde el samurái perseguirá a los dos ninjas para recuperar su amado tazón de noodles. Se ha decidido hacer estos dos estilos tan opuestos para dar un poco de colorido y variabilidad al juego visualmente ya que aunque las mecánicas sean simples es favorable que se vea como algo más intenso de lo que a priori pueda parecer.
+
 	* **Fondos** Los fondos serán dinámicos conforme el nivel avance, pero no serán acordes a la aparición de las plataformas a lo largo del nivel (parallax mapping).
+	
 	* **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario. Estas quedarán acordes al tema del escenario y se diferenciarán bien las partes tangibles en las que el jugador puede posicionarse y las que no.
 
 ### 5.- Marketing
