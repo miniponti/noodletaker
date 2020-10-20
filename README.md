@@ -127,7 +127,7 @@ NoodleTaker consta de los siguientes estados:
 #### 4.1.- Interfaz
 * **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “Comenzar”, el cual si se pulsa, los jugadores ya pueden jugar.
 
-![](concept art/inicio.png)
+![](concept%20art/inicio.png)
 
 * **Durante el juego:** una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Esta se encuentra en la esquina superior izquierda de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
 
