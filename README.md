@@ -169,4 +169,5 @@ Como segundo plan y si él juego adquiere cierta popularidad, se realizará un k
 * **La tarada (Yuno Gasai)**: aparece por detrás y se lleva al ninja a vete tú a saber para qué
 * **Nuru-nuru-nuru-nuru (Koro-Sensei)**: Aparece “Kokoro-Sensei” y ralentiza con un tentáculoº.
 
+
 * Adaptar y lanzar NoodleTaker para dispositivos móviles (Android y iOS).
