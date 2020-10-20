@@ -164,10 +164,8 @@ Como segundo plan y si él juego adquiere cierta popularidad, se realizará un k
 
 ### 6.- Planes para el futuro
 
-* **Nuevas habilidades:**
-* **Una floripondia (Une fleur)**: sale “Nico nico ni”y aparece una mano que frena al otro ninja
-* **La tarada (Yuno Gasai)**: aparece por detrás y se lleva al ninja a vete tú a saber para qué
-* **Nuru-nuru-nuru-nuru (Koro-Sensei)**: Aparece “Kokoro-Sensei” y ralentiza con un tentáculoº.
-
-
+*  **Nuevas habilidades:**
+* * **Una floripondia (Une fleur)**: sale “Nico nico ni”y aparece una mano que frena al otro ninja
+* * **La tarada (Yuno Gasai)**: aparece por detrás y se lleva al ninja a vete tú a saber para qué
+* * **Nuru-nuru-nuru-nuru (Koro-Sensei)**: Aparece “Kokoro-Sensei” y ralentiza con un tentáculo.
 * Adaptar y lanzar NoodleTaker para dispositivos móviles (Android y iOS).
