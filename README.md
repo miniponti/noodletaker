@@ -1,5 +1,5 @@
 # Noodletaker
-La temática del juego es "Japón moderno mezclado con figuras del Japón antiguo"
+La temática del juego es "Japón moderno mezclado con figuras del Japón feudal"
 
 **Integrantes del grupo**:
 1. **NOMBRE:** Ismael Jiménez Martínez | **CORREO:** i.jimenezm.2018@alumnos.urjc.es | **USUARIO:** _gossipxbabylon_
