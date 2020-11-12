@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
+        <title>NoodleTaker</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script type="text/javascript">
+            //Configuración de la escena
+            var config = {
+                type: Phaser.CANVAS,
+                width: 1400,
+                height: 750,
+                physics: {
+                    default: 'arcade',
+                    arcade: {
+                        gravity: {y: 300},
+                        debug: false
+                    }
+                },
+                scene: {
+                    preload: preload,
+                    create: create,
+                    update: update
+                }
+            };
+
+            var game = new Phaser.Game(config);
+
+            //Atributos y variables
+            var fondoCasa1;
+
+            var player1;
+            var player2;
+            var samurai;
+            var finishLine;
+
+            var cursors;
+            var keyA;
+            var keyD;
+            var keyW;
+
+            var ground;
+            var platforms;
+            var platformsSpeed;
+
+            var p1WinsText;
+            var p2WinsText;
+
+            var time;
+            var timedEvent;
+
+            //Cargar los archivos
+            function preload() {
+                this.load.image('casa1', 'assets/fondoCasa1.jfif');
+                this.load.image('ground', 'assets/platform.png');
+                this.load.image('platform', 'assets/platform.png');
+                this.load.image('finishLine', 'assets/platform.png');
+                this.load.spritesheet('player1', 'assets/dude.png', {
+                    frameWidth: 32,
+                    frameHeight: 48
+                });
+                this.load.spritesheet('player2', 'assets/dude.png', {
+                    frameWidth: 32,
+                    frameHeight: 48
+                });
+
+                this.load.spritesheet('samurai', 'assets/samurai.png', {
+                    frameWidth: 800,
+                    frameHeight: 600
+                });
+            }
+            ;
+
+            //Creación de sprites y objetos
+            function create() {
+                //Fondo en movimiento
+                this.marioBg = this.add.tileSprite(400, 300, config.width, config.height, 'casa1');
+                this.marioBg.setScale(2, 2);
+
+                //Suelo
+                ground = this.physics.add.sprite(config.width / 2, 750, 'ground');
+                ground.setScale(4, 1);
+
+                //Plataformas (grupo)
+                this.platforms = this.physics.add.group({
+                    allowGravity: false,
+                    immovable: true
+                });
+
+                this.platforms.create(1400, 100, 'platform');
+                this.platforms.create(1400, 200, 'platform');
+                this.platforms.create(1400, 300, 'platform');
+                this.platforms.create(1400, 400, 'platform');
+                this.platforms.setVelocityX(-50);
+
+                //Jugadores
+                player1 = this.physics.add.sprite(400, 700, 'player1');
+                player2 = this.physics.add.sprite(450, 700, 'player2');
+
+                //Samurai enemigo
+                samurai = this.physics.add.sprite(20, 575, 'samurai');
+                samurai.setScale(0.3, 0.3);
+
+                time = this.add.text(32, 32);
+                timedEvent = this.time.delayedCall(3000, createFinishLine, [], this);
+
+                //Colisiones con los límites del canvas
+                ground.setCollideWorldBounds(true);
+                player1.setCollideWorldBounds(true);
+                player2.setCollideWorldBounds(true);
+                samurai.setCollideWorldBounds(true);
+
+                //Controles
+                cursors = this.input.keyboard.createCursorKeys();
+                keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+                keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+                keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+
+                //Colisiones
+                this.physics.add.collider(player1, ground);
+                this.physics.add.collider(player2, ground);
+                this.physics.add.collider(samurai, ground);
+
+                this.physics.add.collider(player1, this.platforms);
+                this.physics.add.collider(player2, this.platforms);
+
+                //Funciones que se activan si hay una colision
+                this.physics.add.collider(player1, samurai, gameOverP1, null, this);
+                this.physics.add.collider(player2, samurai, gameOverP2, null, this);
+            }
+            ;
+
+            function update() {
+                time.setText('Event.progress: ' + timedEvent.getProgress().toString().substr(0, 4));
+                var movePos = 5;
+                this.marioBg.tilePositionX += movePos;
+                movePlayer(1);
+                movePlayer(2);
+            }
+
+            function movePlayer(playerIndex) {
+                var velocityX = 160;
+                var velocityY = 330;
+                if (playerIndex === 1) {
+                    if (cursors.left.isDown) {
+                        player1.setVelocityX(-velocityX);
+                        player1.anims.play('left', true);
+                    } else if (cursors.right.isDown)
+                    {
+                        player1.setVelocityX(velocityX);
+                        player1.anims.play('right', true);
+                    } else
+                    {
+                        player1.setVelocityX(0);
+                        player1.anims.play('turn');
+                    }
+
+                    //Saltar
+                    //La tecla de salto es el cursor hacia arriba y se compruba si está pulsada. También se verifica si el personaje está tocando el suelo, ya que de lo
+                    //contrario podría saltar mientras está en el aire. Si se cumplen estas dos condiciones, se aplica una velocidad vertical de 330 px/s.
+                    if (cursors.up.isDown && player1.body.touching.down)
+                    {
+                        player1.setVelocityY(-velocityY);
+                    }
+                } else if (playerIndex === 2) {
+                    if (keyA.isDown) {
+                        player2.setVelocityX(-velocityX);
+                        player2.anims.play('left', true);
+                    } else if (keyD.isDown)
+                    {
+                        player2.setVelocityX(velocityX);
+                        player2.anims.play('right', true);
+                    } else
+                    {
+                        player2.setVelocityX(0);
+                        player2.anims.play('turn');
+                    }
+
+                    //Saltar
+                    //La tecla de salto es el cursor hacia arriba y se compruba si está pulsada. También se verifica si el personaje está tocando el suelo, ya que de lo
+                    //contrario podría saltar mientras está en el aire. Si se cumplen estas dos condiciones, se aplica una velocidad vertical de 330 px/s.
+                    if (keyW.isDown && player2.body.touching.down)
+                    {
+                        player2.setVelocityY(-velocityY);
+                    }
+                }
+            }
+
+            //Función que se activa si el jugador 1 colisiona con el samurai, en
+            //tal caso, el jugador 2 gana
+            function gameOverP1() {
+                //Los jugadores ya no pueden moverse
+                this.physics.pause();
+                gameOver = true;
+                p2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {
+                    fontSize: '32px',
+                    fill: '#000'
+                });
+            }
+
+            //Función que se activa si el jugador 2 colisiona con el samurai, en
+            //tal caso, el jugador 1 gana
+            function gameOverP2() {
+                //Los jugadores ya no pueden moverse
+                this.physics.pause(p2WinsText);
+                gameOver = true;
+                p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
+                    fontSize: '32px',
+                    fill: '#000'
+                });
+            }
+
+            function winnerP1() {
+                this.physics.pause();
+                gameOver = true;
+                p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
+                    fontSize: '32px',
+                    fill: '#000'
+                });
+            }
+
+            function winnerP2() {
+                this.physics.pause();
+                gameOver = true;
+                p2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {
+                    fontSize: '32px',
+                    fill: '#000'
+                });
+            }
+
+            function createFinishLine()
+            {
+                finishLine = this.physics.add.sprite(1400, 350, 'finishLine');
+                finishLine.setScale(0.05, 23);
+                this.physics.add.collider(finishLine, ground);
+                finishLine.setVelocityX(-50);
+                this.physics.add.collider(player1, finishLine, winnerP1, null, this);
+                this.physics.add.collider(player2, finishLine, winnerP2, null, this);
+            }
+
+            function destroySprite(sprite) {
+                sprite.disableBody(true, true);
+            }
+
+        </script>
+    </body>
+</html>
