@@ -26,47 +26,71 @@ class GameScene extends Phaser.Scene {
             frameWidth: 1161,
             frameHeight: 1387
         });
+        this.load.spritesheet('powerup', 'assets/sprites/ETM.png', {
+            frameWidth: 871,
+            frameHeight: 1303
+        });
     }
 
     create() {
         //FONDO DEL JUEGO
+
         //INICIALIZACION FONDO
         this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'fondo');
         this.bg.setOrigin(0,0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
 
-        //SUELO CON COLLIDERS
-        this.suelo = this.physics.add.image(0, 750, 'suelo'); //INICIALIZACION SUELO
-        this.suelo.setCollideWorldBounds(true);               //COLISIONES CON EL BORDE DEL "CANVAS"
+        //SUELO ESTATICO
+        this.suelo = this.physics.add.staticGroup();
+        this.suelo.create(0, 750, 'suelo').setScale(2).refreshBody(); //INICIALIZACION SUELO
+        
 
         //JUGADOR 1
-        this.player1 = this.physics.add.sprite(400, 550, 'j1');  //INICIALIZACION J1
+        this.player1 = this.physics.add.sprite(450, 550, 'j1');  //INICIALIZACION J1
         this.player1.setScale(0.15,0.15);                        //ESCALADO J1
-        this.physics.add.collider(this.player1, this.suelo);     //COLISIONES CON SUELO
-        this.anims.create({                                      //ANIMACION SPRITE J1
+        
+        //ANIMACIONES JUGADOR 1
+        this.anims.create({                                     
             key: "j1_anim",
             frames: this.anims.generateFrameNumbers("j1"),
             frameRate: 20,
             repeat: -1
+        });
+        this.anims.create({                                      //ANIMACION SPRITE J1
+            key: "j1_stand",
+            frames: [{key: 'j1', frame: 3}],
+            frameRate: 20,
         });
         this.player1.play("j1_anim");
 
         //JUGADOR 2
         this.player2 = this.physics.add.sprite(500, 550, 'j2');  //INICIALIZACION J2
         this.player2.setScale(0.15,0.15);                        //ESCALADO J2
-        this.physics.add.collider(this.player2, this.suelo);     //COLISIONES CON SUELO
-        this.anims.create({                                      //ANIMACION SPRITE J2
+
+        //ANIMACIONES JUGADOR 2
+        this.anims.create({                                      
             key: "j2_anim",
             frames: this.anims.generateFrameNumbers("j2"),
             frameRate: 20,
             repeat: -1
         });
+        this.anims.create({                                      //ANIMACION SPRITE J1
+            key: "j2_stand",
+            frames: [{key: 'j2', frame: 3}],
+            frameRate: 20,
+        });
         this.player2.play("j2_anim");
 
         //SAMURAI
-        this.samurai = this.physics.add.sprite(0, 450, 'samurai');  //INICIALIZACION SAMURAI
-        this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURAI
-        this.samurai.setOrigin(0,0);
-        this.physics.add.collider(this.samurai, this.suelo);         //COLISIONES CON SUELO
+        this.samurai = this.physics.add.sprite(100, 545, 'samurai');  //INICIALIZACION SAMURAI
+        this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
+        
+        //PowerUps
+        this.powerUps = this.physics.add.group();
+
+        //El todo mitico
+    
+        this.todoMitico = this.powerUps.create(900, 550, 'powerup');
+        this.todoMitico.setScale(0.15, 0.15);
 
         //TECLAS
         this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -77,6 +101,25 @@ class GameScene extends Phaser.Scene {
         this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+        //Colisiones con los límites del canvas
+        this.player1.setCollideWorldBounds(true);
+        this.player2.setCollideWorldBounds(true);
+        this.samurai.setCollideWorldBounds(true);
+        this.todoMitico.setCollideWorldBounds(true);
+
+        //COLISIONES CON SUELO
+        this.physics.add.collider(this.samurai, this.suelo);         
+        this.physics.add.collider(this.player2, this.suelo);     
+        this.physics.add.collider(this.player1, this.suelo);     
+        this.physics.add.collider(this.powerUps, this.suelo);
+
+        //COLISIONES ENTRE ELEMENTOS
+        this.physics.add.collider(this.player1, this.samurai, this.gameOverP1, null, this);
+        this.physics.add.collider(this.player2, this.samurai, this.gameOverP2, null, this);
+        this.physics.add.collider(this.player1, this.player2);
+        this.physics.add.collider(this.player1, this.powerUps);
+        this.physics.add.collider(this.player2, this.powerUps);
 
     }
 
@@ -120,4 +163,36 @@ class GameScene extends Phaser.Scene {
 
     }
 
+    elTodoMitico(player, powerUp){
+        this.physics.pause();
+        console.log(player);
+    }
+
+    gameOverP1() {
+        //Los jugadores ya no pueden moverse
+        this.physics.pause();
+        this.gameOver = true;                                                   //Fin del juego
+        this.thisp2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {       //Mostramos por pantalla el texto de victoria
+            fontSize: '32px',
+            fill: '#000'
+        });
+
+        //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
+        this.player2.play("j2_stand");                                          
+        this.player1.play("j1_stand");
+    }
+
+    gameOverP2() {
+        //Los jugadores ya no pueden moverse
+        this.physics.pause();
+        this.gameOver = true;
+        this.p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
+            fontSize: '32px',
+            fill: '#000'
+        });
+
+        //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
+        this.player2.play("j2_stand");
+        this.player1.play("j1_stand");
+    }
 }
