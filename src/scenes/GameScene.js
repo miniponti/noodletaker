@@ -10,18 +10,18 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         //CARGA DE TODAS LAS IMAGENES
-        this.load.image('fondo', 'assets/casas.png');
-        this.load.image('suelo', 'assets/plataforma.png');
-        this.load.image('obstaculo', 'assets/plataforma.png');
-        this.load.spritesheet('j1', 'assets/AZUL_CORRIENDO.png', {
+        this.load.image('fondo', 'assets/sprites/casas.png');
+        this.load.image('suelo', 'assets/sprites/plataforma.png');
+        this.load.image('obstaculo', 'assets/sprites/plataforma.png');
+        this.load.spritesheet('j1', 'assets/sprites/AZUL_CORRIENDO.png', {
             frameWidth: 697,
             frameHeight: 1004
         });
-        this.load.spritesheet('j2', 'assets/VERDE_CORRIENDO.png', {
+        this.load.spritesheet('j2', 'assets/sprites/VERDE_CORRIENDO.png', {
             frameWidth: 697,
             frameHeight: 1004
         });
-        this.load.spritesheet('samurai', 'assets/samurai.png', {
+        this.load.spritesheet('samurai', 'assets/sprites/samurai.png', {
             frameWidth: 1161,
             frameHeight: 1387
         });
