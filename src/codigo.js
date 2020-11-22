@@ -1,8 +1,8 @@
-var config = {
+let config = {
     type: Phaser.AUTO,
     width: 1400,
     height: 750,
-    backgroundColor: '#2ce6ff',
+    backgroundColor: '#303fb1',
     physics: {
         default: 'arcade',
         arcade: {
@@ -10,7 +10,7 @@ var config = {
             debug: false
         }
     },
-    scene: [TitleScene,GameScene]
+    scene: [TitleScene, GameScene]
 };
 
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);

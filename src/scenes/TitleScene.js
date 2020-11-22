@@ -10,10 +10,10 @@ class TitleScene extends Phaser.Scene {
     }
 
     create() {
-        var bg = this.add.sprite(0,0,'fondoTitulo');
+        let bg = this.add.sprite(0, 0, 'fondoTitulo');
         bg.setOrigin(0,0);
 
-        var botonStart = this.add.image(700,500,'botonSTART');
+        let botonStart = this.add.image(config.width / 2, 500, 'botonSTART');
         botonStart.setInteractive({useHandCursor: true});
         botonStart.on("pointerdown", () => this.clickButton());
 
