@@ -13,6 +13,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('fondo', 'assets/sprites/casas.png');
         this.load.image('suelo', 'assets/sprites/plataforma.png');
         this.load.image('obstaculo', 'assets/sprites/plataforma.png');
+        //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
         this.load.spritesheet('j1', 'assets/sprites/AZUL_CORRIENDO.png', {
             frameWidth: 697,
             frameHeight: 1004
