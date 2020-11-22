@@ -127,45 +127,48 @@ class GameScene extends Phaser.Scene {
         this.velocidadJugador = 200;
         this.velocidadMundo = 100;
         this.velocidadSalto = 400
+        this.finJuego = false;
     }
 
     movePlayers(){
-        //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
-        if(this.keyW.isDown && this.player1.body.touching.down){
-            this.player1.setVelocityY(-this.velocidadSalto);
-        }
-        else if (this.keyA.isDown){
-            this.player1.setVelocityX(-(this.velocidadJugador+this.velocidadMundo));
-            this.player1.play("j1_anim", true); 
-            this.player1.setFlip(true,false)
-        }
-        else if(this.keyS.isDown){
-            this.player1.play("j1_stand", true);
-            this.player1.setVelocityX(-this.velocidadMundo);
-        }
-        else if (this.keyD.isDown){
-            this.player1.setVelocityX(this.velocidadJugador);
-            this.player1.play("j1_anim", true);
-            this.player1.setFlip(false,false) 
-        }
+        if(!finjuego){
+            //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
+            if(this.keyW.isDown && this.player1.body.touching.down){
+                this.player1.setVelocityY(-this.velocidadSalto);
+            }
+            else if (this.keyA.isDown){
+                this.player1.setVelocityX(-(this.velocidadJugador+this.velocidadMundo));
+                this.player1.play("j1_anim", true); 
+                this.player1.setFlip(true,false)
+            }
+            else if(this.keyS.isDown){
+                this.player1.play("j1_stand", true);
+                this.player1.setVelocityX(-this.velocidadMundo);
+            }
+            else if (this.keyD.isDown){
+                this.player1.setVelocityX(this.velocidadJugador);
+                this.player1.play("j1_anim", true);
+                this.player1.setFlip(false,false) 
+            }
 
-        //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
-        if(this.keyUP.isDown && this.player2.body.touching.down){
-            this.player2.setVelocityY(-this.velocidadSalto);
-        }
-        else if (this.keyLEFT.isDown){
-            this.player2.setVelocityX(-(this.velocidadJugador+this.velocidadMundo));
-            this.player2.play("j2_anim", true); 
-            this.player2.setFlip(true,false)
-        }
-        else if(this.keyDOWN.isDown){
-            this.player2.play("j2_stand", true); 
-            this.player2.setVelocityX(-this.velocidadMundo);
-        }
-        else if (this.keyRIGHT.isDown){
-            this.player2.setVelocityX(this.velocidadJugador);
-            this.player2.play("j2_anim", true);
-            this.player2.setFlip(false,false) 
+            //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
+            if(this.keyUP.isDown && this.player2.body.touching.down){
+                this.player2.setVelocityY(-this.velocidadSalto);
+            }
+            else if (this.keyLEFT.isDown){
+                this.player2.setVelocityX(-(this.velocidadJugador+this.velocidadMundo));
+                this.player2.play("j2_anim", true); 
+                this.player2.setFlip(true,false)
+            }
+            else if(this.keyDOWN.isDown){
+                this.player2.play("j2_stand", true); 
+                this.player2.setVelocityX(-this.velocidadMundo);
+            }
+            else if (this.keyRIGHT.isDown){
+                this.player2.setVelocityX(this.velocidadJugador);
+                this.player2.play("j2_anim", true);
+                this.player2.setFlip(false,false) 
+            }
         }
     }
 
@@ -193,6 +196,7 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play("j2_stand");                                          
         this.player1.play("j1_stand");
+        this.finJuego = true;
     }
 
     gameOverP2() {
@@ -204,8 +208,10 @@ class GameScene extends Phaser.Scene {
             fill: '#000'
         });
 
+
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play("j2_stand");
         this.player1.play("j1_stand");
+        this.finJuego = true;
     }
 }
