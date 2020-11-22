@@ -127,11 +127,10 @@ class GameScene extends Phaser.Scene {
         this.velocidadJugador = 200;
         this.velocidadMundo = 100;
         this.velocidadSalto = 400
-        this.finJuego = false;
     }
 
     movePlayers(){
-        if(!finjuego){
+        
             //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
             if(this.keyW.isDown && this.player1.body.touching.down){
                 this.player1.setVelocityY(-this.velocidadSalto);
@@ -169,13 +168,14 @@ class GameScene extends Phaser.Scene {
                 this.player2.play("j2_anim", true);
                 this.player2.setFlip(false,false) 
             }
-        }
+        
     }
 
     update() {
-        
-        this.movePlayers();
-        this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
+        if(!this.gameOver){
+            this.movePlayers();
+            this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
+        }
     }
 
 
@@ -196,7 +196,7 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play("j2_stand");                                          
         this.player1.play("j1_stand");
-        this.finJuego = true;
+        
     }
 
     gameOverP2() {
@@ -212,6 +212,6 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play("j2_stand");
         this.player1.play("j1_stand");
-        this.finJuego = true;
+      
     }
 }
