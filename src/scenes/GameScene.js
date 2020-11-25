@@ -34,11 +34,13 @@ class GameScene extends Phaser.Scene {
 
         //AUDIO
         this.load.audio("juegoAudio","assets/audio/juego2.mp3");
+        this.load.audio("gameoverAudio","assets/audio/gameover.mp3");
     }
 
     create() {
         //AUDIO
         this.gameBGM = this.sound.add("juegoAudio",{loop: false});
+        this.gameoverAudio = this.sound.add("gameoverAudio");
         this.gameBGM.play();
 
         //FONDO DEL JUEGO
@@ -205,6 +207,7 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play("j2_stand");                                          
         this.player1.play("j1_stand");
+        this.gameoverAudio.play();
         
     }
 
@@ -221,6 +224,7 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play("j2_stand");
         this.player1.play("j1_stand");
+        this.gameoverAudio.play();
       
     }
 }

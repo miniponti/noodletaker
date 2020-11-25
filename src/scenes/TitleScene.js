@@ -11,6 +11,7 @@ class TitleScene extends Phaser.Scene {
 
         //AUDIO
         this.load.audio("tituloAudio","assets/audio/titulo.mp3");
+        this.load.audio("tutun","assets/audio/tutunTITULO.mp3");
     }
 
     create() {
@@ -20,7 +21,9 @@ class TitleScene extends Phaser.Scene {
 
         //AUDIO
         //this.titleBGM = this.sound.add("tituloAudio");
-        //this.titleBGM.play();
+        this.tutunTitulo = this.sound.add("tutun");
+
+
 
         //BOTON
         let botonStart = this.add.image(config.width / 2, 500, 'botonSTART');
@@ -31,12 +34,20 @@ class TitleScene extends Phaser.Scene {
     }
 
     update(time,delta){
-
+        //this.titleBGM.play();
     }
+
 
     //FUNCION DEL BOTON
     clickButton(){
-        this.scene.switch('juegoEscena');
+        this.tutunTitulo.play();
+        this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
+        //this.titleBGM.stop();
+
     }
+    cambiarEscena(){
+
+    }
+
 
 }
