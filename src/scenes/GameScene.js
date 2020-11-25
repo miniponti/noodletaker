@@ -13,6 +13,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('fondo', 'assets/sprites/casas.png');
         this.load.image('suelo', 'assets/sprites/plataforma.png');
         this.load.image('obstaculo', 'assets/sprites/plataforma.png');
+
         //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
         this.load.spritesheet('j1', 'assets/sprites/AZUL_CORRIENDO.png', {
             frameWidth: 697,
@@ -30,12 +31,17 @@ class GameScene extends Phaser.Scene {
             frameWidth: 871,
             frameHeight: 1303
         });
+
+        //AUDIO
+        this.load.audio("juegoAudio","assets/audio/juego2.mp3");
     }
 
     create() {
-        //FONDO DEL JUEGO
+        //AUDIO
+        this.gameBGM = this.sound.add("juegoAudio",{loop: false});
+        this.gameBGM.play();
 
-        //INICIALIZACION FONDO
+        //FONDO DEL JUEGO
         this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'fondo');
         this.bg.setOrigin(0,0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
 
@@ -49,13 +55,13 @@ class GameScene extends Phaser.Scene {
         this.player1.setScale(0.15,0.15);                        //ESCALADO J1
         
         //ANIMACIONES JUGADOR 1
-        this.anims.create({                                     
+        this.anims.create({                                     //ANIMACION MOVIMIENTO J1
             key: "j1_anim",
             frames: this.anims.generateFrameNumbers("j1"),
             frameRate: 20,
             repeat: -1
         });
-        this.anims.create({                                      //ANIMACION SPRITE J1
+        this.anims.create({                                      //ANIMACION ESTATICO J1
             key: "j1_stand",
             frames: [{key: 'j1', frame: 3}],
             frameRate: 20,
@@ -68,13 +74,13 @@ class GameScene extends Phaser.Scene {
         this.player2.setScale(0.15,0.15);                        //ESCALADO J2
 
         //ANIMACIONES JUGADOR 2
-        this.anims.create({                                      
+        this.anims.create({                                      //ANIMACION MOVIMIENTO J2
             key: "j2_anim",
             frames: this.anims.generateFrameNumbers("j2"),
             frameRate: 20,
             repeat: -1
         });
-        this.anims.create({                                      //ANIMACION SPRITE J1
+        this.anims.create({                                      //ANIMACION ESTATICO J2
             key: "j2_stand",
             frames: [{key: 'j2', frame: 3}],
             frameRate: 20,
@@ -84,13 +90,12 @@ class GameScene extends Phaser.Scene {
 
         //SAMURAI
         this.samurai = this.physics.add.sprite(100, 545, 'samurai');  //INICIALIZACION SAMURAI
-        this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
+        this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURAI
         
         //PowerUps
         this.powerUps = this.physics.add.group();
 
-        //El todo mitico
-    
+        //El TODO MITICO
         this.todoMitico = this.powerUps.create(900, 550, 'powerup');
         this.todoMitico.setScale(0.15, 0.15);
 
@@ -176,6 +181,10 @@ class GameScene extends Phaser.Scene {
             this.movePlayers();
             this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
         }
+        else{
+            this.gameBGM.stop();
+        }
+
     }
 
 
