@@ -260,7 +260,7 @@ class GameScene extends Phaser.Scene {
     startGame() {
         console.log("startGame FUNCIONA");
         this.startGameBool = true;
-        this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
+        //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
         this.timedFinishLine = this.time.delayedCall(3000, this.createFinishLine, [], this);
         this.finishLineTimer = this.add.text(32, 64);
     }
