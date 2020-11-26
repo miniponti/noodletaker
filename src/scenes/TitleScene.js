@@ -8,6 +8,8 @@ class TitleScene extends Phaser.Scene {
         //IMAGENES
         this.load.image('fondoTitulo', 'assets/sprites/fondo.png');
         this.load.image('botonSTART','assets/sprites/START.png');
+        this.load.image('botonCtrl','assets/sprites/CONTROLES.png');
+        this.load.image('botonAudio','assets/sprites/audio.png');
 
         //AUDIO
         this.load.audio("tituloAudio","assets/audio/titulo.mp3");
@@ -25,10 +27,21 @@ class TitleScene extends Phaser.Scene {
 
 
 
-        //BOTON
-        let botonStart = this.add.image(config.width / 2, 500, 'botonSTART');
+        //BOTON START
+        let botonStart = this.add.image(config.width / 2 - 200, 500, 'botonSTART');
         botonStart.setInteractive({useHandCursor: true});
-        botonStart.on("pointerdown", () => this.clickButton());
+        botonStart.on("pointerdown", () => this.startGame());
+
+        //BOTON CONTROLES
+        let botonCtrl = this.add.image(config.width / 2 + 200, 500, 'botonCtrl');
+        botonCtrl.setInteractive({useHandCursor: true});
+        botonCtrl.on("pointerdown", () => this.mostrarControles());
+
+        //BOTON AUDIO
+        let botonAudio = this.add.image(config.width - 100, 650, 'botonAudio');
+        botonAudio.setInteractive({useHandCursor: true});
+        botonAudio.on("pointerdown", () => this.volumen());
+
 
 
     }
@@ -39,13 +52,19 @@ class TitleScene extends Phaser.Scene {
 
 
     //FUNCION DEL BOTON
-    clickButton(){
+    startGame(){
         this.tutunTitulo.play();
-        this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
+        //this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
+        this.scene.switch('juegoEscena');
         //this.titleBGM.stop();
 
     }
-    cambiarEscena(){
+
+    mostrarControles(){
+        this.scene.switch('juegoEscena');
+    }
+
+    volumen(){
 
     }
 
