@@ -33,14 +33,18 @@ class GameScene extends Phaser.Scene {
         });
         
         //AUDIO
-        this.load.audio("juegoAudio","assets/audio/juego2.mp3");
+        this.load.audio("juegoAudio","assets/audio/juegoBGM.mp3");
         this.load.audio("gameoverAudio","assets/audio/gameover.mp3");
     }
 
     create() {
         //AUDIO
-        this.gameBGM = this.sound.add("juegoAudio",{loop: false});
+        let configAudio = {
+            rate: 0.8
+        }
+        this.gameBGM = this.sound.add("juegoAudio",configAudio);
         this.gameoverAudio = this.sound.add("gameoverAudio");
+
         
         //FONDO DEL JUEGO
         this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'fondo');
@@ -130,7 +134,7 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player1, this.powerUps);
         this.physics.add.collider(this.player2, this.powerUps);
 
-        this.time.delayedCall(1000, this.startGame, [], this);
+        this.time.delayedCall(3000, this.startGame, [], this);
         //this.startGameTimer = this.add.text(32, 32);
 
         //Variables
@@ -260,9 +264,7 @@ class GameScene extends Phaser.Scene {
         console.log("startGame FUNCIONA");
 
         //CONFIGURACIÓN INICIAL DEL AUDIO
-        let configAudio = {
 
-        }
         this.gameBGM.play();
         this.startGameBool = true;
         //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
