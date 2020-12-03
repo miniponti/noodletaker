@@ -25,8 +25,6 @@ class TitleScene extends Phaser.Scene {
         //this.titleBGM = this.sound.add("tituloAudio");
         this.tutunTitulo = this.sound.add("tutun");
 
-
-
         //BOTON START
         let botonStart = this.add.image(config.width / 2 - 200, 500, 'botonSTART');
         botonStart.setInteractive({useHandCursor: true});
@@ -36,38 +34,30 @@ class TitleScene extends Phaser.Scene {
         let botonCtrl = this.add.image(config.width / 2 + 200, 500, 'botonCtrl');
         botonCtrl.setInteractive({useHandCursor: true});
         botonCtrl.on("pointerdown", () => this.mostrarControles());
-
+        /*
         //BOTON AUDIO
         let botonAudio = this.add.image(config.width - 100, 650, 'botonAudio');
         botonAudio.setInteractive({useHandCursor: true});
         botonAudio.on("pointerdown", () => this.volumen());
-
-
-
+        */
     }
 
     update(time,delta){
         //this.titleBGM.play();
     }
 
-
     //FUNCION DEL BOTON
-    startGame(){
-        this.tutunTitulo.play();
-        this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
-
-        this.scene.start('juegoEscena');
+    clickButton(){
+        console.log("clickButton FUNCIONA");
+        //this.tutunTitulo.play();
+        //this.scene.start('juegoEscena');
+        //this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
         //this.titleBGM.stop();
 
     }
 
     mostrarControles(){
-        this.scene.switch('ControlesScene');
+        console.log("mostrarControles FUNCIONA");
+        //this.scene.start('controlsScene');
     }
-
-    volumen(){
-
-    }
-
-
 }
