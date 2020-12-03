@@ -56,7 +56,7 @@ class TitleScene extends Phaser.Scene {
         this.tutunTitulo.play();
         this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
 
-        this.scene.switch('juegoEscena');
+        this.scene.start('juegoEscena');
         //this.titleBGM.stop();
 
     }
