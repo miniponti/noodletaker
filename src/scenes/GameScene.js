@@ -141,6 +141,7 @@ class GameScene extends Phaser.Scene {
         this.velocidadJugador = 200;
         this.velocidadMundo = 100;
         this.velocidadSalto = 400;
+        this.gameOver = false;
         this.startGameBool = false;
     }
 
@@ -207,6 +208,8 @@ class GameScene extends Phaser.Scene {
         this.player2.play("j2_stand");
         this.player1.play("j1_stand");
         this.gameoverAudio.play();
+        
+        this.scene.start('resumenScene');
     }
 
     gameOverP2() {
@@ -224,6 +227,8 @@ class GameScene extends Phaser.Scene {
         this.player2.play("j2_stand");
         this.player1.play("j1_stand");
         this.gameoverAudio.play();
+        
+        this.scene.start('resumenScene');
     }
 
     createFinishLine()
