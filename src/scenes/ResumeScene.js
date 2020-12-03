@@ -22,20 +22,34 @@ class ResumeScene extends Phaser.Scene {
         //this.titleBGM = this.sound.add("tituloAudio");
         this.tutunTitulo = this.sound.add("tutun");
 
-
-
         //BOTON
-        let botonStart = this.add.image(config.width / 2, 500, 'botonRESTART');
-        botonStart.setInteractive({useHandCursor: true});
-        botonStart.on("pointerdown", () => this.clickButton());
+        let botonRestart = this.add.image(config.width / 2, 500, 'botonRESTART');
+        botonRestart.setScale(0.1, 0.1);
+        botonRestart.setInteractive({useHandCursor: true});
+        botonRestart.on("pointerdown", () => this.restartGame());
     }
     
-    clickButton(){
+    restartGame(){
         this.tutunTitulo.play();
         //this.tutunTitulo.onStop(this.scene.switch('TitleScene'));
         this.scene.start('TitleScene');
         //this.scene.stop('juegoEscena');
         //this.titleBGM.stop();
 
+    }
+
+    setWinnerText(index){
+        if (index = 1){
+            this.p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
+                fontSize: '32px',
+                fill: '#000'
+            });
+            
+        } else if (index = 2) {
+            this.p2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {//Mostramos por pantalla el texto de victoria
+                fontSize: '32px',
+                fill: '#000'
+            });
+        }
     }
 }
