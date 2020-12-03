@@ -6,13 +6,11 @@ class GameScene extends Phaser.Scene {
 
     init() {
 
-    };
-    
-    preload() {
-        console.log("GameScene PRELOAD");
-
+    }
+    ;
+            preload() {
         //CARGA DE TODAS LAS IMAGENES
-        this.load.image('fondo', 'assets/sprites/casas.png');
+        this.load.image('fondo', 'assets/sprites/IMG_0008.png');
         this.load.image('suelo', 'assets/sprites/plataforma.png');
         this.load.image('obstaculo', 'assets/sprites/plataforma.png');
         this.load.image('meta', 'assets/sprites/plataforma.png');
@@ -35,16 +33,18 @@ class GameScene extends Phaser.Scene {
         });
         
         //AUDIO
-        this.load.audio("juegoAudio","assets/audio/juego2.mp3");
+        this.load.audio("juegoAudio","assets/audio/juegoBGM.mp3");
         this.load.audio("gameoverAudio","assets/audio/gameover.mp3");
     }
 
     create() {
-        console.log("GameScene CREATE");
-
         //AUDIO
-        this.gameBGM = this.sound.add("juegoAudio",{loop: false});
+        let configAudio = {
+            rate: 0.8
+        }
+        this.gameBGM = this.sound.add("juegoAudio",configAudio);
         this.gameoverAudio = this.sound.add("gameoverAudio");
+
         
         //FONDO DEL JUEGO
         this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'fondo');
@@ -69,9 +69,10 @@ class GameScene extends Phaser.Scene {
         this.anims.create({//ANIMACION SPRITE J1
             key: "j1_stand",
             frames: [{key: 'j1', frame: 3}],
-            frameRate: 20
+            frameRate: 20,
         });
         this.player1.play("j1_stand");
+        //this.player1.setVelocityX(-100);
 
         //JUGADOR 2
         this.player2 = this.physics.add.sprite(650, 550, 'j2');  //INICIALIZACION J2
@@ -90,6 +91,7 @@ class GameScene extends Phaser.Scene {
             frameRate: 20,
         });
         this.player2.play("j2_stand");
+        //this.player2.setVelocityX(-100);
 
         //SAMURAI
         this.samurai = this.physics.add.sprite(100, 545, 'samurai');  //INICIALIZACION SAMURAI
@@ -141,6 +143,8 @@ class GameScene extends Phaser.Scene {
         this.velocidadSalto = 400;
         this.gameOver = false;
         this.startGameBool = false;
+        this.P1Winner = false;
+        this.P2Winner = false;
     }
 
     movePlayers() {
@@ -181,8 +185,6 @@ class GameScene extends Phaser.Scene {
 
     update() {
         if (!this.gameOver && this.startGameBool) {
-            this.player1.setVelocityX(-100);
-            this.player2.setVelocityX(-100);
             this.movePlayers();
             this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
         } else {
@@ -197,32 +199,12 @@ class GameScene extends Phaser.Scene {
     gameOverP1() {
         //Los jugadores ya no pueden moverse
         console.log("gameOverP1 FUNCIONA");
+
+        //this.P1Winner = true;
+        //setWinnerText(2);
+
         this.physics.pause();
         this.gameOver = true;                                                   //Fin del juego
-        this.thisp2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {//Mostramos por pantalla el texto de victoria
-            fontSize: '32px',
-            fill: '#000'
-        });
-
-        //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
-        this.player2.play("j2_stand");
-        this.player1.play("j1_stand");
-        this.gameoverAudio.play();
-
-        //this.scene.switch('resumenScene');
-        this.scene.start('resumenScene');
-    }
-
-    gameOverP2() {
-        console.log("gameOverP2 FUNCIONA");
-        //Los jugadores ya no pueden moverse
-        this.physics.pause();
-        this.gameOver = true;
-        this.p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
-            fontSize: '32px',
-            fill: '#000'
-        });
-
 
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play("j2_stand");
@@ -230,7 +212,23 @@ class GameScene extends Phaser.Scene {
         this.gameoverAudio.play();
         
         this.scene.start('resumenScene');
-        //this.scene.switch('resumenScene');
+    }
+
+    gameOverP2() {
+        console.log("gameOverP2 FUNCIONA");
+
+        //this.P1Winner = true;
+        //setWinnerText(1);
+        //Los jugadores ya no pueden moverse
+        this.physics.pause();
+        this.gameOver = true;
+
+        //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
+        this.player2.play("j2_stand");
+        this.player1.play("j1_stand");
+        this.gameoverAudio.play();
+        
+        this.scene.start('resumenScene');
     }
 
     createFinishLine()
@@ -247,7 +245,8 @@ class GameScene extends Phaser.Scene {
 
     }
     /*
-    createPlatform() {
+    createPlatform()
+    {
         if (this.startGameBool) {
             console.log("createPlatform FUNCIONA");
             this.platforms = this.physics.add.group({
@@ -268,8 +267,11 @@ class GameScene extends Phaser.Scene {
     */
     startGame() {
         console.log("startGame FUNCIONA");
-        this.startGameBool = true;
+
+        //CONFIGURACIÓN INICIAL DEL AUDIO
+
         this.gameBGM.play();
+        this.startGameBool = true;
         //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
         this.timedFinishLine = this.time.delayedCall(3000, this.createFinishLine, [], this);
         this.finishLineTimer = this.add.text(32, 64);

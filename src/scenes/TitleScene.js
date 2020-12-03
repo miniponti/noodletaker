@@ -47,10 +47,10 @@ class TitleScene extends Phaser.Scene {
     }
 
     //FUNCION DEL BOTON
-    clickButton(){
+    startGame(){
         console.log("clickButton FUNCIONA");
-        //this.tutunTitulo.play();
-        //this.scene.start('juegoEscena');
+        this.tutunTitulo.play();
+        this.scene.start('juegoEscena');
         //this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
         //this.titleBGM.stop();
 
@@ -58,6 +58,6 @@ class TitleScene extends Phaser.Scene {
 
     mostrarControles(){
         console.log("mostrarControles FUNCIONA");
-        //this.scene.start('controlsScene');
+        this.scene.start('controlsScene');
     }
 }
