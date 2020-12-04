@@ -6,12 +6,12 @@ class ResumeScene extends Phaser.Scene {
     
     preload() {
         //IMAGENES
-        this.load.image('fondoTitulo', 'assets/sprites/TITLE_BACKGROUND.png');
-        this.load.image('botonRESTART','assets/sprites/buttons/RESTART_BUTTON.png');
+        this.load.image('fondoTitulo', 'assets/sprites/fondo.png');
+        this.load.image('botonRESTART','assets/sprites/RESTART.png');
 
         //AUDIO
-        this.load.audio("tituloAudio","assets/audio/TITLE_BGM.mp3");
-        this.load.audio("tutun","assets/audio/START_SFX.mp3");
+        this.load.audio("tituloAudio","assets/audio/titulo.mp3");
+        this.load.audio("tutun","assets/audio/tutunTITULO.mp3");
     }
     
     create() {
@@ -24,8 +24,19 @@ class ResumeScene extends Phaser.Scene {
 
         //BOTON
         let botonRestart = this.add.image(config.width / 2, 500, 'botonRESTART');
+        botonRestart.setScale(0.1, 0.1);
         botonRestart.setInteractive({useHandCursor: true});
         botonRestart.on("pointerdown", () => this.restartGame());
+
+        this.p1WinsText = this.add.text(100, 100, 'PLAYER 1 WINS!');
+        this.p1WinsText.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
+        //this.p1WinsText.setVisible(false);
+        //this.p1WinsText.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
+
+        this.p2WinsText = this.add.text(100, 100, 'PLAYER 2 WINS!');
+        this.p2WinsText.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
+        //this.p2WinsText.setVisible(false);
+        //this.p2WinsText.setTint(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
     }
     
     restartGame(){
@@ -38,17 +49,14 @@ class ResumeScene extends Phaser.Scene {
     }
 
     setWinnerText(index){
-        if (index = 1){
-            this.p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
-                fontSize: '32px',
-                fill: '#000'
-            });
+        if (index === 1){
+            console.log("P1 WINS");
+            //this.p1WinsText.setVisible(true);
             
-        } else if (index = 2) {
-            this.p2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {//Mostramos por pantalla el texto de victoria
-                fontSize: '32px',
-                fill: '#000'
-            });
+        } else if (index === 2) {
+            console.log("P2 WINS");
+            //this.p2WinsText.setVisible(true);
+
         }
     }
 }
