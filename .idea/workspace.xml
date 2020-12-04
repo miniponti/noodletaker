@@ -34,6 +34,12 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\elena\Documents\GitHub\noodletaker\assets\interface" />
+      <recent name="C:\Users\elena\Documents\GitHub\noodletaker\assets\sprites\buttons" />
+    </key>
+  </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration name="index2.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/noodletaker/index2.html" useBuiltInWebServerPort="true">
       <method v="2" />
@@ -60,7 +66,8 @@
       <workItem from="1606313495141" duration="4212000" />
       <workItem from="1606389478278" duration="5175000" />
       <workItem from="1606404767577" duration="3333000" />
-      <workItem from="1606994330687" duration="3305000" />
+      <workItem from="1606994330687" duration="3909000" />
+      <workItem from="1607096975932" duration="5254000" />
     </task>
     <servers />
   </component>
@@ -72,6 +79,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/0.1080.1920.1040@0.0.1920.1040" timestamp="1606209988639" />
+    <state x="703" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607100673102">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="703" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/0.1080.1536.824@0.0.1920.1040" timestamp="1607100673102" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606209924022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

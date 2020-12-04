@@ -1,44 +1,47 @@
 class TitleScene extends Phaser.Scene {
 
     constructor() {
-        super({key:"TitleScene"});
+        super({key:"TITLE_SCENE_KEY"});
     }
 
     preload() {
-        //IMAGENES
-        this.load.image('fondoTitulo', 'assets/sprites/fondo.png');
-        this.load.image('botonSTART','assets/sprites/START.png');
-        this.load.image('botonCtrl','assets/sprites/CONTROLES.png');
-        this.load.image('botonAudio','assets/sprites/audio.png');
+        //FONDO
+        this.load.image('TITLE_BG', 'assets/sprites/TITLE_BACKGROUND.png');
+
+        //BOTONES
+        this.load.image('START_BUTTON','assets/sprites/buttons/START_BUTTON.png');
+        this.load.image('CONTROLS_BUTTON','assets/sprites/buttons/CONTROLS_BUTTON.png');
+        this.load.image('MUSIC_BUTTON','assets/sprites/buttons/AUDIO_BUTTON.png');
 
         //AUDIO
-        this.load.audio("tituloAudio","assets/audio/titulo.mp3");
-        this.load.audio("tutun","assets/audio/tutunTITULO.mp3");
+        this.load.audio("TITLESCENE_MUSIC","assets/audio/TITLE_BGM.mp3");
+        this.load.audio("START_SFX","assets/audio/START_SFX.mp3");
     }
 
     create() {
         //FONDO
-        let bg = this.add.sprite(0, 0, 'fondoTitulo');
+        let bg = this.add.sprite(0, 0, 'TITLE_BG');
         bg.setOrigin(0,0);
 
         //AUDIO
-        //this.titleBGM = this.sound.add("tituloAudio");
-        this.tutunTitulo = this.sound.add("tutun");
+        //this.titleBGM = this.sound.add("TITLESCENE_MUSIC");
+        this.startSFX = this.sound.add("START_SFX");
 
         //BOTON START
-        let botonStart = this.add.image(config.width / 2 - 200, 500, 'botonSTART');
-        botonStart.setInteractive({useHandCursor: true});
-        botonStart.on("pointerdown", () => this.startGame());
+        let startButton = this.add.image(config.width / 2 - 200, 500, 'START_BUTTON');
+        startButton.setInteractive({useHandCursor: true});
+        startButton.on("pointerdown", () => this.startGame());
 
         //BOTON CONTROLES
-        let botonCtrl = this.add.image(config.width / 2 + 200, 500, 'botonCtrl');
-        botonCtrl.setInteractive({useHandCursor: true});
-        botonCtrl.on("pointerdown", () => this.mostrarControles());
+        let controlsButton = this.add.image(config.width / 2 + 200, 500, 'CONTROLS_BUTTON');
+        controlsButton.setInteractive({useHandCursor: true});
+        controlsButton.on("pointerdown", () => this.showControlsScene());
+
         /*
         //BOTON AUDIO
-        let botonAudio = this.add.image(config.width - 100, 650, 'botonAudio');
-        botonAudio.setInteractive({useHandCursor: true});
-        botonAudio.on("pointerdown", () => this.volumen());
+        let MUSIC_BUTTON = this.add.image(config.width - 100, 650, 'MUSIC_BUTTON');
+        MUSIC_BUTTON.setInteractive({useHandCursor: true});
+        MUSIC_BUTTON.on("pointerdown", () => this.volumen());
         */
     }
 
@@ -46,18 +49,19 @@ class TitleScene extends Phaser.Scene {
         //this.titleBGM.play();
     }
 
-    //FUNCION DEL BOTON
+    //FUNCION PARA EL BOTON START
     startGame(){
         console.log("clickButton FUNCIONA");
-        this.tutunTitulo.play();
-        this.scene.start('juegoEscena');
-        //this.tutunTitulo.onStop(this.scene.switch('juegoEscena'));
+        this.startSFX.play();
+        this.scene.start('GAME_SCENE_KEY');
+        //this.START_SFXTitulo.onStop(this.scene.switch('juegoEscena'));
         //this.titleBGM.stop();
 
     }
 
-    mostrarControles(){
-        console.log("mostrarControles FUNCIONA");
-        this.scene.start('controlsScene');
+    //FUNCION PARA EL BOTON DE CONTROLES
+    showControlsScene(){
+        console.log("showControlsScene FUNCIONA");
+        this.scene.start('CONTROL_KEYS_SCENE_KEY');
     }
 }

@@ -6,12 +6,12 @@ class ResumeScene extends Phaser.Scene {
     
     preload() {
         //IMAGENES
-        this.load.image('fondoTitulo', 'assets/sprites/fondo.png');
-        this.load.image('botonRESTART','assets/sprites/RESTART.png');
+        this.load.image('fondoTitulo', 'assets/sprites/TITLE_BACKGROUND.png');
+        this.load.image('botonRESTART','assets/sprites/buttons/RESTART_BUTTON.png');
 
         //AUDIO
-        this.load.audio("tituloAudio","assets/audio/titulo.mp3");
-        this.load.audio("tutun","assets/audio/tutunTITULO.mp3");
+        this.load.audio("tituloAudio","assets/audio/TITLE_BGM.mp3");
+        this.load.audio("tutun","assets/audio/START_SFX.mp3");
     }
     
     create() {
@@ -24,7 +24,6 @@ class ResumeScene extends Phaser.Scene {
 
         //BOTON
         let botonRestart = this.add.image(config.width / 2, 500, 'botonRESTART');
-        botonRestart.setScale(0.1, 0.1);
         botonRestart.setInteractive({useHandCursor: true});
         botonRestart.on("pointerdown", () => this.restartGame());
     }
