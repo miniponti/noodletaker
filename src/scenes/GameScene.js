@@ -36,14 +36,17 @@ class GameScene extends Phaser.Scene {
         //AUDIO
         this.load.audio("GAME_AUDIO","assets/audio/GAME_BGM.mp3");
         this.load.audio("GAMEOVER_AUDIO","assets/audio/gameover.mp3");
+        this.load.audio("GONG_SFX", "assets/audio/GONG.mp3");
+        this.load.audio("LITTLE_GONG_SFX", "assets/audio/littleGONG.mp3");
     }
 
     create() {
         //AUDIO
         this.gameBGM = this.sound.add("GAME_AUDIO");
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
+        this.gongSFX = this.sound.add("GONG_SFX");
+        this.littleGongSFX = this.sound.add("LITTLE_GONG_SFX");
 
-        
         //FONDO DEL JUEGO
         this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'fondo');
         this.bg.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
@@ -69,7 +72,7 @@ class GameScene extends Phaser.Scene {
             frameRate: 20,
         });
         this.player1.play("j1_stand");
-        //this.player1.setVelocityX(-100);
+
 
         //JUGADOR 2-----------------------------------------------------------------------------------------------------
         this.player2 = this.physics.add.sprite(650, 550, 'j2');  //INICIALIZACION J2
@@ -129,8 +132,11 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player1, this.powerUps);
         this.physics.add.collider(this.player2, this.powerUps);
 
-        this.time.delayedCall(3000, this.startGame, [], this);
-        //this.startGameTimer = this.add.text(32, 32);
+        this.doomyText = this.add.text(config.width / 2, config.height / 2, 'xd?', { font: '64px japaneseFont' });
+        this.doomyText.setVisible(false);
+
+        this.readyTitleCall = this.time.delayedCall(1000, this.readyTitle, [], this);
+        this.startGameCall = this.time.delayedCall(5000, this.startGame, [], this);
 
         //Variables
         this.playerSpeed = 200;
@@ -138,8 +144,8 @@ class GameScene extends Phaser.Scene {
         this.jumpSpeed = 400;
         this.gameOver = false;
         this.startGameBool = false;
-        this.P1Winner = false;
-        this.P2Winner = false;
+        //this.P1Winner;
+        //this.P2Winner;
     }
 
     update() {
@@ -168,6 +174,8 @@ class GameScene extends Phaser.Scene {
             this.player1.setVelocityX(this.playerSpeed);
             this.player1.play("j1_anim", true);
             this.player1.setFlip(false, false)
+        } else {
+            this.player1.setVelocityX(-100);
         }
 
         //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
@@ -184,16 +192,17 @@ class GameScene extends Phaser.Scene {
             this.player2.setVelocityX(this.playerSpeed);
             this.player2.play("j2_anim", true);
             this.player2.setFlip(false, false)
+        } else {
+            this.player2.setVelocityX(-100);
         }
-
     }
 
     gameOverP1() {
         //Los jugadores ya no pueden moverse
         console.log("gameOverP1 FUNCIONA");
 
-        //this.P1Winner = true;
-        //setWinnerText(2);
+        //this.P2Winner = new ResumeScene();
+        //this.P2Winner.setWinnerText(2);
 
         this.physics.pause();
         this.gameOver = true;                                                   //Fin del juego
@@ -209,8 +218,9 @@ class GameScene extends Phaser.Scene {
     gameOverP2() {
         console.log("gameOverP2 FUNCIONA");
 
-        //this.P1Winner = true;
-        //setWinnerText(1);
+        //this.P1Winner = new ResumeScene();
+        //this.P1Winner.setWinnerText(1);
+
         //Los jugadores ya no pueden moverse
         this.physics.pause();
         this.gameOver = true;
@@ -257,15 +267,44 @@ class GameScene extends Phaser.Scene {
         }
     }
     */
+
+    readyTitle(){
+        console.log("READY?");
+        this.readyText = this.add.text(config.width / 2, config.height / 2, 'READY?', { font: '192px japaneseFont' });
+        this.readyText.setStroke('#ff5757', 16);
+        Phaser.Display.Align.In.Center(this.readyText, this.bg);
+        this.littleGongSFX.play();
+        this.setTextCall = this.time.delayedCall(1000, this.setTitle, [], this);
+    }
+
+    setTitle(){
+        console.log("SET?");
+        this.readyText.setVisible(false);
+        this.setText = this.add.text(config.width / 2, config.height / 2, 'SET?', { font: '192px japaneseFont' });
+        this.setText.setStroke('#ff5757', 16);
+        Phaser.Display.Align.In.Center(this.setText, this.bg);
+        this.littleGongSFX.play();
+        this.goTextCall = this.time.delayedCall(1000, this.goTitle, [], this);
+    }
+
+    goTitle(){
+        console.log("GO!");
+        this.gongSFX.play();
+        this.setText.setVisible(false);
+        this.goText = this.add.text(config.width / 2, config.height / 2, 'GO!', { font: '192px japaneseFont' });
+        this.goText.setStroke('#ff5757', 16);
+        Phaser.Display.Align.In.Center(this.goText, this.bg);
+    }
+
     startGame() {
         console.log("startGame FUNCIONA");
-
+        this.goText.setVisible(false);
         //CONFIGURACIÓN INICIAL DEL AUDIO
 
         this.gameBGM.play();
         this.startGameBool = true;
         //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
         this.timedFinishLine = this.time.delayedCall(3000, this.createFinishLine, [], this);
-        this.finishLineTimer = this.add.text(32, 64);
+        //this.finishLineTimer = this.add.text(32, 64);
     }
 }

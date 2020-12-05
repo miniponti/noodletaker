@@ -19,7 +19,7 @@ class ResumeScene extends Phaser.Scene {
         bg.setOrigin(0,0);
 
         //AUDIO
-        //this.titleBGM = this.sound.add("tituloAudio");
+        this.titleBGM = this.sound.add("tituloAudio");
         this.tutunTitulo = this.sound.add("tutun");
 
         //BOTON
@@ -31,7 +31,7 @@ class ResumeScene extends Phaser.Scene {
     restartGame(){
         this.tutunTitulo.play();
         //this.tutunTitulo.onStop(this.scene.switch('TitleScene'));
-        this.scene.start('TitleScene');
+        this.scene.start('TITLE_SCENE_KEY');
         //this.scene.stop('juegoEscena');
         //this.titleBGM.stop();
 

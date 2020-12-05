@@ -3,6 +3,9 @@ let config = {
     width: 1376,
     height: 736,
     backgroundColor: '#303fb1',
+    style: {
+        fontFamily: 'japaneseFont'
+    },
     physics: {
         default: 'arcade',
         arcade: {
