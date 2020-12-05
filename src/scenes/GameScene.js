@@ -204,8 +204,8 @@ class GameScene extends Phaser.Scene {
         //Los jugadores ya no pueden moverse
         console.log("gameOverP1 FUNCIONA");
 
-        this.P2Winner = new ResumeScene();
-        this.P2Winner.setWinnerText(2);
+        //this.P2Winner = new ResumeScene();
+        //this.P2Winner.setWinnerText(2);
 
         this.physics.pause();
         this.gameOver = true;                                                   //Fin del juego
@@ -221,8 +221,8 @@ class GameScene extends Phaser.Scene {
     gameOverP2() {
         console.log("gameOverP2 FUNCIONA");
 
-        this.P1Winner = new ResumeScene();
-        this.P1Winner.setWinnerText(1);
+        //this.P1Winner = new ResumeScene();
+        //this.P1Winner.setWinnerText(1);
 
         //Los jugadores ya no pueden moverse
         this.physics.pause();
