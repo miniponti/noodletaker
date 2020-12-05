@@ -29,6 +29,7 @@ class ControlKeysScene extends Phaser.Scene{
     //FUNCION QUE PERMITE VOLVER A LA PANTALLA DEL TITULO
     returnToTitle(){
         console.log("returnToTitle FUNCIONA");
-        this.scene.start('TITLE_SCENE_KEY');
+        this.scene.stop('CONTROL_KEYS_SCENE_KEY');
+        this.scene.resume('TITLE_SCENE_KEY');
     }
 }

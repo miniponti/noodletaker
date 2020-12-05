@@ -34,7 +34,7 @@ class GameScene extends Phaser.Scene {
         });
         
         //AUDIO
-        this.load.audio("GAME_AUDIO","assets/audio/juegoBGM.mp3");
+        this.load.audio("GAME_AUDIO","assets/audio/GAME_BGM.mp3");
         this.load.audio("GAMEOVER_AUDIO","assets/audio/gameover.mp3");
         this.load.audio("GONG_SFX", "assets/audio/GONG.mp3");
         this.load.audio("LITTLE_GONG_SFX", "assets/audio/littleGONG.mp3");
@@ -42,10 +42,7 @@ class GameScene extends Phaser.Scene {
 
     create() {
         //AUDIO
-        let configAudio = {
-            rate: 0.8
-        }
-        this.gameBGM = this.sound.add("GAME_AUDIO",configAudio);
+        this.gameBGM = this.sound.add("GAME_AUDIO");
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
         this.gongSFX = this.sound.add("GONG_SFX");
         this.littleGongSFX = this.sound.add("LITTLE_GONG_SFX");
@@ -132,7 +129,6 @@ class GameScene extends Phaser.Scene {
         //COLISIONES ENTRE ELEMENTOS
         this.physics.add.collider(this.player1, this.samurai, this.gameOverP1, null, this);
         this.physics.add.collider(this.player2, this.samurai, this.gameOverP2, null, this);
-        this.physics.add.collider(this.player1, this.player2);
         this.physics.add.collider(this.player1, this.powerUps);
         this.physics.add.collider(this.player2, this.powerUps);
 
@@ -150,6 +146,16 @@ class GameScene extends Phaser.Scene {
         this.startGameBool = false;
         //this.P1Winner;
         //this.P2Winner;
+    }
+
+    update() {
+        if (!this.gameOver && this.startGameBool) {
+            this.movePlayers();
+            this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
+        }
+        else{
+            this.gameBGM.stop();
+        }
     }
 
     movePlayers() {
@@ -188,15 +194,6 @@ class GameScene extends Phaser.Scene {
             this.player2.setFlip(false, false)
         } else {
             this.player2.setVelocityX(-100);
-        }
-    }
-
-    update() {
-        if (!this.gameOver && this.startGameBool) {
-            this.movePlayers();
-            this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
-        } else {
-            this.gameBGM.stop();
         }
     }
 
