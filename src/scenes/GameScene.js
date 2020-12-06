@@ -14,6 +14,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('suelo', 'assets/sprites/plataforma.png');
         this.load.image('obstaculo', 'assets/sprites/plataforma.png');
         this.load.image('meta', 'assets/sprites/plataforma.png');
+        this.load.image('noodles', 'assets/temporales/noodles.png');
 
         //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
         this.load.spritesheet('j1', 'assets/sprites/BLUE_SPRITESHEET.png', {
@@ -41,6 +42,18 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
+
+        //Variables
+        this.playerSpeed = 200;
+        this.worldSpeed = 100;
+        this.jumpSpeed = 400;
+        this.gameOver = false;
+        this.startGameBool = false;
+        this.player1Moving = true;
+        this.player2Moving = true;
+        this.timerP1;
+        this.timerP2;
+
         //AUDIO
         this.gameBGM = this.sound.add("GAME_AUDIO");
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
@@ -97,6 +110,14 @@ class GameScene extends Phaser.Scene {
         this.samurai = this.physics.add.sprite(100, 545, 'samurai');  //INICIALIZACION SAMURAI
         this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
 
+        //NOODLES
+        this.noodles = this.add.sprite(1000, 545, 'noodles');
+        this.noodles.setScale(0.15, 0.15);
+        this.hasNoodles = 0;
+        this.noodlesHolder = this.physics.add.sprite(1000, 545, 'noodles');
+        this.noodlesHolder.setScale(0.15, 0.15);
+        
+        
         //PowerUps
         this.powerUps = this.physics.add.group();
 
@@ -113,6 +134,8 @@ class GameScene extends Phaser.Scene {
         this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         //Colisiones con los límites del canvas
         this.player1.setCollideWorldBounds(true);
@@ -125,12 +148,16 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player2, this.suelo);
         this.physics.add.collider(this.player1, this.suelo);
         this.physics.add.collider(this.powerUps, this.suelo);
+        this.physics.add.collider(this.noodlesHolder, this.suelo);
 
         //COLISIONES ENTRE ELEMENTOS
         this.physics.add.collider(this.player1, this.samurai, this.gameOverP1, null, this);
         this.physics.add.collider(this.player2, this.samurai, this.gameOverP2, null, this);
         this.physics.add.collider(this.player1, this.powerUps);
         this.physics.add.collider(this.player2, this.powerUps);
+        this.physics.add.collider(this.player1, this.noodlesHolder, this.takeNoodles1, null, this);
+        this.physics.add.collider(this.player2, this.noodlesHolder, this.takeNoodles2, null, this);
+        this.physics.add.overlap(this.player1, this.player2, this.playersCrush, null, this)
 
         this.doomyText = this.add.text(config.width / 2, config.height / 2, 'xd?', { font: '64px japaneseFont' });
         this.doomyText.setVisible(false);
@@ -138,12 +165,7 @@ class GameScene extends Phaser.Scene {
         this.readyTitleCall = this.time.delayedCall(1000, this.readyTitle, [], this);
         this.startGameCall = this.time.delayedCall(5000, this.startGame, [], this);
 
-        //Variables
-        this.playerSpeed = 200;
-        this.worldSpeed = 100;
-        this.jumpSpeed = 400;
-        this.gameOver = false;
-        this.startGameBool = false;
+        
         //this.P1Winner;
         //this.P2Winner;
     }
@@ -152,6 +174,7 @@ class GameScene extends Phaser.Scene {
         if (!this.gameOver && this.startGameBool) {
             //ACTUALIZAR BARRA DE PROGRESO
             //this.progressBarText.setText(this.progressBarText + this.progressBar.getProgress().toString().substr(0, 4));
+            
             this.graphics.fillStyle(0xff5757, 1);
             this.graphics.fillRect(0, 10, 1000 * this.progressBar.getProgress(), 20);
 
@@ -163,42 +186,67 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    checkOverlap(spriteA, spriteB) {
+
+        this.boundsA = spriteA.getBounds();
+        this.boundsB = spriteB.getBounds();
+    
+        return Phaser.Rectangle.intersects(boundsA, boundsB);
+    
+    }
+
     movePlayers() {
 
+       
         //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
-        if (this.keyW.isDown && this.player1.body.touching.down) {
-            this.player1.setVelocityY(-this.jumpSpeed);
-        } else if (this.keyA.isDown) {
-            this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
-            this.player1.play("j1_anim", true);
-            this.player1.setFlip(true, false)
-        } else if (this.keyS.isDown) {
-            this.player1.play("j1_stand", true);
-            this.player1.setVelocityX(-this.worldSpeed);
-        } else if (this.keyD.isDown) {
-            this.player1.setVelocityX(this.playerSpeed);
-            this.player1.play("j1_anim", true);
-            this.player1.setFlip(false, false)
-        } else {
-            this.player1.setVelocityX(-100);
-        }
+            if (this.keyW.isDown && this.player1.body.touching.down) {
+                this.player1.setVelocityY(-this.jumpSpeed);
+            } else if (this.keyA.isDown) {
+                this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
+                this.player1.play("j1_anim", true);
+                this.player1.setFlip(true, false)
+            } else if (this.keyS.isDown) {
+                this.player1.play("j1_stand", true);
+                this.player1.setVelocityX(-this.worldSpeed);
+            } else if (this.keyD.isDown) {
+                this.player1.setVelocityX(this.playerSpeed);
+                this.player1.play("j1_anim", true);
+                this.player1.setFlip(false, false)
+            } else {
+                this.player1.setVelocityX(-100);
+            }
+        
 
         //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
-        if (this.keyUP.isDown && this.player2.body.touching.down) {
-            this.player2.setVelocityY(-this.jumpSpeed);
-        } else if (this.keyLEFT.isDown) {
-            this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
-            this.player2.play("j2_anim", true);
-            this.player2.setFlip(true, false)
-        } else if (this.keyDOWN.isDown) {
-            this.player2.play("j2_stand", true);
-            this.player2.setVelocityX(-this.worldSpeed);
-        } else if (this.keyRIGHT.isDown) {
-            this.player2.setVelocityX(this.playerSpeed);
-            this.player2.play("j2_anim", true);
-            this.player2.setFlip(false, false)
-        } else {
-            this.player2.setVelocityX(-100);
+            if (this.keyUP.isDown && this.player2.body.touching.down) {
+                this.player2.setVelocityY(-this.jumpSpeed);
+            } else if (this.keyLEFT.isDown) {
+                this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
+                this.player2.play("j2_anim", true);
+                this.player2.setFlip(true, false)
+            } else if (this.keyDOWN.isDown) {
+                this.player2.play("j2_stand", true);
+                this.player2.setVelocityX(-this.worldSpeed);
+            } else if (this.keyRIGHT.isDown) {
+                this.player2.setVelocityX(this.playerSpeed);
+                this.player2.play("j2_anim", true);
+                this.player2.setFlip(false, false)
+            } else {
+                this.player2.setVelocityX(-100);
+            }
+           
+
+        if(this.hasNoodles==0){
+            this.noodlesHolder.setVelocityX(-100);
+            this.noodles.x = this.noodlesHolder.x;
+            this.noodles.y = this.noodlesHolder.y;
+
+        }else if(this.hasNoodles==1){
+            this.noodles.x = this.player1.x;
+            this.noodles.y = this.player1.y -100;
+        }else if(this.hasNoodles==2){
+            this.noodles.x = this.player2.x;
+            this.noodles.y = this.player2.y -100;
         }
     }
 
@@ -299,7 +347,33 @@ class GameScene extends Phaser.Scene {
         this.timedFinishLine = this.time.delayedCall(60000, this.createFinishLine, [], this);
     }
 
+    takeNoodles1(){
+            console.log("1 cogio los noodles")
+            this.hasNoodles = 1;
+            this.noodlesHolder.destroy();
+    }
+    takeNoodles2(){
+        console.log("2 cogio los noodles")
+        this.hasNoodles = 2;
+        this.noodlesHolder.destroy();
+    }
+
+
+    playersCrush(){
+  
+        if(this.keyENTER.isDown && this.hasNoodles==1){
+            this.hasNoodles = 2;
+            this.player1.setAccelerationX(-300);
+        }else if(this.keyE.isDown && this.hasNoodles==2){
+            this.hasNoodles = 1;
+            this.player2.setAccelerationX(-300);      
+        }
+    }
+
+ 
+    
     /*
+   
     createPlatform()
     {
         if (this.startGameBool) {
