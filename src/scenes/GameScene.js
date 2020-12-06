@@ -152,9 +152,8 @@ class GameScene extends Phaser.Scene {
         if (!this.gameOver && this.startGameBool) {
             //ACTUALIZAR BARRA DE PROGRESO
             //this.progressBarText.setText(this.progressBarText + this.progressBar.getProgress().toString().substr(0, 4));
-            this.progressBarText.setText('Progress made: ');
-            this.graphics.fillStyle(0x697bbc, 1);
-            this.graphics.fillRect(0, 16, 1000 * this.progressBar.getProgress(), 8);
+            this.graphics.fillStyle(0xff5757, 1);
+            this.graphics.fillRect(0, 10, 1000 * this.progressBar.getProgress(), 20);
 
             this.movePlayers();
             this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
@@ -286,19 +285,18 @@ class GameScene extends Phaser.Scene {
 
         //BARRA DE PROGRESO
         this.progressBar = this.time.addEvent({delay: 60000});
-        this.progressBarText = this.add.text(32, 32, { font: '10px japaneseFont' });
-        this.progressBarBorder = this.add.rectangle(740, 40, 1020, 16, 0xff5757);
-        //Phaser.Display.Align.In.Center(this.progressBarBorder, this.progressBar);
+        this.progressStartBarText = this.add.text(32, 32, 'START',{ font: '32px japaneseFont' });
+        this.progressStartBarText.setStroke('#ff5757', 8);
+        this.progressFinishBarText = this.add.text(1200, 32, 'FINISH',{ font: '32px japaneseFont' });
+        this.progressFinishBarText.setStroke('#ff5757', 8);
+        this.progressBarBorder = this.add.rectangle(680, 52, 1000, 20, 0xffffff);
+        this.graphics = this.add.graphics({ x: 180, y: 32 });
 
-        this.hsv = Phaser.Display.Color.HSVColorWheel();
-        this.graphics = this.add.graphics({ x: 240, y: 20 });
         //CONFIGURACIÓN INICIAL DEL AUDIO
-
         this.gameBGM.play();
         this.startGameBool = true;
         //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
         this.timedFinishLine = this.time.delayedCall(60000, this.createFinishLine, [], this);
-        //this.finishLineTimer = this.add.text(32, 64);
     }
 
     /*
