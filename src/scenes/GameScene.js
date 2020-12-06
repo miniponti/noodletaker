@@ -150,6 +150,12 @@ class GameScene extends Phaser.Scene {
 
     update() {
         if (!this.gameOver && this.startGameBool) {
+            //ACTUALIZAR BARRA DE PROGRESO
+            //this.progressBarText.setText(this.progressBarText + this.progressBar.getProgress().toString().substr(0, 4));
+            this.progressBarText.setText('Progress made: ');
+            this.graphics.fillStyle(0x697bbc, 1);
+            this.graphics.fillRect(0, 16, 1000 * this.progressBar.getProgress(), 8);
+
             this.movePlayers();
             this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
         }
@@ -244,29 +250,7 @@ class GameScene extends Phaser.Scene {
             this.physics.add.collider(this.player1, this.finishLine, this.gameOverP2, null, this);
             this.physics.add.collider(this.player2, this.finishLine, this.gameOverP1, null, this);
         }
-
     }
-    /*
-    createPlatform()
-    {
-        if (this.startGameBool) {
-            console.log("createPlatform FUNCIONA");
-            this.platforms = this.physics.add.group({
-                allowGravity: false,
-                immovable: true
-            });
-            this.platforms.create(1600, 200, 'obstaculo');
-            this.platforms.create(1500, 300, 'obstaculo');
-            this.platforms.create(1400, 400, 'obstaculo');
-            this.platforms.create(1300, 500, 'obstaculo');
-            this.platforms.create(1200, 600, 'obstaculo');
-            this.platforms.setVelocityX(-400);
-            //this.platforms.setScale(0.1, 0,1);
-            this.physics.add.collider(this.player1, this.platforms);
-            this.physics.add.collider(this.player2, this.platforms);
-        }
-    }
-    */
 
     readyTitle(){
         console.log("READY?");
@@ -299,12 +283,43 @@ class GameScene extends Phaser.Scene {
     startGame() {
         console.log("startGame FUNCIONA");
         this.goText.setVisible(false);
+
+        //BARRA DE PROGRESO
+        this.progressBar = this.time.addEvent({delay: 60000});
+        this.progressBarText = this.add.text(32, 32, { font: '10px japaneseFont' });
+        this.progressBarBorder = this.add.rectangle(740, 40, 1020, 16, 0xff5757);
+        //Phaser.Display.Align.In.Center(this.progressBarBorder, this.progressBar);
+
+        this.hsv = Phaser.Display.Color.HSVColorWheel();
+        this.graphics = this.add.graphics({ x: 240, y: 20 });
         //CONFIGURACIÓN INICIAL DEL AUDIO
 
         this.gameBGM.play();
         this.startGameBool = true;
         //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
-        this.timedFinishLine = this.time.delayedCall(3000, this.createFinishLine, [], this);
+        this.timedFinishLine = this.time.delayedCall(60000, this.createFinishLine, [], this);
         //this.finishLineTimer = this.add.text(32, 64);
     }
+
+    /*
+    createPlatform()
+    {
+        if (this.startGameBool) {
+            console.log("createPlatform FUNCIONA");
+            this.platforms = this.physics.add.group({
+                allowGravity: false,
+                immovable: true
+            });
+            this.platforms.create(1600, 200, 'obstaculo');
+            this.platforms.create(1500, 300, 'obstaculo');
+            this.platforms.create(1400, 400, 'obstaculo');
+            this.platforms.create(1300, 500, 'obstaculo');
+            this.platforms.create(1200, 600, 'obstaculo');
+            this.platforms.setVelocityX(-400);
+            //this.platforms.setScale(0.1, 0,1);
+            this.physics.add.collider(this.player1, this.platforms);
+            this.physics.add.collider(this.player2, this.platforms);
+        }
+    }
+    */
 }
