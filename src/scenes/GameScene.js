@@ -49,11 +49,11 @@ class GameScene extends Phaser.Scene {
         this.jumpSpeed = 400;
         this.gameOver = false;
         this.startGameBool = false;
-        this.player1Moving = true;
-        this.player2Moving = true;
-        this.timerP1;
-        this.timerP2;
-
+        this.p1Moving = true;
+        this.p2Moving = true;
+        this.temporizadorP1 = this.time.now;
+        this.temporizadorP2 = this.time.now;
+        this.stunTime = 200; //ms
         //AUDIO
         this.gameBGM = this.sound.add("GAME_AUDIO");
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
@@ -153,8 +153,9 @@ class GameScene extends Phaser.Scene {
         //COLISIONES ENTRE ELEMENTOS
         this.physics.add.collider(this.player1, this.samurai, this.gameOverP1, null, this);
         this.physics.add.collider(this.player2, this.samurai, this.gameOverP2, null, this);
-        this.physics.add.collider(this.player1, this.powerUps);
-        this.physics.add.collider(this.player2, this.powerUps);
+        this.physics.add.collider(this.noodlesHolder, this.samurai, this.badEnding, null, this);
+        this.physics.add.collider(this.player1, this.powerUps, this.powerUpTodoMitico, null, this);
+        this.physics.add.collider(this.player2, this.powerUps, this.powerUpTodoMitico, null, this);
         this.physics.add.collider(this.player1, this.noodlesHolder, this.takeNoodles1, null, this);
         this.physics.add.collider(this.player2, this.noodlesHolder, this.takeNoodles2, null, this);
         this.physics.add.overlap(this.player1, this.player2, this.playersCrush, null, this)
@@ -186,19 +187,11 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    checkOverlap(spriteA, spriteB) {
-
-        this.boundsA = spriteA.getBounds();
-        this.boundsB = spriteB.getBounds();
-    
-        return Phaser.Rectangle.intersects(boundsA, boundsB);
-    
-    }
-
     movePlayers() {
 
        
         //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
+        if(this.p1Moving){
             if (this.keyW.isDown && this.player1.body.touching.down) {
                 this.player1.setVelocityY(-this.jumpSpeed);
             } else if (this.keyA.isDown) {
@@ -215,9 +208,15 @@ class GameScene extends Phaser.Scene {
             } else {
                 this.player1.setVelocityX(-100);
             }
-        
+        }else{
+            console.log(this.temporizadorP1);
+            if(this.time.now> this.temporizadorP1){
+                this.reactivateP1();
+            }
+        }
 
         //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
+        if(this.p2Moving){
             if (this.keyUP.isDown && this.player2.body.touching.down) {
                 this.player2.setVelocityY(-this.jumpSpeed);
             } else if (this.keyLEFT.isDown) {
@@ -234,7 +233,12 @@ class GameScene extends Phaser.Scene {
             } else {
                 this.player2.setVelocityX(-100);
             }
-           
+        }else{
+            console.log(this.temporizadorP2);
+            if(this.time.now> this.temporizadorP2){
+                this.reactivateP2();
+            }
+        }  
 
         if(this.hasNoodles==0){
             this.noodlesHolder.setVelocityX(-100);
@@ -361,17 +365,80 @@ class GameScene extends Phaser.Scene {
 
     playersCrush(){
   
-        if(this.keyENTER.isDown && this.hasNoodles==1){
-            this.hasNoodles = 2;
-            this.player1.setAccelerationX(-300);
-        }else if(this.keyE.isDown && this.hasNoodles==2){
-            this.hasNoodles = 1;
-            this.player2.setAccelerationX(-300);      
+        if(this.keyENTER.isDown){
+            if( this.hasNoodles==1){
+                this.hasNoodles = 2;
+            }
+            
+            
+            if(this.player2.x > this.player1.x){
+                this.player1.setVelocityX(-700);
+            }else{
+                this.player1.setVelocityX(700);
+            }
+            
+            this.temporizadorP1 = this.time.now + this.stunTime;
+            this.p1Moving = false;
+            console.log(this.temporizadorP1);
+        }else if(this.keyE.isDown){
+
+            if( this.hasNoodles==2){
+                this.hasNoodles = 1;
+            }
+            if(this.player2.x > this.player1.x){
+                this.player2.setVelocityX(700);
+            }else{
+                this.player2.setVelocityX(-700);
+            }
+            
+            this.temporizadorP2 = this.time.now + this.stunTime;
+            this.p2Moving = false;     
+            console.log(this.temporizadorP2);
         }
     }
 
- 
+    reactivateP1(){
+        console.log("p1 reactivado");
+        this.p1Moving = true;
+    }
+    reactivateP2(){
+        console.log("p2 reactivado");
+        this.p2Moving = true;
+    }
     
+    badEnding(){
+        console.log("bad gameOver FUNCIONA");
+
+        //this.P1Winner = new ResumeScene();
+        //this.P1Winner.setWinnerText(1);
+
+        //Los jugadores ya no pueden moverse
+        this.physics.pause();
+        this.gameOver = true;
+
+        //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
+        this.player2.play("j2_stand");
+        this.player1.play("j1_stand");
+        this.gameoverSFX.play();
+        
+        this.scene.start('resumenScene');
+    }
+
+    powerUpTodoMitico(player, powerup){
+        if(player == this.player1){
+            this.player2.setVelocityX(-1000);
+            this.temporizadorP2 = this.time.now + this.stunTime;
+            this.p2Moving = false;
+            console.log(this.temporizadorP2);
+           
+        }else if (player == this.player2){
+            this.player1.setVelocityX(-1000);
+            this.temporizadorP1 = this.time.now + this.stunTime;
+            this.p1Moving = false;
+            console.log(this.temporizadorP2);
+        }
+        powerup.destroy();
+    }
     /*
    
     createPlatform()
