@@ -54,6 +54,7 @@ class GameScene extends Phaser.Scene {
         this.temporizadorP1 = this.time.now;
         this.temporizadorP2 = this.time.now;
         this.stunTime = 200; //ms
+        this.powerUpSpawner = 0;
         //AUDIO
         this.gameBGM = this.sound.add("GAME_AUDIO");
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
@@ -104,27 +105,25 @@ class GameScene extends Phaser.Scene {
             frameRate: 20,
         });
         this.player2.play("j2_stand");
-        //this.player2.setVelocityX(-100);
+       
 
         //SAMURAI
         this.samurai = this.physics.add.sprite(100, 545, 'samurai');  //INICIALIZACION SAMURAI
         this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
 
         //NOODLES
-        this.noodles = this.add.sprite(1000, 545, 'noodles');
+        this.noodles = this.add.sprite(1000, 618.65, 'noodles');
         this.noodles.setScale(0.15, 0.15);
         this.hasNoodles = 0;
-        this.noodlesHolder = this.physics.add.sprite(1000, 545, 'noodles');
+        this.noodlesHolder = this.physics.add.sprite(1000, 618.65, 'noodles');
         this.noodlesHolder.setScale(0.15, 0.15);
-        
+        this.noodlesHolder.setVisible(false);
         
         //PowerUps
         this.powerUps = this.physics.add.group();
 
         //El todo mitico
-        this.todoMitico = this.powerUps.create(900, 550, 'powerup');
-        this.todoMitico.setScale(0.15, 0.15);
-
+        
         //TECLAS
         this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -141,7 +140,7 @@ class GameScene extends Phaser.Scene {
         this.player1.setCollideWorldBounds(true);
         this.player2.setCollideWorldBounds(true);
         this.samurai.setCollideWorldBounds(true);
-        this.todoMitico.setCollideWorldBounds(true);
+        
 
         //COLISIONES CON SUELO
         this.physics.add.collider(this.samurai, this.suelo);
@@ -156,6 +155,7 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.noodlesHolder, this.samurai, this.badEnding, null, this);
         this.physics.add.collider(this.player1, this.powerUps, this.powerUpTodoMitico, null, this);
         this.physics.add.collider(this.player2, this.powerUps, this.powerUpTodoMitico, null, this);
+        this.physics.add.collider(this.samurai, this.powerUps, this.powerUpTodoMitico, null, this);
         this.physics.add.collider(this.player1, this.noodlesHolder, this.takeNoodles1, null, this);
         this.physics.add.collider(this.player2, this.noodlesHolder, this.takeNoodles2, null, this);
         this.physics.add.overlap(this.player1, this.player2, this.playersCrush, null, this)
@@ -181,6 +181,15 @@ class GameScene extends Phaser.Scene {
 
             this.movePlayers();
             this.bg.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
+
+            if(this.powerUpSpawner <= this.time.now){
+                this.powerUpSpawner+=10000;
+                this.todoMitico = this.powerUps.create(1300, 550, 'powerup');
+                this.todoMitico.setScale(0.15, 0.15);
+                this.todoMitico.setVelocityX(-this.worldSpeed);
+                this.todoMitico.setCollideWorldBounds(true);
+                
+            }
         }
         else{
             this.gameBGM.stop();
@@ -206,10 +215,10 @@ class GameScene extends Phaser.Scene {
                 this.player1.play("j1_anim", true);
                 this.player1.setFlip(false, false)
             } else {
-                this.player1.setVelocityX(-100);
+                this.player1.setVelocityX(-this.worldSpeed);
             }
         }else{
-            console.log(this.temporizadorP1);
+            //console.log(this.temporizadorP1);
             if(this.time.now> this.temporizadorP1){
                 this.reactivateP1();
             }
@@ -231,17 +240,17 @@ class GameScene extends Phaser.Scene {
                 this.player2.play("j2_anim", true);
                 this.player2.setFlip(false, false)
             } else {
-                this.player2.setVelocityX(-100);
+                this.player2.setVelocityX(-this.worldSpeed);
             }
         }else{
-            console.log(this.temporizadorP2);
+            //console.log(this.temporizadorP2);
             if(this.time.now> this.temporizadorP2){
                 this.reactivateP2();
             }
         }  
 
         if(this.hasNoodles==0){
-            this.noodlesHolder.setVelocityX(-100);
+            this.noodlesHolder.setVelocityX(-this.worldSpeed);
             this.noodles.x = this.noodlesHolder.x;
             this.noodles.y = this.noodlesHolder.y;
 
@@ -252,6 +261,7 @@ class GameScene extends Phaser.Scene {
             this.noodles.x = this.player2.x;
             this.noodles.y = this.player2.y -100;
         }
+
     }
 
     gameOverP1() {
@@ -347,6 +357,7 @@ class GameScene extends Phaser.Scene {
         //CONFIGURACIÓN INICIAL DEL AUDIO
         this.gameBGM.play();
         this.startGameBool = true;
+        this.powerUpSpawner = this.time.now;
         //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
         this.timedFinishLine = this.time.delayedCall(60000, this.createFinishLine, [], this);
     }
@@ -364,39 +375,39 @@ class GameScene extends Phaser.Scene {
 
 
     playersCrush(){
-  
-        if(this.keyENTER.isDown){
-            if( this.hasNoodles==1){
-                this.hasNoodles = 2;
-            }
+        if(this.startGameBool){
+            if(this.keyENTER.isDown){
+                if( this.hasNoodles==1){
+                    this.hasNoodles = 2;
+                }
+                
+                
+                if(this.player2.x > this.player1.x){
+                    this.player1.setVelocityX(-700);
+                }else{
+                    this.player1.setVelocityX(700);
+                }
+                
+                this.temporizadorP1 = this.time.now + this.stunTime;
+                this.p1Moving = false;
+                console.log(this.temporizadorP1);
+            }else if(this.keyE.isDown){
             
-            
-            if(this.player2.x > this.player1.x){
-                this.player1.setVelocityX(-700);
-            }else{
-                this.player1.setVelocityX(700);
+                if( this.hasNoodles==2){
+                    this.hasNoodles = 1;
+                }
+                if(this.player2.x > this.player1.x){
+                    this.player2.setVelocityX(700);
+                }else{
+                    this.player2.setVelocityX(-700);
+                }
+                
+                this.temporizadorP2 = this.time.now + this.stunTime;
+                this.p2Moving = false;     
+                console.log(this.temporizadorP2);
             }
-            
-            this.temporizadorP1 = this.time.now + this.stunTime;
-            this.p1Moving = false;
-            console.log(this.temporizadorP1);
-        }else if(this.keyE.isDown){
-
-            if( this.hasNoodles==2){
-                this.hasNoodles = 1;
-            }
-            if(this.player2.x > this.player1.x){
-                this.player2.setVelocityX(700);
-            }else{
-                this.player2.setVelocityX(-700);
-            }
-            
-            this.temporizadorP2 = this.time.now + this.stunTime;
-            this.p2Moving = false;     
-            console.log(this.temporizadorP2);
         }
     }
-
     reactivateP1(){
         console.log("p1 reactivado");
         this.p1Moving = true;
@@ -436,6 +447,13 @@ class GameScene extends Phaser.Scene {
             this.temporizadorP1 = this.time.now + this.stunTime;
             this.p1Moving = false;
             console.log(this.temporizadorP2);
+        }else{
+            this.player2.setVelocityX(-1000);
+            this.temporizadorP2 = this.time.now + this.stunTime;
+            this.p2Moving = false;
+            this.player1.setVelocityX(-1000);
+            this.temporizadorP1 = this.time.now + this.stunTime;
+            this.p1Moving = false;
         }
         powerup.destroy();
     }
