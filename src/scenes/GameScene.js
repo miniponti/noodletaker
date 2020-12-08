@@ -55,6 +55,11 @@ class GameScene extends Phaser.Scene {
         this.p2Moving = true;
         this.temporizadorP1 = this.time.now;
         this.temporizadorP2 = this.time.now;
+        this.p1canAtack = true;
+        this.p2canAtack = true;
+        this.temporizadorAtack1 = this.time.now;
+        this.temporizadorAtack2 = this.time.now;
+        this.atackTime = 1000; //ms
         this.stunTime = 200; //ms
         this.powerUpSpawner = 0;
         //AUDIO
@@ -380,7 +385,19 @@ class GameScene extends Phaser.Scene {
 
     playersCrush(){
         if(this.startGameBool){
-            if(this.keyENTER.isDown){
+
+            if(!this.p2canAtack){
+                if(this.temporizadorAtack2<=this.time.now){
+                    this.p2canAtack = true;
+                }
+            }
+            if(!this.p1canAtack){
+                if(this.temporizadorAtack1<=this.time.now){
+                    this.p1canAtack = true;
+                }
+            }
+
+            if(this.keyENTER.isDown && this.p2canAtack){
                 this.punchSFX.play();
                 if( this.hasNoodles==1){
                     this.hasNoodles = 2;
@@ -394,8 +411,11 @@ class GameScene extends Phaser.Scene {
                 this.player1.play("j1_stand", true);
                 this.temporizadorP1 = this.time.now + this.stunTime;
                 this.p1Moving = false;
+
+                this.temporizadorAtack2 = this.time.now + this.atackTime;
+                this.p2canAtack = false;
                 console.log(this.temporizadorP1);
-            }else if(this.keyE.isDown){
+            }else if(this.keyE.isDown && this.p1canAtack){
                 this.punchSFX.play();
                 if( this.hasNoodles==2){
                     this.hasNoodles = 1;
@@ -407,7 +427,10 @@ class GameScene extends Phaser.Scene {
                 }
                 this.player2.play("j2_stand", true);
                 this.temporizadorP2 = this.time.now + this.stunTime;
-                this.p2Moving = false;     
+                this.p2Moving = false;
+                
+                this.temporizadorAtack1 = this.time.now + this.atackTime;
+                this.p1canAtack = false;
                 console.log(this.temporizadorP2);
             }
         }
