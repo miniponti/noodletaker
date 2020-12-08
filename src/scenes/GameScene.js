@@ -222,6 +222,7 @@ class GameScene extends Phaser.Scene {
                 this.player1.play("j1_anim", true);
                 this.player1.setFlip(false, false)
             } else {
+                this.player1.play("j1_stand", true);
                 this.player1.setVelocityX(-this.worldSpeed);
             }
         }else{
@@ -248,6 +249,7 @@ class GameScene extends Phaser.Scene {
                 this.player2.play("j2_anim", true);
                 this.player2.setFlip(false, false)
             } else {
+                this.player2.play("j2_stand", true);
                 this.player2.setVelocityX(-this.worldSpeed);
             }
         }else{
@@ -395,7 +397,7 @@ class GameScene extends Phaser.Scene {
                 } else {
                     this.player1.setVelocityX(700);
                 }
-                
+                this.player1.play("j1_stand", true);
                 this.temporizadorP1 = this.time.now + this.stunTime;
                 this.p1Moving = false;
                 console.log(this.temporizadorP1);
@@ -409,7 +411,7 @@ class GameScene extends Phaser.Scene {
                 } else {
                     this.player2.setVelocityX(-700);
                 }
-                
+                this.player2.play("j2_stand", true);
                 this.temporizadorP2 = this.time.now + this.stunTime;
                 this.p2Moving = false;     
                 console.log(this.temporizadorP2);
