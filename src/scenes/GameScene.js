@@ -12,9 +12,11 @@ class GameScene extends Phaser.Scene {
         //CARGA DE TODAS LAS IMAGENES
         this.load.image('fondo', 'assets/sprites/IMG_0008.png');
         this.load.image('suelo', 'assets/sprites/plataforma.png');
-        this.load.image('obstaculo', 'assets/sprites/plataforma.png');
+        //this.load.image('obstaculo', 'assets/sprites/plataforma.png');
         this.load.image('meta', 'assets/sprites/plataforma.png');
         this.load.image('noodles', 'assets/temporales/noodles.png');
+        this.load.image("tiles", "");
+        this.load.tilemapTiledJSON("bg", "assets/background/Fondo_1_Parte_1_Noodletaker..json");
 
         //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
         this.load.spritesheet('j1', 'assets/sprites/BLUE_SPRITESHEET.png', {
@@ -66,6 +68,10 @@ class GameScene extends Phaser.Scene {
         this.jumpSFX = this.sound.add("JUMP_SFX", {volume: 0.3});
 
         //FONDO DEL JUEGO
+        //const map = this.make.tilemap({ key: "bg", tileWidth: 16, tileHeight: 16});
+        //const tileset = map.addTilesetImage("Fondo_Nivel_1_Part_1");
+        //const layer = map.createStaticLayer(0, tileset, 0, 0);
+        //const bg = this.make.tilemap({ key: "background"});
         this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'fondo');
         this.bg.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
 
