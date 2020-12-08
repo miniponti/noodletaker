@@ -14,10 +14,10 @@ class ControlKeysScene extends Phaser.Scene{
     create(){
         console.log("CONTROL_KEYS_SCENE CREATE");
         this.add.sprite(0,0,'CONTROLS_BG').setOrigin(0,0);
-        this.add.sprite(config.width/2, config.height/2, 'CONTROLS_MENU');
+        this.add.sprite(config.width/2, config.height/2, 'CONTROLS_MENU').setScale(0.6,0.6);
 
         //BOTON SALIDA
-        let EXIT_BUTTON = this.add.image(config.width - 250, 100, 'EXIT_BUTTON');
+        let EXIT_BUTTON = this.add.image(config.width - 100, 50, 'EXIT_BUTTON');
         EXIT_BUTTON.setInteractive({useHandCursor: true});
         EXIT_BUTTON.on("pointerdown", () => this.returnToTitle());
     }

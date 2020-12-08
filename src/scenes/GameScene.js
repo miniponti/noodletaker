@@ -15,21 +15,21 @@ class GameScene extends Phaser.Scene {
         //this.load.image('obstaculo', 'assets/sprites/plataforma.png');
         this.load.image('meta', 'assets/sprites/plataforma.png');
         this.load.image('noodles', 'assets/temporales/noodles.png');
-        this.load.image("tiles", "");
-        this.load.tilemapTiledJSON("bg", "assets/background/Fondo_1_Parte_1_Noodletaker..json");
+        //this.load.image("tiles", "");
+        //this.load.tilemapTiledJSON("bg", "assets/background/Fondo_1_Parte_1_Noodletaker..json");
 
         //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
         this.load.spritesheet('j1', 'assets/sprites/BLUE_SPRITESHEET.png', {
-            frameWidth: 697,
-            frameHeight: 1004
+            frameWidth: 250,
+            frameHeight: 330
         });
         this.load.spritesheet('j2', 'assets/sprites/GREEN_SPRITESHEET.png', {
-            frameWidth: 697,
-            frameHeight: 1004
+            frameWidth: 250,
+            frameHeight: 330
         });
         this.load.spritesheet('samurai', 'assets/sprites/samurai.png', {
-            frameWidth: 1161,
-            frameHeight: 1387
+            frameWidth: 293,
+            frameHeight: 350
         });
         this.load.spritesheet('powerup', 'assets/sprites/ETM.png', {
             frameWidth: 871,
@@ -59,6 +59,7 @@ class GameScene extends Phaser.Scene {
         this.temporizadorP2 = this.time.now;
         this.stunTime = 200; //ms
         this.powerUpSpawner = 0;
+        
         //AUDIO
         this.gameBGM = this.sound.add("GAME_AUDIO");
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
@@ -77,11 +78,10 @@ class GameScene extends Phaser.Scene {
 
         //SUELO ESTATICO
         this.suelo = this.physics.add.staticGroup();
-        this.suelo.create(0, 750, 'suelo').setScale(2).refreshBody(); //INICIALIZACION SUELO
+        this.suelo.create(0, 350, 'suelo').setScale(2).refreshBody(); //INICIALIZACION SUELO
 
         //JUGADOR 1-----------------------------------------------------------------------------------------------------
-        this.player1 = this.physics.add.sprite(600, 550, 'j1');  //INICIALIZACION J1
-        this.player1.setScale(0.15, 0.15);                        //ESCALADO J1
+        this.player1 = this.physics.add.sprite(350, 350, 'j1')  //INICIALIZACION J1
 
         //ANIMACIONES JUGADOR 1
         this.anims.create({
@@ -99,8 +99,7 @@ class GameScene extends Phaser.Scene {
 
 
         //JUGADOR 2-----------------------------------------------------------------------------------------------------
-        this.player2 = this.physics.add.sprite(650, 550, 'j2');  //INICIALIZACION J2
-        this.player2.setScale(0.15, 0.15);                        //ESCALADO J2
+        this.player2 = this.physics.add.sprite(350, 350, 'j2')  //INICIALIZACION J2
 
         //ANIMACIONES JUGADOR 2
         this.anims.create({
@@ -118,15 +117,14 @@ class GameScene extends Phaser.Scene {
        
 
         //SAMURAI
-        this.samurai = this.physics.add.sprite(100, 545, 'samurai');  //INICIALIZACION SAMURAI
-        this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
+        this.samurai = this.physics.add.sprite(0, 350, 'samurai');  //INICIALIZACION SAMURAI
 
         //NOODLES
-        this.noodles = this.add.sprite(1000, 618.65, 'noodles');
-        this.noodles.setScale(0.15, 0.15);
+        this.noodles = this.add.sprite(500, 380, 'noodles');
+        this.noodles.setScale(0.6, 0.6);
         this.hasNoodles = 0;
-        this.noodlesHolder = this.physics.add.sprite(1000, 618.65, 'noodles');
-        this.noodlesHolder.setScale(0.15, 0.15);
+        this.noodlesHolder = this.physics.add.sprite(500, 380, 'noodles');
+        this.noodlesHolder.setScale(0.6, 0.6);
         this.noodlesHolder.setVisible(false);
         
         //PowerUps
