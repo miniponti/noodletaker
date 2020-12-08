@@ -367,7 +367,7 @@ class GameScene extends Phaser.Scene {
         this.gameBGM.play();
         this.startGameBool = true;
         this.powerUpSpawner = this.time.now;
-        //this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
+        this.timedPlatforms = this.time.addEvent({delay: 3000, callback: this.createPlatform, callbackScope: this, loop: true});
         this.timedFinishLine = this.time.delayedCall(60000, this.createFinishLine, [], this);
     }
 
@@ -485,7 +485,7 @@ class GameScene extends Phaser.Scene {
         }
         powerup.destroy();
     }
-    /*
+    
    
     createPlatform()
     {
@@ -495,16 +495,17 @@ class GameScene extends Phaser.Scene {
                 allowGravity: false,
                 immovable: true
             });
-            this.platforms.create(1600, 200, 'obstaculo');
-            this.platforms.create(1500, 300, 'obstaculo');
-            this.platforms.create(1400, 400, 'obstaculo');
-            this.platforms.create(1300, 500, 'obstaculo');
-            this.platforms.create(1200, 600, 'obstaculo');
-            this.platforms.setVelocityX(-400);
-            //this.platforms.setScale(0.1, 0,1);
+  
+            for(let i = 0; i<5; i++){
+                var plat = this.platforms.create(1600 - i*100, 200 + i*100, 'obstaculo');
+                plat.setVelocityX(-this.worldSpeed);
+                plat.setScale(0.2,0.1);
+            }
+
+    
             this.physics.add.collider(this.player1, this.platforms);
             this.physics.add.collider(this.player2, this.platforms);
         }
     }
-    */
+    
 }
