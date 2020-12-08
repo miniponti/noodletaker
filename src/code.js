@@ -1,7 +1,7 @@
 let config = {
     type: Phaser.AUTO,
-    width: 700,
-    height: 400,
+    width: 1376,
+    height: 736,
     backgroundColor: '#303fb1',
     style: {
         fontFamily: 'japaneseFont'

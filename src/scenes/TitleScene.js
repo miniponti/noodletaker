@@ -10,11 +10,12 @@ class TitleScene extends Phaser.Scene {
 
         //BOTONES
         this.load.image('START_BUTTON','assets/sprites/buttons/START_BUTTON.png');
-        this.load.image('CONTROLS_BUTTON','assets/sprites/buttons/CONTROLS_BUTTON.png');
-        this.load.image('CONTROLS_BUTTON_HOVER','assets/sprites/buttons/CONTROLS_BUTTON_HOVER.png');
-        this.load.image('CONTROLS_BUTTON_DOWN','assets/sprites/buttons/CONTROLS_BUTTON_DOWN.png');
+        this.load.spritesheet('CONTROLS_BUTTON','assets/sprites/buttons/CONTROLS_BUTTON.png',
+        {
+            frameWidth: 320, 
+            frameHeight: 70
+        });
         this.load.image('MUSIC_BUTTON','assets/sprites/buttons/AUDIO_BUTTON.png');
-        this.load.image('MUTED_BUTTON','assets/sprites/buttons/MUTED_BUTTON.png');
 
         //AUDIO
         this.load.audio('TITLESCENE_MUSIC','assets/audio/TITLE_BGM.mp3');
@@ -31,38 +32,21 @@ class TitleScene extends Phaser.Scene {
         this.startSFX = this.sound.add("START_SFX");
 
         //BOTON START
-        this.startButton = this.add.sprite(config.width / 2 - 100, 250, 'START_BUTTON');
+        this.startButton = this.add.sprite(config.width / 2 - 200, 500, 'START_BUTTON');
         this.startButton.setInteractive({useHandCursor: true});
         this.startButton.on("pointerdown", () => this.startGame());
         
 
         //BOTON AUDIO
-        this.musicButton = this.add.image(config.width - 100, 350, 'MUSIC_BUTTON');
-        this.musicButton.setInteractive({useHandCursor: true});
-        this.musicButton.on("pointerdown", () => this.volumen());
-
-        this.mutedButton = this.add.image(config.width - 100, 350, 'MUTED_BUTTON');
-        this.mutedButton.setInteractive({useHandCursor: true});
-        this.mutedButton.on("pointerdown", () => this.volumen());
-        this.mutedButton.setVisible(false);
+        this.MUSIC_BUTTON = this.add.image(config.width - 100, 650, 'MUSIC_BUTTON');
+        this.MUSIC_BUTTON.setInteractive({useHandCursor: true});
+        this.MUSIC_BUTTON.on("pointerdown", () => this.volumen());
 
         //BOTON CONTROLES
-        this.controlsButton = this.add.image(config.width / 2 + 100, 250, 'CONTROLS_BUTTON');
+        this.controlsButton = this.add.image(config.width / 2 + 200, 500, 'CONTROLS_BUTTON');
         this.controlsButton.setInteractive({useHandCursor: true});
         this.controlsButton.on("pointerdown", () => this.showControlsScene());
         this.controlsButton.on('pointerover', () => this.startButtonOver());
-
-        this.controlsButtonHover = this.add.image(config.width / 2 + 100, 250, 'CONTROLS_BUTTON_HOVER');
-        this.controlsButtonHover.setInteractive({useHandCursor: true});
-        this.controlsButtonHover.on("pointerdown", () => this.showControlsScene());
-        this.controlsButtonHover.on('pointerover', () => this.startButtonOver());
-        this.controlsButtonHover.setVisible(false);
-
-        this.controlsButtonDown = this.add.image(config.width / 2 + 100, 250, 'CONTROLS_BUTTON_DOWN');
-        this.controlsButtonDown.setInteractive({useHandCursor: true});
-        this.controlsButtonDown.on("pointerdown", () => this.showControlsScene());
-        this.controlsButtonDown.on('pointerover', () => this.startButtonOver());
-        this.controlsButtonDown.setVisible(false);
 
         this.startTitle();
         
@@ -97,20 +81,6 @@ class TitleScene extends Phaser.Scene {
         console.log("showControlsScene FUNCIONA");
         this.scene.pause('TITLE_SCENE_KEY');
         this.scene.run('CONTROL_KEYS_SCENE_KEY');
-    }
-
-    //FUNCION PARA SILENCIAR EL AUDIO
-    volumen(){
-        if (!this.titleBGM.mute) 
-        {
-            this.titleBGM.mute = true;
-            this.mutedButton.setVisible(true);
-        } 
-        else 
-        {
-            this.titleBGM.mute = false;
-            this.mutedButton.setVisible(false);
-        }
     }
 }
 
