@@ -39,6 +39,8 @@ class GameScene extends Phaser.Scene {
         this.load.audio("GAMEOVER_AUDIO","assets/audio/gameover.mp3");
         this.load.audio("GONG_SFX", "assets/audio/GONG.mp3");
         this.load.audio("LITTLE_GONG_SFX", "assets/audio/littleGONG.mp3");
+        this.load.audio("PUNCH_SFX", "assets/audio/PUNCH.mp3");
+        this.load.audio("JUMP_SFX", "assets/audio/JUMP.mp3");
     }
 
     create() {
@@ -60,6 +62,8 @@ class GameScene extends Phaser.Scene {
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
         this.gongSFX = this.sound.add("GONG_SFX");
         this.littleGongSFX = this.sound.add("LITTLE_GONG_SFX");
+        this.punchSFX = this.sound.add("PUNCH_SFX", {volume: 0.3});
+        this.jumpSFX = this.sound.add("JUMP_SFX", {volume: 0.3});
 
         //FONDO DEL JUEGO
         this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'fondo');
@@ -165,10 +169,6 @@ class GameScene extends Phaser.Scene {
 
         this.readyTitleCall = this.time.delayedCall(1000, this.readyTitle, [], this);
         this.startGameCall = this.time.delayedCall(5000, this.startGame, [], this);
-
-        
-        //this.P1Winner;
-        //this.P2Winner;
     }
 
     update() {
@@ -202,6 +202,7 @@ class GameScene extends Phaser.Scene {
         //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
         if(this.p1Moving){
             if (this.keyW.isDown && this.player1.body.touching.down) {
+                this.jumpSFX.play();
                 this.player1.setVelocityY(-this.jumpSpeed);
             } else if (this.keyA.isDown) {
                 this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
@@ -227,6 +228,7 @@ class GameScene extends Phaser.Scene {
         //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
         if(this.p2Moving){
             if (this.keyUP.isDown && this.player2.body.touching.down) {
+                this.jumpSFX.play();
                 this.player2.setVelocityY(-this.jumpSpeed);
             } else if (this.keyLEFT.isDown) {
                 this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
@@ -377,14 +379,14 @@ class GameScene extends Phaser.Scene {
     playersCrush(){
         if(this.startGameBool){
             if(this.keyENTER.isDown){
+                this.punchSFX.play();
                 if( this.hasNoodles==1){
                     this.hasNoodles = 2;
                 }
-                
-                
+
                 if(this.player2.x > this.player1.x){
                     this.player1.setVelocityX(-700);
-                }else{
+                } else {
                     this.player1.setVelocityX(700);
                 }
                 
@@ -392,13 +394,13 @@ class GameScene extends Phaser.Scene {
                 this.p1Moving = false;
                 console.log(this.temporizadorP1);
             }else if(this.keyE.isDown){
-            
+                this.punchSFX.play();
                 if( this.hasNoodles==2){
                     this.hasNoodles = 1;
                 }
                 if(this.player2.x > this.player1.x){
                     this.player2.setVelocityX(700);
-                }else{
+                } else {
                     this.player2.setVelocityX(-700);
                 }
                 
@@ -436,6 +438,7 @@ class GameScene extends Phaser.Scene {
     }
 
     powerUpTodoMitico(player, powerup){
+        this.punchSFX.play();
         if(player == this.player1){
             this.player2.setVelocityX(-1000);
             this.temporizadorP2 = this.time.now + this.stunTime;
