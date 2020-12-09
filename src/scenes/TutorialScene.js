@@ -1,10 +1,10 @@
 class TutorialScene extends Phaser.Scene{
     constructor() {
-        super({key: "TUTORIAL_SCENE_KEY"});
+        super({key: 'TUTORIAL_SCENE_KEY'});
     }
 
     preload(){
-        console.log("TUTORIAL SCENE PRELOAD");
+        console.log('TUTORIAL SCENE PRELOAD');
 
         this.load.image('TUTORIAL_1','assets/interface/TUTORIAL_1.png');
         this.load.image('TUTORIAL_2','assets/interface/TUTORIAL_2.png');
@@ -13,22 +13,46 @@ class TutorialScene extends Phaser.Scene{
     }
 
     create(){
-        console.log("TUTORIAL SCENE CREATE");
+        console.log('TUTORIAL SCENE CREATE');
+        //FONDO
         this.add.sprite(0,0,'TUTORIAL_BG').setOrigin(0,0);
+
+        //PRIMER PANEL DEL TUTORIAL
         this.tutorial1 = this.add.sprite(config.width/2, config.height/2, 'TUTORIAL_1');
+        this.tutorial1.setInteractive({useHandCursor: true});
+        this.tutorial1.on('pointerdown', () => this.nextPanel());
+
+
+        //SEGUNDO PANEL DEL TUTORIAL
         this.tutorial2 = this.add.sprite(config.width/2, config.height/2, 'TUTORIAL_2');
         this.tutorial2.setVisible(false);
 
         //BOTON SALIDA
-        let EXIT_BUTTON = this.add.image(config.width - 250, 100, 'EXIT_BUTTON');
-        EXIT_BUTTON.setInteractive({useHandCursor: true});
-        EXIT_BUTTON.on("pointerdown", () => this.returnToTitle());
+        this.exitButton = this.add.image(config.width - 250, 100, 'EXIT_BUTTON');
+        this.exitButton.setInteractive({useHandCursor: true});
+        this.exitButton.on('pointerdown', () => this.returnToTitle());
     }
 
     update(){
 
     }
 
+<<<<<<< HEAD
+    //FUNCION QUE PASA AL SIGUIENTE PANEL
+    nextPanel(){
+        
+    }
+
+=======
+<<<<<<< Updated upstream
+=======
+    //FUNCION QUE PASA AL SIGUIENTE PANEL
+    nextPanel(){
+        this.tutorial2.setVisible(true);
+    }
+
+>>>>>>> Stashed changes
+>>>>>>> e790a21f5171b6f641d770cca4e3b567dfced345
     //FUNCION QUE PERMITE VOLVER A LA PANTALLA DEL TITULO
     returnToTitle(){
         //console.log("returnToTitle FUNCIONA");
