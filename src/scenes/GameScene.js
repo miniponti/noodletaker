@@ -49,7 +49,7 @@ class GameScene extends Phaser.Scene {
         //Variables
         this.playerSpeed = 300;
         this.worldSpeed = 360;
-        this.jumpSpeed = 400;
+        this.jumpSpeed = 450;
         this.platformSpawnSpeed = 1000;
         this.powerupSpawnSpeed = 5000;
         this.gameOver = false;
@@ -97,8 +97,10 @@ class GameScene extends Phaser.Scene {
         //PLATAFORMAS
         this.platforms = this.physics.add.group({
             allowGravity: false,
-            immovable: true
+            immovable: true,
         });
+
+       
 
         //JUGADOR 1-----------------------------------------------------------------------------------------------------
         this.player1 = this.physics.add.sprite(600, 550, 'j1');  //INICIALIZACION J1
@@ -143,10 +145,10 @@ class GameScene extends Phaser.Scene {
         this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
 
         //NOODLES
-        this.noodles = this.add.sprite(1000, 625, 'noodles');
+        this.noodles = this.add.sprite(1000, 598.25, 'noodles');
         this.noodles.setScale(0.5, 0.5);
         this.hasNoodles = 0;
-        this.noodlesHolder = this.physics.add.sprite(1000, 625, 'noodles');
+        this.noodlesHolder = this.physics.add.sprite(1000, 598.25, 'noodles');
         this.noodlesHolder.setScale(0.5, 0.5);
         this.noodlesHolder.setVisible(false);
         
@@ -180,8 +182,8 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.noodlesHolder, this.suelo);
 
         //COLISIONES ENTRE ELEMENTOS
-        this.physics.add.collider(this.player1, this.samurai, this.gameOverP1, null, this);
-        this.physics.add.collider(this.player2, this.samurai, this.gameOverP2, null, this);
+        this.physics.add.overlap(this.player1, this.samurai, this.gameOverP1, null, this);
+        this.physics.add.overlap(this.player2, this.samurai, this.gameOverP2, null, this);
         this.physics.add.collider(this.noodlesHolder, this.samurai, this.badEnding, null, this);
         this.physics.add.collider(this.player1, this.powerUps, this.powerUpTodoMitico, null, this);
         this.physics.add.collider(this.player2, this.powerUps, this.powerUpTodoMitico, null, this);
@@ -192,6 +194,7 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player1, this.platforms);
         this.physics.add.collider(this.player2, this.platforms);
         this.physics.add.collider(this.powerUps, this.platforms);
+        this.physics.add.overlap(this.samurai, this.platforms, this.destruirPlataforma, null, this);
 
         this.doomyText = this.add.text(config.width / 2, config.height / 2, 'xd?', { font: '64px japaneseFont' });
         this.doomyText.setVisible(false);
@@ -297,7 +300,7 @@ class GameScene extends Phaser.Scene {
         }  
 
         if(this.hasNoodles==0){
-            //console.log(this.noodlesHolder.y);
+            console.log(this.noodlesHolder.y);
             this.noodlesHolder.setVelocityX(-this.worldSpeed);
             this.noodles.x = this.noodlesHolder.x;
             this.noodles.y = this.noodlesHolder.y;
@@ -408,6 +411,7 @@ class GameScene extends Phaser.Scene {
         this.hasNoodles = 2;
         this.noodlesHolder.destroy();
     }
+    
 
     playersCrush(){
         if(this.startGameBool){
@@ -486,7 +490,11 @@ class GameScene extends Phaser.Scene {
         
         this.scene.start('resumenScene');
     }
-
+    destruirPlataforma(samurai, platafroma){
+        console.log("destruyendo platadormas");
+        platafroma.destroy();
+    }
+    
     powerUpTodoMitico(player, powerup){
         this.punchSFX.play();
         if(player == this.player1){
@@ -564,35 +572,49 @@ class GameScene extends Phaser.Scene {
         switch(this.randomPlat){
             case 0:
                 console.log("Powerup 0 creada");
-                let power0 = this.powerUps.create(1600, 550, 'powerup');
+                let power0 = this.powerUps.create(1600, 600, 'powerup');
+              
                 power0.setScale(0.1, 0.1);
+                power0.y = power0.y-power0.height*0.1 - 1;
                 power0.setVelocityX(-this.worldSpeed);
+                console.log(power0.height);
                 break;
             case 1:
                 console.log("Powerup 1 creada");
-                let power1 = this.powerUps.create(1600, 450, 'powerup');
+                let power1 = this.powerUps.create(1600, 500 , 'powerup');
+                
                 power1.setScale(0.1, 0.1);
+                power1.y = power1.y-power1.height*0.1  - 1;
                 power1.setVelocityX(-this.worldSpeed);
+                console.log(power1.height);
                 break;
             case 2:
                 console.log("Powerup 2 creada");
-                let power2 = this.powerUps.create(1600, 350, 'powerup');
+                let power2 = this.powerUps.create(1600, 400, 'powerup');
+               
                 power2.setScale(0.1, 0.1);
+                power2.y = power2.y-power2.height*0.1  - 1;
                 power2.setVelocityX(-this.worldSpeed);
+                console.log(power2.height);
                 break;
             case 3:
                 console.log("Powerup 3 creada");
-                let power3 = this.powerUps.create(1600, 250, 'powerup');
+                let power3 = this.powerUps.create(1600, 300, 'powerup');
                 power3.setScale(0.1, 0.1);
+                power3.y = power3.y-power3.height*0.1  - 1;
                 power3.setVelocityX(-this.worldSpeed);
+                console.log(power3.height);
                 break;
             case 4:
                 console.log("Powerup 4 creada");
-                let power4 = this.powerUps.create(1600, 250, 'powerup');
+                let power4 = this.powerUps.create(1600, 200, 'powerup');
                 power4.setScale(0.1, 0.1);
+                power4.y = power4.y-power4.height*0.1  - 1;
                 power4.setVelocityX(-this.worldSpeed);
+                console.log(power4.height);
                 break;
         }
+        
     }
 
     decideWinner()
