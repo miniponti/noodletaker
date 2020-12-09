@@ -49,9 +49,9 @@ class GameScene extends Phaser.Scene {
 
         //Variables
         this.playerSpeed = 300;
-        this.worldSpeed = 270;
+        this.worldSpeed = 450;
         this.jumpSpeed = 400;
-        this.platformSpawnSpeed = 2000;
+        this.platformSpawnSpeed = 1000;
         this.gameOver = false;
         this.startGameBool = false;
         this.p1Moving = true;
@@ -207,7 +207,7 @@ class GameScene extends Phaser.Scene {
 
             this.movePlayers();
             this.bg1.tilePositionX += 2; //MOVIMIENTO CONSTANTE DEL FONDO
-            this.bg2.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
+            this.bg2.tilePositionX += 5; //MOVIMIENTO CONSTANTE DEL FONDO
 
             if(this.powerUpSpawner <= this.time.now){
                 this.powerUpSpawner+=10000;
@@ -523,32 +523,34 @@ class GameScene extends Phaser.Scene {
                 break;
             case 1:
                 console.log("Plataforma 1 creada");
-                let plat2 = this.platforms.create(1600, 550, 'obstaculo');
+                let plat2 = this.platforms.create(1600, 500, 'obstaculo');
                 plat2.setVelocityX(-this.worldSpeed);
                 //plat2.setScale(0.2,0.1);
                 break;
             case 2:
                 console.log("Plataforma 2 creada");
-                let plat3 = this.platforms.create(1600, 500, 'obstaculo');
+                let plat3 = this.platforms.create(1600, 400, 'obstaculo');
                 plat3.setVelocityX(-this.worldSpeed);
                 //plat3.setScale(0.2,0.1);
                 break;
             case 3:
                 console.log("Plataforma 3 creada");
-                let plat4 = this.platforms.create(1600, 450, 'obstaculo');
+                let plat4 = this.platforms.create(1600, 300, 'obstaculo');
                 plat4.setVelocityX(-this.worldSpeed);
                 //plat4.setScale(0.2,0.1);
                 break;
             case 4:
                 console.log("Plataforma 4 creada");
-                let plat5 = this.platforms.create(1600, 400, 'obstaculo');
+                let plat5 = this.platforms.create(1600, 200, 'obstaculo');
                 plat5.setVelocityX(-this.worldSpeed);
                 //plat5.setScale(0.2,0.3);
                 break;
+                /*
             default:
                 let plat6 = this.platforms.create(1600, 350, 'obstaculo');
                 plat6.setVelocityX(-this.worldSpeed);
                 break;
+                */
         }
             
             
