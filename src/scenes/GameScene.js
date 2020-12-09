@@ -50,8 +50,8 @@ class GameScene extends Phaser.Scene {
         this.playerSpeed = 300;
         this.worldSpeed = 270;
         this.jumpSpeed = 450;
-        this.platformSpawnSpeed = 1000;
-        this.powerupSpawnSpeed = 5000;
+        this.platformSpawnSpeed = 1500;
+        this.powerupSpawnSpeed = 6000;
         this.gameOver = false;
         this.startGameBool = false;
         this.p1Moving = true;
