@@ -17,6 +17,9 @@ class TitleScene extends Phaser.Scene {
         this.load.image('CONTROLS_BUTTON_DOWN','assets/sprites/buttons/CONTROLS_BUTTON_DOWN.png');
         this.load.image('MUSIC_BUTTON','assets/sprites/buttons/AUDIO_BUTTON.png');
         this.load.image('MUTED_BUTTON','assets/sprites/buttons/AUDIO_BUTTON_MUTED.png');
+        this.load.image('TUTORIAL_BUTTON','assets/sprites/buttons/TUTORIAL_BUTTON.png');
+        this.load.image('TUTORIAL_BUTTON_HOVER','assets/sprites/buttons/TUTORIAL_BUTTON_HOVER.png');
+        this.load.image('TUTORIAL_BUTTON_DOWN','assets/sprites/buttons/TUTORIAL_BUTTON_DOWN.png');
 
         //AUDIO
         this.load.audio('TITLESCENE_MUSIC','assets/audio/TITLE_BGM.mp3');
@@ -75,6 +78,22 @@ class TitleScene extends Phaser.Scene {
         this.controlsButtonDown.on('pointerup', () => this.controlsUp());
         this.controlsButtonDown.setVisible(false);
 
+        //BOTON TUTORIAL---------------------------------------------------------------------------------
+        this.tutorialButton = this.add.image(config.width / 2, 600, 'TUTORIAL_BUTTON');
+        this.tutorialButton.setInteractive({useHandCursor: true});
+        this.tutorialButton.on('pointerover', () => this.tutorialHover());
+        
+        this.tutorialButtonHover = this.add.image(config.width / 2, 600, 'TUTORIAL_BUTTON_HOVER');
+        this.tutorialButtonHover.setInteractive({useHandCursor: true});
+        this.tutorialButtonHover.on('pointerdown', () => this.tutorialDown());
+        this.tutorialButtonHover.on('pointerout', () => this.tutorialOut());
+        this.tutorialButtonHover.setVisible(false);
+
+        this.tutorialButtonDown = this.add.image(config.width / 2, 600, 'TUTORIAL_BUTTON_DOWN');
+        this.tutorialButtonDown.setInteractive({useHandCursor: true});
+        this.tutorialButtonDown.on('pointerup', () => this.tutorialUp());
+        this.tutorialButtonDown.setVisible(false);
+
         this.startTitle();        
     }
 
@@ -97,23 +116,23 @@ class TitleScene extends Phaser.Scene {
     //FUNCIONES PARA EL BOTON START----------------------------------------------------
     //PARA CUANDO PASA POR ENCIMA
     startButtonOver(){
-        console.log('START hovered');
+        //console.log('START hovered');
         this.startHover.setVisible(true);
     }
     //PARA CUANDO NO ESTA ENCIMA
     startOut(){
-        console.log('start not over');
+        //console.log('start not over');
         this.startHover.setVisible(false);
     }
     //PARA CUANDO SE PULSA
     startButtonDown(){
-        console.log('start clicked');
+        //console.log('start clicked');
         this.startDown.setVisible(true);
         this.startSFX.play();
     }
     //PARA CUANDO DEJA DE PULSARSE
     startUp(){
-        console.log('start up');
+        //console.log('start up');
         this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }
@@ -122,32 +141,56 @@ class TitleScene extends Phaser.Scene {
     //FUNCIONES PARA EL BOTON DE CONTROLES---------------------------------------------
     //PARA CUANDO SE PASA POR ENCIMA
     controlsHover(){    
-        console.log('controls hovered');
+        //console.log('controls hovered');
         this.controlsButtonHover.setVisible(true);
     }
     //PARA CUANDO NO ESTA ENCIMA
     controlsOut(){      
-        console.log('controls not hovered');
+        //console.log('controls not hovered');
         this.controlsButtonHover.setVisible(false);
     }
     //PARA CUANDO SE PULSA
     controlsDown(){
-        console.log('controls clicked');
+        //console.log('controls clicked');
         this.controlsButtonDown.setVisible(true);
     }
     //PARA CUANDO SE DEJA DE HACER CLICK
     controlsUp(){
-        console.log('controls up');
+        //console.log('controls up');
         this.controlsButtonDown.setVisible(false);
         this.scene.pause('TITLE_SCENE_KEY');
         this.scene.run('CONTROL_KEYS_SCENE_KEY');
+    }
+
+    //FUNCIONES PARA EL BOTON DEL TUTORIAL---------------------------------------------
+    //PARA CUANDO SE PASA POR ENCIMA
+    tutorialHover(){    
+        //console.log('controls hovered');
+        this.tutorialButtonHover.setVisible(true);
+    }
+    //PARA CUANDO NO ESTA ENCIMA
+    tutorialOut(){      
+        //console.log('controls not hovered');
+        this.tutorialButtonHover.setVisible(false);
+    }
+    //PARA CUANDO SE PULSA
+    tutorialDown(){
+        //console.log('controls clicked');
+        this.tutorialButtonDown.setVisible(true);
+    }
+    //PARA CUANDO SE DEJA DE HACER CLICK
+    tutorialUp(){
+        //console.log('controls up');
+        this.tutorialButtonDown.setVisible(false);
+        this.scene.pause('TITLE_SCENE_KEY');
+        this.scene.run('TUTORIAL_SCENE_KEY');
     }
     //-----------------------------------------------------------------------------------
 
     //FUNCION QUE PONE EN MARCHA LA PANTALLA DEL TITULO
     startTitle(){
         this.titleBGM.play();
-        console.log('start title funciona');
+        //console.log('start title funciona');
     }
     
 }
