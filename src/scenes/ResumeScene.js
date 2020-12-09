@@ -31,6 +31,7 @@ class ResumeScene extends Phaser.Scene {
     }
     
     restartGame(){
+
         this.startSFX.play();
         this.scene.start('TITLE_SCENE_KEY');
     }

@@ -11,17 +11,10 @@ class GameScene extends Phaser.Scene {
     preload() {
         //CARGA DE TODAS LAS IMAGENES
         this.load.image('bg1', 'assets/sprites/Background1.png');
-<<<<<<< Updated upstream
-        this.load.image('bg2', 'assets/sprites/Background2.png');
-        this.load.image('suelo', 'assets/sprites/plataforma.png');
-        this.load.image('obstaculo', 'assets/sprites/PLATFORM2.png');
-        this.load.image('meta', 'assets/sprites/plataforma.png');
-=======
         this.load.image('bg2', 'assets/sprites/Background3.png');
         this.load.image('road', 'assets/sprites/plataforma.png');
         this.load.image('obstacle', 'assets/sprites/PLATFORM2.png');
         this.load.image('finishline', 'assets/sprites/plataforma.png');
->>>>>>> Stashed changes
         this.load.image('noodles', 'assets/sprites/NOODLECUP.png');
 
         //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
@@ -52,12 +45,12 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-
         //Variables
         this.playerSpeed = 300;
-        this.worldSpeed = 450;
-        this.jumpSpeed = 400;
-        this.platformSpawnSpeed = 1000;
+        this.worldSpeed = 270;
+        this.jumpSpeed = 450;
+        this.platformSpawnSpeed = 1500;
+        this.powerupSpawnSpeed = 6000;
         this.gameOver = false;
         this.startGameBool = false;
         this.p1Moving = true;
@@ -75,7 +68,9 @@ class GameScene extends Phaser.Scene {
         this.atackTime = 1000; //ms
         this.stunTime = 200; //ms
         this.jumpTime = 1000;
-        this.powerUpSpawner = 10000;
+        this.randomPlat;
+
+
         //AUDIO
         this.gameBGM = this.sound.add('GAME_AUDIO');
         this.gameoverSFX = this.sound.add('GAMEOVER_AUDIO');
@@ -88,11 +83,11 @@ class GameScene extends Phaser.Scene {
         this.bg1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'bg1');
         this.bg1.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
         this.bg1.setScrollFactor(0);
-        this.bg1.setScale(1.5,1.5);
+        this.bg1.setScale(1.5, 1.5);
         this.bg2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'bg2');
         this.bg2.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
         this.bg2.setScrollFactor(0);
-        this.bg2.setScale(1.5,1.5);
+        this.bg2.setScale(3, 3);
 
         //SUELO ESTATICO
         this.suelo = this.physics.add.staticGroup();
@@ -101,8 +96,10 @@ class GameScene extends Phaser.Scene {
         //PLATAFORMAS
         this.platforms = this.physics.add.group({
             allowGravity: false,
-            immovable: true
+            immovable: true,
         });
+
+       
 
         //JUGADOR 1-----------------------------------------------------------------------------------------------------
         this.player1 = this.physics.add.sprite(600, 550, 'j1');  //INICIALIZACION J1
@@ -147,10 +144,10 @@ class GameScene extends Phaser.Scene {
         this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
 
         //NOODLES
-        this.noodles = this.add.sprite(1000, 625, 'noodles');
+        this.noodles = this.add.sprite(1000, 598.25, 'noodles');
         this.noodles.setScale(0.5, 0.5);
         this.hasNoodles = 0;
-        this.noodlesHolder = this.physics.add.sprite(1000, 625, 'noodles');
+        this.noodlesHolder = this.physics.add.sprite(1000, 598.25, 'noodles');
         this.noodlesHolder.setScale(0.5, 0.5);
         this.noodlesHolder.setVisible(false);
         
@@ -184,8 +181,8 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.noodlesHolder, this.suelo);
 
         //COLISIONES ENTRE ELEMENTOS
-        this.physics.add.collider(this.player1, this.samurai, this.gameOverP1, null, this);
-        this.physics.add.collider(this.player2, this.samurai, this.gameOverP2, null, this);
+        this.physics.add.overlap(this.player1, this.samurai, this.gameOverP1, null, this);
+        this.physics.add.overlap(this.player2, this.samurai, this.gameOverP2, null, this);
         this.physics.add.collider(this.noodlesHolder, this.samurai, this.badEnding, null, this);
         this.physics.add.collider(this.player1, this.powerUps, this.powerUpTodoMitico, null, this);
         this.physics.add.collider(this.player2, this.powerUps, this.powerUpTodoMitico, null, this);
@@ -195,6 +192,8 @@ class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.player1, this.player2, this.playersCrush, null, this)
         this.physics.add.collider(this.player1, this.platforms);
         this.physics.add.collider(this.player2, this.platforms);
+        this.physics.add.collider(this.powerUps, this.platforms);
+        this.physics.add.overlap(this.samurai, this.platforms, this.destruirPlataforma, null, this);
 
         this.doomyText = this.add.text(config.width / 2, config.height / 2, 'xd?', { font: '64px japaneseFont' });
         this.doomyText.setVisible(false);
@@ -213,8 +212,8 @@ class GameScene extends Phaser.Scene {
 
             this.movePlayers();
             this.bg1.tilePositionX += 2; //MOVIMIENTO CONSTANTE DEL FONDO
-            this.bg2.tilePositionX += 5; //MOVIMIENTO CONSTANTE DEL FONDO
-
+            this.bg2.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
+            /*
             if(this.powerUpSpawner <= this.time.now){
                 this.powerUpSpawner+=10000;
                 this.todoMitico = this.powerUps.create(1375, 550, 'powerup');
@@ -223,6 +222,22 @@ class GameScene extends Phaser.Scene {
                 //this.todoMitico.setCollideWorldBounds(true);
                 
             }
+            */
+           var childs = [];
+           var contador = 0;
+           this.platforms.children.iterate(function (child) {
+
+            if(child.x<=0){
+                childs[contador] = child;
+                contador++;
+            }
+            
+
+        });
+            for(var i = 0; i<contador; i++){
+                childs[i].destroy();
+            }
+
         } else {
             this.gameBGM.stop();
         }
@@ -299,7 +314,7 @@ class GameScene extends Phaser.Scene {
         }  
 
         if(this.hasNoodles==0){
-            //console.log(this.noodlesHolder.y);
+            console.log(this.noodlesHolder.y);
             this.noodlesHolder.setVelocityX(-this.worldSpeed);
             this.noodles.x = this.noodlesHolder.x;
             this.noodles.y = this.noodlesHolder.y;
@@ -396,9 +411,12 @@ class GameScene extends Phaser.Scene {
         this.startGameBool = true;
         this.powerUpSpawner = this.time.now;
         this.timedPlatforms = this.time.addEvent({delay: this.platformSpawnSpeed, callback: this.createPlatform, callbackScope: this, loop: true});
+        this.timedStartPowerUp = this.time.delayedCall(240, this.StartPowerUp, [], this);
         this.timedDecideWinner = this.time.delayedCall(60000, this.decideWinner, [], this);
     }
-
+    StartPowerUp(){
+        this.timedPowerups = this.time.addEvent({delay: this.powerupSpawnSpeed, callback: this.createPowerup, callbackScope: this, loop: true});
+    }
     takeNoodles1(){
             console.log("1 cogio los noodles")
             this.hasNoodles = 1;
@@ -409,11 +427,10 @@ class GameScene extends Phaser.Scene {
         this.hasNoodles = 2;
         this.noodlesHolder.destroy();
     }
-
+    
 
     playersCrush(){
         if(this.startGameBool){
-
             if(!this.p2canAtack){
                 if(this.attackTimerP2<=this.time.now){
                     this.p2canAtack = true;
@@ -489,7 +506,11 @@ class GameScene extends Phaser.Scene {
         
         this.scene.start('resumenScene');
     }
-
+    destruirPlataforma(samurai, platafroma){
+        console.log("destruyendo platadormas");
+        platafroma.destroy();
+    }
+    
     powerUpTodoMitico(player, powerup){
         this.punchSFX.play();
         if(player == this.player1){
@@ -517,50 +538,48 @@ class GameScene extends Phaser.Scene {
    
     createPlatform()
     {
-            
         let random = this.randomNumber();
         //console.log(random);
+        let randomPlat;
         switch(random){
             case 0:
                 console.log("Plataforma 0 creada");
                 let plat1 = this.platforms.create(1600, 600, 'obstacle');
                 plat1.setVelocityX(-this.worldSpeed);
-                //plat1.setScale(0.2,0.1);
+                plat1.setOrigin(0,0);
+                this.randomPlat = 0;
                 break;
             case 1:
                 console.log("Plataforma 1 creada");
                 let plat2 = this.platforms.create(1600, 500, 'obstacle');
                 plat2.setVelocityX(-this.worldSpeed);
-                //plat2.setScale(0.2,0.1);
+                this.randomPlat = 1;
+                plat2.setOrigin(0,0);
                 break;
             case 2:
                 console.log("Plataforma 2 creada");
                 let plat3 = this.platforms.create(1600, 400, 'obstacle');
                 plat3.setVelocityX(-this.worldSpeed);
-                //plat3.setScale(0.2,0.1);
+                this.randomPlat = 2;
+                plat3.setOrigin(0,0);
                 break;
             case 3:
                 console.log("Plataforma 3 creada");
                 let plat4 = this.platforms.create(1600, 300, 'obstacle');
                 plat4.setVelocityX(-this.worldSpeed);
-                //plat4.setScale(0.2,0.1);
+                this.randomPlat = 3;
+                plat4.setOrigin(0,0);
                 break;
             case 4:
                 console.log("Plataforma 4 creada");
                 let plat5 = this.platforms.create(1600, 200, 'obstacle');
                 plat5.setVelocityX(-this.worldSpeed);
-                //plat5.setScale(0.2,0.3);
+                this.randomPlat = 4;
+                plat5.setOrigin(0,0);
                 break;
-                /*
-            default:
-                let plat6 = this.platforms.create(1600, 350, 'obstaculo');
-                plat6.setVelocityX(-this.worldSpeed);
-                break;
-                */
         }
-            
-            
-        
+
+        return randomPlat;
     }
 
     randomNumber(){
@@ -568,6 +587,55 @@ class GameScene extends Phaser.Scene {
         let random2 = Math.floor(Math.random() * 5);
         //console.log(random2);
         return random2;
+    }
+
+    createPowerup(){
+        switch(this.randomPlat){
+            case 0:
+                console.log("Powerup 0 creada");
+                let power0 = this.powerUps.create(1600, 600, 'powerup');
+              
+                power0.setScale(0.1, 0.1);
+                power0.y = power0.y-power0.height*0.1 - 1;
+                power0.setVelocityX(-this.worldSpeed);
+                console.log(power0.height);
+                break;
+            case 1:
+                console.log("Powerup 1 creada");
+                let power1 = this.powerUps.create(1600, 500 , 'powerup');
+                
+                power1.setScale(0.1, 0.1);
+                power1.y = power1.y-power1.height*0.1  - 1;
+                power1.setVelocityX(-this.worldSpeed);
+                console.log(power1.height);
+                break;
+            case 2:
+                console.log("Powerup 2 creada");
+                let power2 = this.powerUps.create(1600, 400, 'powerup');
+               
+                power2.setScale(0.1, 0.1);
+                power2.y = power2.y-power2.height*0.1  - 1;
+                power2.setVelocityX(-this.worldSpeed);
+                console.log(power2.height);
+                break;
+            case 3:
+                console.log("Powerup 3 creada");
+                let power3 = this.powerUps.create(1600, 300, 'powerup');
+                power3.setScale(0.1, 0.1);
+                power3.y = power3.y-power3.height*0.1  - 1;
+                power3.setVelocityX(-this.worldSpeed);
+                console.log(power3.height);
+                break;
+            case 4:
+                console.log("Powerup 4 creada");
+                let power4 = this.powerUps.create(1600, 200, 'powerup');
+                power4.setScale(0.1, 0.1);
+                power4.y = power4.y-power4.height*0.1  - 1;
+                power4.setVelocityX(-this.worldSpeed);
+                console.log(power4.height);
+                break;
+        }
+        
     }
 
     decideWinner()
@@ -580,9 +648,9 @@ class GameScene extends Phaser.Scene {
         this.player1.play("j1_stand");
         this.gameoverSFX.play();
         if(this.hasNoodles = 1){
-            this.scene.start('WINNER_P1_SCENE');
-        } else if(this.hasNoodles = 2){
             this.scene.start('WINNER_P2_SCENE');
+        } else if(this.hasNoodles = 2){
+            this.scene.start('WINNER_P1_SCENE');
         }
     }
 }

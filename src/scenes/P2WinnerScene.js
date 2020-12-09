@@ -24,13 +24,6 @@ class P2WinnerScene extends Phaser.Scene {
         let restartButton = this.add.image(config.width / 2, 650, 'RESTART_BUTTON');
         restartButton.setInteractive({useHandCursor: true});
         restartButton.on('pointerdown', () => this.restartGame());
-
-<<<<<<< Updated upstream
-        this.P2WinnerText = this.add.text(config.width / 2, config.height / 2, 'P2 TOOK THE NOODLES!', { font: '72px japaneseFont' });
-        this.P2WinnerText.setStroke('#ff5757', 16);
-        Phaser.Display.Align.In.Center(this.P2WinnerText, bg);
-=======
->>>>>>> Stashed changes
     }
     
     restartGame(){
