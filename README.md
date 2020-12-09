@@ -10,7 +10,6 @@ La temática del juego es "Japón moderno mezclado con figuras del Japón feudal
 **Trello**: https://trello.com/b/f4JpxO8a
 
 
-# GAME DESIGN DOCUMENT
 
 ### 1.- Introducción
 #### 1.1.- Concepto principal
@@ -53,72 +52,51 @@ __Cámara neutra__: La cámara toma una perspectiva lateral, perpendicular a la 
 		* ↓ = Agacharse.	
 		* → = Moverse a la derecha.
 		* Tecla Ctrl derecho = Atacar.
-* Online
-	* W = Saltar
-	* A = Moverse a la izquierda
-	* S = Agacharse
-	* D = Moverse a la derecha.
-	* Barra Espaciadora = Atacar.
 
-#### 2.3.- Puntuación
-Solo existe una puntuación como tal en la fase de bonificación, donde se utilizará para definir qué jugador de los dos gana al otro y por tanto recibe la bonificación. Dicha fase ocurrirá a la mitad del nivel.
-Sin embargo, se trata de una carrera hasta una meta, y el jugador que vaya por delante es el que tiene el tazón de noodles.
 
-#### 2.4.- Jugabilidad
+#### 2.3.- Jugabilidad
 * **Movimiento de los jugadores**: la jugabilidad se basa en un espacio de dos dimensiones en el que se puede avanzar horizontal y verticalmente, creando un entorno similar al de los juegos de plataformas.
 
 * **Movimiento de la cámara**: La cámara del juego se mueve constantemente, hasta que uno de los jugadores llegue al final o pierda en medio de la partida (bien porque el samurái le atrapa o porque uno de los obstáculos le impide avanzar).
 
 * **Obstáculos y peligros**: a medida que avanza la partida, van surgiendo distintos obstáculos que los jugadores deben esquivar para seguir adelante, como hoyos en el suelo o bloques que vienen por la parte derecha y deben saltar o agacharse para esquivarlos.
 
-* **Atacar**: Los dos jugadores pueden atacarse entre sí, si se pulsa la correspondiente tecla de ataque y si un jugador entra en contacto con el otro. El efecto del ataque es la ralentización de movimiento del otro jugador durante cierto tiempo.
+* **Atacar**: Los dos jugadores pueden atacarse entre sí, si se pulsa la correspondiente tecla de ataque y si un jugador entra en contacto con el otro. El efecto del ataque es empujar hacia atrás al otro jugador.
 
-#### 2.5.- Niveles
+#### 2.4.- Niveles
 El sistema de niveles se basa en una secuencia de escenarios (el nivel es en ningún caso seleccionable) que se van sucediendo de la siguiente forma:
 
 * Al principio del juego se plantea un nivel estándar en el que los jugadores deben esquivar los obstáculos hasta que uno de los jugadores pierda.
-
-* Si ninguno de los jugadores ha perdido llegada la mitad de duración del nivel, se activa una fase de bonificación, en la que cualquiera de los jugadores puede conseguir una ventaja sobre el otro (por ejemplo, velocidad o paralizar al otro jugador 1 segundo).
 
 * Una vez terminado el primer nivel, se accede al siguiente con una estética visual y posición de obstáculos diferentes al anterior. 
 
 * Cuando se hayan finalizado todos los niveles, se habrá acabado la partida y por tanto se mostrarán los resultados.
 
-* Esta sucesión de niveles entre plataformas y zona de bonificación constituye la tónica general del juego.
-
-#### 2.6.- Condiciones de victoria
+#### 2.5.- Condiciones de victoria
 Es una partida al mejor de tres. Durante tres niveles (tres escenarios) los jugadores compiten, y el que logre sacar dos victorias primero gana la partida.
 Un jugador sale victorioso de un nivel cuando:
 
-* El otro jugador es capturado por el samurái que persigue a ambos (debido a la reducción de velocidad al no esquivar obstáculos con éxito o al ser atacada por el otro jugador).
+* El otro jugador es capturado por el samurái que persigue a ambos.
 
 * El otro jugador falla al esquivar un obstáculo que conlleva una derrota instantánea (caer en un hueco en el suelo en el mapa por ejemplo).
 
 * Consigue llegar al final del recorrido en primer lugar; al final de cada escenario hay una marca que indica la meta, el primero que la cruce se lleva la victoria del nivel.
 
-#### 2.7.- Intensidad
-La intensidad viene marcada por el ritmo de la canción del propio nivel. Al principio el ritmo es lento, pero a medida que el juego progresa, aumenta y por tanto el escenario se desliza de derecha a izquierda cada vez más rápido, hasta que llegue al límite de máxima velocidad.
-
-#### 2.8.- Obstáculos
+#### 2.6.- Obstáculos
 Los obstáculos se dividen en varios grupos en función de la forma de esquivarlos:
 * **Plataformas**: Las plataformas son el obstáculo más común del juego, aparecen por la derecha de la pantalla y van hacia el jugador de derecha a izquierda (siguiendo el autoscroll del nivel), son de diferentes tamaños y se esquivan saltando sobre ellas o yendo por debajo (si es posible).
-* **Trampas en el suelo**: Zonas en el suelo que ralentizan al jugador. Se esquivan saltando sobre ellas en el momento correcto.
-* **Huecos en el suelo**: Zonas en las que el suelo desaparece dejando un hueco vacío. Se pueden esquivar con un salto y si se cae un jugador, pierde automáticamente el nivel.
 
-#### 2.9.- Habilidades
-Las distintas habilidades o Power Ups aparecen aleatoriamente por la parte derecha de la pantalla, y se activan automáticamente cuando uno de los jugadores entra en contacto con ellas:
+#### 2.7.- Habilidades
 * **Sumashu (Smash)**: si un jugador toca esta habilidad, en la pantalla se muestra un mensaje de emergencia y, a continuación, sale un personaje llamado Todo Mítico que le da un puñetazo al ninja controlado por el otro jugador y lo paraliza durante un cierto tiempo.
-* **Zaguárudo (The world)**: cuando un jugador obtiene esta habilidad, se muestra un mensaje de alerta en la pantalla, aparece el personaje Darío Brandys y hace que el otro ninja no pueda moverse durante un cierto tiempo.
 
-#### 2.10.- Primeros minutos
-Al arrancar el texto, y darle al botón de empezar, se muestra un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
+#### 2.8.- Guía
+En la pantalla del título, se le da la opción al jugador de pulsar un botón que muestre un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
 
 ### 3.- Estados del juego
 NoodleTaker consta de los siguientes estados:
-	* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón, el cual si se pulsa y los dos jugadores están disponibles, comienza la 		partida.
-	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a usar los controles.
-	* **Menú de siguiente nivel:** aparece cuando se ha completado uno de los escenarios y en él se muestra la puntuación de cada jugador y un botón para pasar al siguiente 	escenario. Esto ocurre dos veces, ya que son 3 niveles que hay que superar.
-	* **Menú de fin de juego:** aparece cuando se han superado los tres niveles y ya se ha establecido el ganador. Si los dos jugadores están disponibles para jugar otra partida, se vuelve al estado de “Partida empezada”. Si no es así, se vuelve al menú de inicio.
+	* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
+	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
+	* **Menú de fin de juego:** aparece cuando se han superado los tres niveles y ya se ha establecido el ganador.
 ![](concept%20art/esquema.png)
 ### 4.- Arte
 #### 4.1.- Interfaz
