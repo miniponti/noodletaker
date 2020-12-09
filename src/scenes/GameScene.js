@@ -413,7 +413,9 @@ class GameScene extends Phaser.Scene {
         this.powerUpSpawner = this.time.now;
         this.timedPlatforms = this.time.addEvent({delay: this.platformSpawnSpeed, callback: this.createPlatform, callbackScope: this, loop: true});
         this.timedStartPowerUp = this.time.delayedCall(240, this.StartPowerUp, [], this);
-        this.timedDecideWinner = this.time.delayedCall(60000, this.decideWinner, [], this);
+        this.timedWaitForFinishLine = this.time.delayedCall(60000, this.waitForFinishLine, [], this);
+
+        this.spawnObjects = true;
     }
     StartPowerUp(){
         this.timedPowerups = this.time.addEvent({delay: this.powerupSpawnSpeed, callback: this.createPowerup, callbackScope: this, loop: true});
@@ -539,7 +541,8 @@ class GameScene extends Phaser.Scene {
    
     createPlatform()
     {
-        let random = this.randomNumber();
+        if (this.spawnObjects){
+            let random = this.randomNumber();
         //console.log(random);
         let randomPlat;
         switch(random){
@@ -581,6 +584,7 @@ class GameScene extends Phaser.Scene {
         }
 
         return randomPlat;
+        }
     }
 
     randomNumber(){
@@ -591,52 +595,72 @@ class GameScene extends Phaser.Scene {
     }
 
     createPowerup(){
-        switch(this.randomPlat){
-            case 0:
-                console.log("Powerup 0 creada");
-                let power0 = this.powerUps.create(1600, 600, 'powerup');
-              
-                power0.setScale(0.1, 0.1);
-                power0.y = power0.y-power0.height*0.1 - 1;
-                power0.setVelocityX(-this.worldSpeed);
-                console.log(power0.height);
-                break;
-            case 1:
-                console.log("Powerup 1 creada");
-                let power1 = this.powerUps.create(1600, 500 , 'powerup');
-                
-                power1.setScale(0.1, 0.1);
-                power1.y = power1.y-power1.height*0.1  - 1;
-                power1.setVelocityX(-this.worldSpeed);
-                console.log(power1.height);
-                break;
-            case 2:
-                console.log("Powerup 2 creada");
-                let power2 = this.powerUps.create(1600, 400, 'powerup');
-               
-                power2.setScale(0.1, 0.1);
-                power2.y = power2.y-power2.height*0.1  - 1;
-                power2.setVelocityX(-this.worldSpeed);
-                console.log(power2.height);
-                break;
-            case 3:
-                console.log("Powerup 3 creada");
-                let power3 = this.powerUps.create(1600, 300, 'powerup');
-                power3.setScale(0.1, 0.1);
-                power3.y = power3.y-power3.height*0.1  - 1;
-                power3.setVelocityX(-this.worldSpeed);
-                console.log(power3.height);
-                break;
-            case 4:
-                console.log("Powerup 4 creada");
-                let power4 = this.powerUps.create(1600, 200, 'powerup');
-                power4.setScale(0.1, 0.1);
-                power4.y = power4.y-power4.height*0.1  - 1;
-                power4.setVelocityX(-this.worldSpeed);
-                console.log(power4.height);
-                break;
+        if (this.spawnObjects){
+            switch(this.randomPlat){
+                case 0:
+                    console.log("Powerup 0 creada");
+                    let power0 = this.powerUps.create(1600, 600, 'powerup');
+                  
+                    power0.setScale(0.1, 0.1);
+                    power0.y = power0.y-power0.height*0.1 - 1;
+                    power0.setVelocityX(-this.worldSpeed);
+                    console.log(power0.height);
+                    break;
+                case 1:
+                    console.log("Powerup 1 creada");
+                    let power1 = this.powerUps.create(1600, 500 , 'powerup');
+                    
+                    power1.setScale(0.1, 0.1);
+                    power1.y = power1.y-power1.height*0.1  - 1;
+                    power1.setVelocityX(-this.worldSpeed);
+                    console.log(power1.height);
+                    break;
+                case 2:
+                    console.log("Powerup 2 creada");
+                    let power2 = this.powerUps.create(1600, 400, 'powerup');
+                   
+                    power2.setScale(0.1, 0.1);
+                    power2.y = power2.y-power2.height*0.1  - 1;
+                    power2.setVelocityX(-this.worldSpeed);
+                    console.log(power2.height);
+                    break;
+                case 3:
+                    console.log("Powerup 3 creada");
+                    let power3 = this.powerUps.create(1600, 300, 'powerup');
+                    power3.setScale(0.1, 0.1);
+                    power3.y = power3.y-power3.height*0.1  - 1;
+                    power3.setVelocityX(-this.worldSpeed);
+                    console.log(power3.height);
+                    break;
+                case 4:
+                    console.log("Powerup 4 creada");
+                    let power4 = this.powerUps.create(1600, 200, 'powerup');
+                    power4.setScale(0.1, 0.1);
+                    power4.y = power4.y-power4.height*0.1  - 1;
+                    power4.setVelocityX(-this.worldSpeed);
+                    console.log(power4.height);
+                    break;
+            }
         }
-        
+    }
+
+    waitForFinishLine(){
+        this.spawnObjects = false;
+        this.timedCreateFinishLine = this.time.delayedCall(5000, this.createFinishLine, [], this);
+    }
+
+    createFinishLine()
+    {
+        if (this.startGameBool) {
+            console.log("createFinishLine FUNCIONA");
+            this.finishLine = this.physics.add.sprite(1400, 200, 'meta');
+            this.finishLine.setScale(0.01, 7.5);
+            this.physics.add.collider(this.finishLine, this.suelo);
+            this.finishLine.setVelocityX(-100);
+            this.physics.add.collider(this.player1, this.finishLine, this.decideWinner, null, this);
+            this.physics.add.collider(this.player2, this.finishLine, this.decideWinner, null, this);
+        }
+
     }
 
     decideWinner()
@@ -648,9 +672,9 @@ class GameScene extends Phaser.Scene {
         this.player2.play("j2_stand");
         this.player1.play("j1_stand");
         this.gameoverSFX.play();
-        if(this.hasNoodles = 1){
+        if(this.hasNoodles === 1){
             this.scene.start('WINNER_P2_SCENE');
-        } else if(this.hasNoodles = 2){
+        } else if(this.hasNoodles === 2){
             this.scene.start('WINNER_P1_SCENE');
         }
     }
