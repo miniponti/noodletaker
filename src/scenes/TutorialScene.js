@@ -29,6 +29,14 @@ class TutorialScene extends Phaser.Scene{
 
     }
 
+<<<<<<< Updated upstream
+=======
+    //FUNCION QUE PASA AL SIGUIENTE PANEL
+    nextPanel(){
+        this.tutorial2.setVisible(true);
+    }
+
+>>>>>>> Stashed changes
     //FUNCION QUE PERMITE VOLVER A LA PANTALLA DEL TITULO
     returnToTitle(){
         //console.log("returnToTitle FUNCIONA");
