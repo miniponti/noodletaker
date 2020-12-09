@@ -1,7 +1,7 @@
 class GameScene extends Phaser.Scene {
 
     constructor() {
-        super("GAME_SCENE_KEY");
+        super('GAME_SCENE_KEY');
     }
 
     init() {
@@ -10,12 +10,11 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         //CARGA DE TODAS LAS IMAGENES
-        //this.load.image('fondo', 'assets/sprites/IMG_0008.png');
         this.load.image('bg1', 'assets/sprites/Background1.png');
         this.load.image('bg2', 'assets/sprites/Background3.png');
-        this.load.image('suelo', 'assets/sprites/plataforma.png');
-        this.load.image('obstaculo', 'assets/sprites/PLATFORM2.png');
-        this.load.image('meta', 'assets/sprites/plataforma.png');
+        this.load.image('road', 'assets/sprites/plataforma.png');
+        this.load.image('obstacle', 'assets/sprites/PLATFORM2.png');
+        this.load.image('finishline', 'assets/sprites/plataforma.png');
         this.load.image('noodles', 'assets/sprites/NOODLECUP.png');
 
         //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
@@ -37,12 +36,12 @@ class GameScene extends Phaser.Scene {
         });
         
         //AUDIO
-        this.load.audio("GAME_AUDIO","assets/audio/GAME_BGM.mp3");
-        this.load.audio("GAMEOVER_AUDIO","assets/audio/gameover.mp3");
-        this.load.audio("GONG_SFX", "assets/audio/GONG.mp3");
-        this.load.audio("LITTLE_GONG_SFX", "assets/audio/littleGONG.mp3");
-        this.load.audio("PUNCH_SFX", "assets/audio/PUNCH.mp3");
-        this.load.audio("JUMP_SFX", "assets/audio/JUMP.mp3");
+        this.load.audio('GAME_AUDIO','assets/audio/GAME_BGM.mp3');
+        this.load.audio('GAMEOVER_AUDIO','assets/audio/gameover.mp3');
+        this.load.audio('GONG_SFX', 'assets/audio/GONG.mp3');
+        this.load.audio('LITTLE_GONG_SFX', 'assets/audio/littleGONG.mp3');
+        this.load.audio('PUNCH_SFX', 'assets/audio/PUNCH.mp3');
+        this.load.audio('JUMP_SFX', 'assets/audio/JUMP.mp3');
     }
 
     create() {
@@ -56,16 +55,16 @@ class GameScene extends Phaser.Scene {
         this.startGameBool = false;
         this.p1Moving = true;
         this.p2Moving = true;
-        this.temporizadorP1 = this.time.now;
-        this.temporizadorP2 = this.time.now;
+        this.timerP1 = this.time.now;
+        this.timerP2 = this.time.now;
         this.p1canAtack = true;
         this.p2canAtack = true;
-        this.temporizadorAtack1 = this.time.now;
-        this.temporizadorAtack2 = this.time.now;
+        this.attackTimerP1 = this.time.now;
+        this.attackTimerP2 = this.time.now;
         this.p1Jump = true;
         this.p2Jump = true;
-        this.temporizadorJumpP1 = this.time.now;
-        this.temporizadorJumpP2 = this.time.now;
+        this.jumpTimerP1 = this.time.now;
+        this.jumpTimerP2 = this.time.now;
         this.atackTime = 1000; //ms
         this.stunTime = 200; //ms
         this.jumpTime = 1000;
@@ -73,12 +72,12 @@ class GameScene extends Phaser.Scene {
 
 
         //AUDIO
-        this.gameBGM = this.sound.add("GAME_AUDIO");
-        this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
-        this.gongSFX = this.sound.add("GONG_SFX");
-        this.littleGongSFX = this.sound.add("LITTLE_GONG_SFX");
-        this.punchSFX = this.sound.add("PUNCH_SFX", {volume: 0.3});
-        this.jumpSFX = this.sound.add("JUMP_SFX", {volume: 0.3});
+        this.gameBGM = this.sound.add('GAME_AUDIO');
+        this.gameoverSFX = this.sound.add('GAMEOVER_AUDIO');
+        this.gongSFX = this.sound.add('GONG_SFX');
+        this.littleGongSFX = this.sound.add('LITTLE_GONG_SFX');
+        this.punchSFX = this.sound.add('PUNCH_SFX', {volume: 0.3});
+        this.jumpSFX = this.sound.add('JUMP_SFX', {volume: 0.3});
 
         //FONDO DEL JUEGO
         this.bg1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'bg1');
@@ -92,7 +91,7 @@ class GameScene extends Phaser.Scene {
 
         //SUELO ESTATICO
         this.suelo = this.physics.add.staticGroup();
-        this.suelo.create(0, 750, 'suelo').setScale(2).refreshBody(); //INICIALIZACION SUELO
+        this.suelo.create(0, 750, 'road').setScale(2).refreshBody(); //INICIALIZACION SUELO
 
         //PLATAFORMAS
         this.platforms = this.physics.add.group({
@@ -247,12 +246,12 @@ class GameScene extends Phaser.Scene {
     movePlayers() {
 
         if(!this.p1Jump){
-            if(this.temporizadorJumpP1<=this.time.now){
+            if(this.jumpTimerP1<=this.time.now){
                 this.p1Jump = true;
             }
         }
         if(!this.p2Jump){
-            if(this.temporizadorJumpP2<=this.time.now){
+            if(this.jumpTimerP2<=this.time.now){
                 this.p2Jump = true;
             }
         }
@@ -262,7 +261,7 @@ class GameScene extends Phaser.Scene {
                 this.jumpSFX.play();
                 this.player1.setVelocityY(-this.jumpSpeed);
                 this.p1Jump = false;
-                this.temporizadorJumpP1 = this.time.now+this.jumpTime;
+                this.jumpTimerP1 = this.time.now+this.jumpTime;
             } else if (this.keyA.isDown) {
                 this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                 this.player1.play("j1_anim", true);
@@ -280,7 +279,7 @@ class GameScene extends Phaser.Scene {
             }
         }else{
             //console.log(this.temporizadorP1);
-            if(this.time.now> this.temporizadorP1){
+            if(this.time.now> this.timerP1){
                 this.reactivateP1();
             }
         }
@@ -291,7 +290,7 @@ class GameScene extends Phaser.Scene {
                 this.jumpSFX.play();
                 this.player2.setVelocityY(-this.jumpSpeed);
                 this.p2Jump = false;
-                this.temporizadorJumpP2 = this.time.now+this.jumpTime;
+                this.jumpTimerP2 = this.time.now+this.jumpTime;
             } else if (this.keyLEFT.isDown) {
                 this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                 this.player2.play("j2_anim", true);
@@ -309,7 +308,7 @@ class GameScene extends Phaser.Scene {
             }
         }else{
             //console.log(this.temporizadorP2);
-            if(this.time.now> this.temporizadorP2){
+            if(this.time.now> this.timerP2){
                 this.reactivateP2();
             }
         }  
@@ -435,12 +434,12 @@ class GameScene extends Phaser.Scene {
     playersCrush(){
         if(this.startGameBool){
             if(!this.p2canAtack){
-                if(this.temporizadorAtack2<=this.time.now){
+                if(this.attackTimerP2<=this.time.now){
                     this.p2canAtack = true;
                 }
             }
             if(!this.p1canAtack){
-                if(this.temporizadorAtack1<=this.time.now){
+                if(this.attackTimerP1<=this.time.now){
                     this.p1canAtack = true;
                 }
             }
@@ -457,12 +456,12 @@ class GameScene extends Phaser.Scene {
                     this.player1.setVelocityX(700);
                 }
                 this.player1.play("j1_stand", true);
-                this.temporizadorP1 = this.time.now + this.stunTime;
+                this.timerP1 = this.time.now + this.stunTime;
                 this.p1Moving = false;
 
-                this.temporizadorAtack2 = this.time.now + this.atackTime;
+                this.attackTimerP2 = this.time.now + this.atackTime;
                 this.p2canAtack = false;
-                console.log(this.temporizadorP1);
+                console.log(this.timerP1);
             }else if(this.keyE.isDown && this.p1canAtack){
                 this.punchSFX.play();
                 if( this.hasNoodles==2){
@@ -474,12 +473,12 @@ class GameScene extends Phaser.Scene {
                     this.player2.setVelocityX(-700);
                 }
                 this.player2.play("j2_stand", true);
-                this.temporizadorP2 = this.time.now + this.stunTime;
+                this.timerP2 = this.time.now + this.stunTime;
                 this.p2Moving = false;
                 
-                this.temporizadorAtack1 = this.time.now + this.atackTime;
+                this.attackTimerP1 = this.time.now + this.atackTime;
                 this.p1canAtack = false;
-                console.log(this.temporizadorP2);
+                console.log(this.timerP2);
             }
         }
     }
@@ -518,21 +517,21 @@ class GameScene extends Phaser.Scene {
         this.punchSFX.play();
         if(player == this.player1){
             this.player2.setVelocityX(-1000);
-            this.temporizadorP2 = this.time.now + this.stunTime;
+            this.timerP2 = this.time.now + this.stunTime;
             this.p2Moving = false;
-            console.log(this.temporizadorP2);
+            console.log(this.timerP2);
            
         }else if (player == this.player2){
             this.player1.setVelocityX(-1000);
-            this.temporizadorP1 = this.time.now + this.stunTime;
+            this.timerP1 = this.time.now + this.stunTime;
             this.p1Moving = false;
-            console.log(this.temporizadorP2);
+            console.log(this.timerP2);
         }else{
             this.player2.setVelocityX(-1000);
-            this.temporizadorP2 = this.time.now + this.stunTime;
+            this.timerP2 = this.time.now + this.stunTime;
             this.p2Moving = false;
             this.player1.setVelocityX(-1000);
-            this.temporizadorP1 = this.time.now + this.stunTime;
+            this.timerP1 = this.time.now + this.stunTime;
             this.p1Moving = false;
         }
         powerup.destroy();
@@ -548,35 +547,35 @@ class GameScene extends Phaser.Scene {
         switch(random){
             case 0:
                 console.log("Plataforma 0 creada");
-                let plat1 = this.platforms.create(1600, 600, 'obstaculo');
+                let plat1 = this.platforms.create(1600, 600, 'obstacle');
                 plat1.setVelocityX(-this.worldSpeed);
                 plat1.setOrigin(0,0);
                 this.randomPlat = 0;
                 break;
             case 1:
                 console.log("Plataforma 1 creada");
-                let plat2 = this.platforms.create(1600, 500, 'obstaculo');
+                let plat2 = this.platforms.create(1600, 500, 'obstacle');
                 plat2.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 1;
                 plat2.setOrigin(0,0);
                 break;
             case 2:
                 console.log("Plataforma 2 creada");
-                let plat3 = this.platforms.create(1600, 400, 'obstaculo');
+                let plat3 = this.platforms.create(1600, 400, 'obstacle');
                 plat3.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 2;
                 plat3.setOrigin(0,0);
                 break;
             case 3:
                 console.log("Plataforma 3 creada");
-                let plat4 = this.platforms.create(1600, 300, 'obstaculo');
+                let plat4 = this.platforms.create(1600, 300, 'obstacle');
                 plat4.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 3;
                 plat4.setOrigin(0,0);
                 break;
             case 4:
                 console.log("Plataforma 4 creada");
-                let plat5 = this.platforms.create(1600, 200, 'obstaculo');
+                let plat5 = this.platforms.create(1600, 200, 'obstacle');
                 plat5.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 4;
                 plat5.setOrigin(0,0);
