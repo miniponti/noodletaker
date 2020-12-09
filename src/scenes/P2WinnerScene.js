@@ -1,7 +1,7 @@
-class ResumeScene extends Phaser.Scene {
+class P2WinnerScene extends Phaser.Scene {
 
     constructor() {
-        super({key:"resumenScene"});
+        super({key:"WINNER_P2_SCENE"});
     }
     
     preload() {
@@ -27,9 +27,9 @@ class ResumeScene extends Phaser.Scene {
         botonRestart.setInteractive({useHandCursor: true});
         botonRestart.on("pointerdown", () => this.restartGame());
 
-        this.loseText = this.add.text(config.width / 2, config.height / 2, 'YOU BOTH LOST THE NOODLES...', { font: '72px japaneseFont' });
-        this.loseText.setStroke('#ff5757', 16);
-        Phaser.Display.Align.In.Center(this.loseText, bg);
+        this.P2WinnerText = this.add.text(config.width / 2, config.height / 2, 'P2 TOOK THE NOODLES!', { font: '72px japaneseFont' });
+        this.P2WinnerText.setStroke('#ff5757', 16);
+        Phaser.Display.Align.In.Center(this.P2WinnerText, bg);
     }
     
     restartGame(){
@@ -39,20 +39,5 @@ class ResumeScene extends Phaser.Scene {
         //this.scene.stop('juegoEscena');
         //this.titleBGM.stop();
 
-    }
-
-    setWinnerText(index){
-        if (index = 1){
-            this.p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
-                fontSize: '32px',
-                fill: '#000'
-            });
-            
-        } else if (index = 2) {
-            this.p2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {//Mostramos por pantalla el texto de victoria
-                fontSize: '32px',
-                fill: '#000'
-            });
-        }
     }
 }
