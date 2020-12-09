@@ -7,19 +7,17 @@ La temática del juego es "Japón moderno mezclado con figuras del Japón feudal
 3. **NOMBRE:** Manuel Abarca Crespo | **CORREO:** m.abarca.2018@alumnos.urjc.es | **USUARIO:** _dakeXd_
 4. **NOMBRE:** Elena Pontijas Martín | **CORREO:** e.pontijas.2018@alumnos.urjc.es | **USUARIO:** _miniponti_
 
-**Trello**: https://trello.com/b/f4JpxO8a
-
 
 
 ### 1.- Introducción
 #### 1.1.- Concepto principal
-NoodleTaker es un juego ambientado en el Japón actual. Un samurái repartidor de noodles está descansando, y cuando se dispone a seguir con su trabajo dos ninjas enemigos aparecen para robarle los pedidos y así quedarse ellos con el dinero. Estos dos ninjas compiten el uno contra el otro para llegar a la meta mientras al mismo tiempo escapan del samurái que los persigue para castigarlos.
+NoodleTaker es un juego ambientado en el Japón actual. Un samurái repartidor de fideos persigue a dos ninjas enemigos que aparecen para robarle los pedidos y así quedarse ellos con el dinero. Estos dos ninjas compiten el uno contra el otro para llegar a la meta mientras al mismo tiempo escapan del samurái que los persigue para castigarlos.
   
 #### 1.2.- Características principales
-1. Jugabilidad sencilla: el planteamiento de NoodleTaker y sus mecánicas hace que sea sencillo de entender y jugar para cualquier público.
-2. Competitividad: NoodleTaker pone a dos jugadores a probar sus habilidades de capacidad de reacción para así superar los obstáculos del juego y conseguir la victoria frente al otro.
-3. Rejugabilidad: por su competitividad, su corta duración y la rivalidad que surge entre los jugadores tras jugar las partidas, el juego es altamente rejugable.
-4. Dinamismo: la velocidad y los reflejos son un elemento muy importante en el juego, lo que genera dinámicas rápidas y precisas.
+1. Jugabilidad sencilla
+2. Competitividad
+3. Rejugabilidad
+4. Dinamismo
 5. Número de jugadores: 2
 6. Plataforma: PC (Windows, Mac, Linux)
 
@@ -89,18 +87,16 @@ NoodleTaker consta de los siguientes estados:
 	* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
 	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
 	* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
-![](concept%20art/esquema.png)
 ### 4.- Arte
 #### 4.1.- Interfaz
 * **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “START”, el cual si se pulsa, el juego se pone en funcionamiento.
-![](concept%20art/inicio.png)
 
 * **Durante el juego:** una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
-![](concept%20art/interfazDentroJuego.png)
+
 * **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
 
 * **Pantalla de nivel completado:** sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le han impedido seguir jugando. Cuando esto ocurre, aparece quién es el ganador del nivel y un botón patra reiniciar la partida.
-![](concept%20art/resultados.png)
+
 #### 4.2.- Personajes
 * Jugables
 	* Ninja 1
@@ -119,20 +115,3 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 * **Fondos** El fondo es dinamico conforme el nivel avance, pero no es acorde a la aparición de las plataformas a lo largo del nivel (parallax mapping).
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
-
-### 5.- Marketing
-Se irán publicando los avances en el juego a través de las diferentes redes sociales creadas para este. 
-
-Dependiendo de la popularidad que este adquiera a través de ellas, procederemos a dos planes: 
-el primero, si el juego no adquiere una popularidad relevante, se anunciaría su publicación una vez llegue el momento, seguramente con algún incentivo para favorecer su extensión por redes sociales, y será publicado gratuitamente en plataformas de juegos indies como “Itch.io”, con opción a donaciones.
-
-Como segundo plan y si el juego adquiere cierta popularidad, se realizaría un kickstarter en el que se intentaría alcanzar los 100 euros que se requiere para publicar un juego en Steam, utilizando una campaña de publicidad más agresiva en redes sociales.
-
-### 6.- Planes para el futuro
-
-*  **Nuevas habilidades:**
-	* **Una floripondia (Une fleur)**
-	* **La tarada (Yuno Gasai)**
-	* **Nuru-nuru-nuru-nuru (Koro-Sensei)**
-	
-* Adaptar y lanzar NoodleTaker para dispositivos móviles (iOS y Android).
