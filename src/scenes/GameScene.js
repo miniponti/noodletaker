@@ -70,7 +70,7 @@ class GameScene extends Phaser.Scene {
         this.stunTime = 200; //ms
         this.jumpTime = 1000;
         this.randomPlat;
-        //this.powerUpSpawner = 10000;
+
 
         //AUDIO
         this.gameBGM = this.sound.add("GAME_AUDIO");
@@ -224,6 +224,21 @@ class GameScene extends Phaser.Scene {
                 
             }
             */
+           var childs = [];
+           var contador = 0;
+           this.platforms.children.iterate(function (child) {
+
+            if(child.x<=0){
+                childs[contador] = child;
+                contador++;
+            }
+            
+
+        });
+            for(var i = 0; i<contador; i++){
+                childs[i].destroy();
+            }
+
         } else {
             this.gameBGM.stop();
         }
@@ -397,10 +412,12 @@ class GameScene extends Phaser.Scene {
         this.startGameBool = true;
         this.powerUpSpawner = this.time.now;
         this.timedPlatforms = this.time.addEvent({delay: this.platformSpawnSpeed, callback: this.createPlatform, callbackScope: this, loop: true});
-        this.timedPowerups = this.time.addEvent({delay: this.powerupSpawnSpeed, callback: this.createPowerup, callbackScope: this, loop: true});
+        this.timedStartPowerUp = this.time.delayedCall(240, this.StartPowerUp, [], this);
         this.timedDecideWinner = this.time.delayedCall(60000, this.decideWinner, [], this);
     }
-
+    StartPowerUp(){
+        this.timedPowerups = this.time.addEvent({delay: this.powerupSpawnSpeed, callback: this.createPowerup, callbackScope: this, loop: true});
+    }
     takeNoodles1(){
             console.log("1 cogio los noodles")
             this.hasNoodles = 1;
@@ -530,6 +547,7 @@ class GameScene extends Phaser.Scene {
                 console.log("Plataforma 0 creada");
                 let plat1 = this.platforms.create(1600, 600, 'obstaculo');
                 plat1.setVelocityX(-this.worldSpeed);
+                plat1.setOrigin(0,0);
                 this.randomPlat = 0;
                 break;
             case 1:
@@ -537,24 +555,28 @@ class GameScene extends Phaser.Scene {
                 let plat2 = this.platforms.create(1600, 500, 'obstaculo');
                 plat2.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 1;
+                plat2.setOrigin(0,0);
                 break;
             case 2:
                 console.log("Plataforma 2 creada");
                 let plat3 = this.platforms.create(1600, 400, 'obstaculo');
                 plat3.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 2;
+                plat3.setOrigin(0,0);
                 break;
             case 3:
                 console.log("Plataforma 3 creada");
                 let plat4 = this.platforms.create(1600, 300, 'obstaculo');
                 plat4.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 3;
+                plat4.setOrigin(0,0);
                 break;
             case 4:
                 console.log("Plataforma 4 creada");
                 let plat5 = this.platforms.create(1600, 200, 'obstaculo');
                 plat5.setVelocityX(-this.worldSpeed);
                 this.randomPlat = 4;
+                plat5.setOrigin(0,0);
                 break;
         }
 
