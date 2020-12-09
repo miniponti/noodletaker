@@ -12,7 +12,7 @@ class GameScene extends Phaser.Scene {
         //CARGA DE TODAS LAS IMAGENES
         //this.load.image('fondo', 'assets/sprites/IMG_0008.png');
         this.load.image('bg1', 'assets/sprites/Background1.png');
-        this.load.image('bg2', 'assets/sprites/Background2.png');
+        this.load.image('bg2', 'assets/sprites/Background3.png');
         this.load.image('suelo', 'assets/sprites/plataforma.png');
         this.load.image('obstaculo', 'assets/sprites/PLATFORM2.png');
         this.load.image('meta', 'assets/sprites/plataforma.png');
@@ -48,7 +48,7 @@ class GameScene extends Phaser.Scene {
     create() {
         //Variables
         this.playerSpeed = 300;
-        this.worldSpeed = 360;
+        this.worldSpeed = 270;
         this.jumpSpeed = 450;
         this.platformSpawnSpeed = 1000;
         this.powerupSpawnSpeed = 5000;
@@ -84,11 +84,11 @@ class GameScene extends Phaser.Scene {
         this.bg1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'bg1');
         this.bg1.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
         this.bg1.setScrollFactor(0);
-        this.bg1.setScale(1.5,1.5);
+        this.bg1.setScale(1.5, 1.5);
         this.bg2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'bg2');
         this.bg2.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
         this.bg2.setScrollFactor(0);
-        this.bg2.setScale(1.5,1.5);
+        this.bg2.setScale(3, 3);
 
         //SUELO ESTATICO
         this.suelo = this.physics.add.staticGroup();
@@ -213,7 +213,7 @@ class GameScene extends Phaser.Scene {
 
             this.movePlayers();
             this.bg1.tilePositionX += 2; //MOVIMIENTO CONSTANTE DEL FONDO
-            this.bg2.tilePositionX += 4; //MOVIMIENTO CONSTANTE DEL FONDO
+            this.bg2.tilePositionX += 3; //MOVIMIENTO CONSTANTE DEL FONDO
             /*
             if(this.powerUpSpawner <= this.time.now){
                 this.powerUpSpawner+=10000;
@@ -649,9 +649,9 @@ class GameScene extends Phaser.Scene {
         this.player1.play("j1_stand");
         this.gameoverSFX.play();
         if(this.hasNoodles = 1){
-            this.scene.start('WINNER_P1_SCENE');
-        } else if(this.hasNoodles = 2){
             this.scene.start('WINNER_P2_SCENE');
+        } else if(this.hasNoodles = 2){
+            this.scene.start('WINNER_P1_SCENE');
         }
     }
 }

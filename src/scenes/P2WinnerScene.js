@@ -29,7 +29,7 @@ class P2WinnerScene extends Phaser.Scene {
 
         this.P2WinnerText = this.add.text(config.width / 2, config.height / 2, 'P2 TOOK THE NOODLES!', { font: '72px japaneseFont' });
         this.P2WinnerText.setStroke('#ff5757', 16);
-        Phaser.Display.Align.In.Center(this.P2WinnerText, bg);
+        Phaser.Display.Align.In.TopCenter(this.P2WinnerText, bg);
     }
     
     restartGame(){
