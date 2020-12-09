@@ -69,7 +69,7 @@ class GameScene extends Phaser.Scene {
         this.atackTime = 1000; //ms
         this.stunTime = 200; //ms
         this.jumpTime = 1000;
-        this.powerUpSpawner = 5000;
+        this.powerUpSpawner = 10000;
         //AUDIO
         this.gameBGM = this.sound.add("GAME_AUDIO");
         this.gameoverSFX = this.sound.add("GAMEOVER_AUDIO");
