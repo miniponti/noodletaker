@@ -10,7 +10,11 @@ let config = {
             debug: false
         }
     },
+<<<<<<< Updated upstream
     scene: [TitleScene, ControlKeysScene, GameScene, ResumeScene]
+=======
+    scene: [TitleScene, ControlKeysScene, TutorialScene, GameScene, P1WinnerScene, P2WinnerScene]
+>>>>>>> Stashed changes
 };
 
 let game = new Phaser.Game(config);

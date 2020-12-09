@@ -4,7 +4,7 @@ class ControlKeysScene extends Phaser.Scene{
     }
 
     preload(){
-        console.log("CONTROL_KEYS_SCENE PRELOAD");
+        //console.log("CONTROL_KEYS_SCENE PRELOAD");
 
         this.load.image('CONTROLS_MENU','assets/interface/CONTROLS_MENU.png');
         this.load.image('CONTROLS_BG','assets/sprites/TITLE_BACKGROUND.png');
@@ -12,7 +12,7 @@ class ControlKeysScene extends Phaser.Scene{
     }
 
     create(){
-        console.log("CONTROL_KEYS_SCENE CREATE");
+        //console.log("CONTROL_KEYS_SCENE CREATE");
         this.add.sprite(0,0,'CONTROLS_BG').setOrigin(0,0);
         this.add.sprite(config.width/2, config.height/2, 'CONTROLS_MENU');
 
@@ -28,7 +28,7 @@ class ControlKeysScene extends Phaser.Scene{
 
     //FUNCION QUE PERMITE VOLVER A LA PANTALLA DEL TITULO
     returnToTitle(){
-        console.log("returnToTitle FUNCIONA");
+        //console.log("returnToTitle FUNCIONA");
         this.scene.stop('CONTROL_KEYS_SCENE_KEY');
         this.scene.resume('TITLE_SCENE_KEY');
     }
