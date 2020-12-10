@@ -35,19 +35,4 @@ class ResumeScene extends Phaser.Scene {
         this.startSFX.play();
         this.scene.start('TITLE_SCENE_KEY');
     }
-
-    setWinnerText(index){
-        if (index = 1){
-            this.p1WinsText = this.add.text(250, 300, 'PLAYER 1 WINS!', {
-                fontSize: '32px',
-                fill: '#000'
-            });
-            
-        } else if (index = 2) {
-            this.p2WinsText = this.add.text(250, 300, 'PLAYER 2 WINS!', {//Mostramos por pantalla el texto de victoria
-                fontSize: '32px',
-                fill: '#000'
-            });
-        }
-    }
 }
