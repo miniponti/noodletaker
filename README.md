@@ -83,13 +83,33 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 En la pantalla del título, se le da la opción al jugador de pulsar un botón que muestre un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
 
 ### 3.- Escenas
+Escena de inicio al arrancar el juego, permite controlar el audio:
 ![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/START_SCENE.PNG)
+
+Escena que muestra los controles para jugar:
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/CONTROLS_SCENE.PNG)
+
+Primera escena del tutorial:
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/TUTORIAL_1_SCENE.PNG)
+
+Segunda escena del tutorial:
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/TUTORIAL_2_SCENE.png)
+
+Captura de un instante del juego. Una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/GAME_SCENE.png)
+
+Escena que se muestra cuando gana el jugador 1 (ninja azul)
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/P1_WINS_SCENE.PNG)
+
+Escena que se muestra cuando gana el jugador 2 (ninja verde)
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/P2_WINS_SCENE.PNG)
+
+Escena que se muestra en caso de que los dos jugadores no hayan cogido el bol de fideos.
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/BAD_ENDING_SCENE.png)
 	
 ### 4.- Arte
 #### 4.1.- Interfaz
 * **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “START”, el cual si se pulsa, el juego se pone en funcionamiento.
-
-* **Durante el juego:** una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
 
 * **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
 
