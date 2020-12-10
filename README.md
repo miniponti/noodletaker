@@ -82,12 +82,8 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 #### 2.8.- Guía
 En la pantalla del título, se le da la opción al jugador de pulsar un botón que muestre un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
 
-### 3.- Estados del juego
-NoodleTaker consta de los siguientes estados:
-	* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
-	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
-	* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
-	![](assets/interface/scenes/DIAGRAMA_ESCENAS.png)
+### 3.- Escenas
+![](assets/interface/scenes/START_SCENE.png)
 	
 ### 4.- Arte
 #### 4.1.- Interfaz
