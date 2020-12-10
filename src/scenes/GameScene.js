@@ -14,7 +14,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('BG2', 'assets/sprites/Background3.png');
         this.load.image('ROAD', 'assets/sprites/plataforma.png');
         this.load.image('OBSTACLE', 'assets/sprites/PLATFORM2.png');
-        this.load.image('FINISHLINE', 'assets/sprites/plataforma.png');
+        this.load.image('FINISHLINE', 'assets/sprites/FINISHLINE.png');
         this.load.image('NOODLES', 'assets/sprites/NOODLECUP.png');
         this.load.image('ELTODOMITICO','assets/sprites/ETM.png');
 
@@ -704,11 +704,11 @@ class GameScene extends Phaser.Scene {
             console.log("createFinishLine FUNCIONA");
            
             this.samurai.setVelocityX(this.worldSpeed);
-            this.finishLine = this.physics.add.sprite(1600, 200, 'FINISHLINE');
-            this.finishLine.setScale(1, 7.5);
-            //this.physics.add.collider(this.finishLine, this.suelo);
+            this.finishLine = this.physics.add.sprite(1550, 200, 'FINISHLINE');
+            this.finishLine.setScale(1, 1);
+            this.physics.add.collider(this.finishLine, this.suelo);
             this.finishLine.setCollideWorldBounds(true);
-            this.finishLine.setVelocityX(-this.worldSpeed);
+            //his.finishLine.setVelocityX(-this.worldSpeed);
             this.physics.add.overlap(this.player1, this.finishLine, this.decideWinner, null, this);
             this.physics.add.overlap(this.player2, this.finishLine, this.decideWinner, null, this);
             this.worldSpeed = 0;
