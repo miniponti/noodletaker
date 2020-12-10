@@ -573,11 +573,12 @@ class GameScene extends Phaser.Scene {
             this.timerP1 = this.time.now + this.stunTime;
             this.p1Moving = false;
         }
-        powerup.destroy();
+        
     }
 
     powerUpTodoMitico(player, powerup){
         //this.scene.pause('GAME_SCENE_KEY');
+        powerup.destroy();
         this.elTodoMitico.setVisible(true);
         this.samuraiSFX.play();
         this.time.delayedCall(300, this.todomiticoWait, [player, powerup], this);
@@ -707,7 +708,7 @@ class GameScene extends Phaser.Scene {
            
             this.samurai.setVelocityX(this.worldSpeed);
             this.finishLine = this.physics.add.sprite(1600, 200, 'FINISHLINE');
-            this.finishLine.setScale(7,5, 7.5);
+            this.finishLine.setScale(1, 7.5);
             //this.physics.add.collider(this.finishLine, this.suelo);
             this.finishLine.setCollideWorldBounds(true);
             this.finishLine.setVelocityX(-this.worldSpeed);
