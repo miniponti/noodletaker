@@ -88,6 +88,7 @@ NoodleTaker consta de los siguientes estados:
 	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
 	* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
 	![](assets/interface/scenes/DIAGRAMA_ESCENAS.png)
+	
 ### 4.- Arte
 #### 4.1.- Interfaz
 * **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “START”, el cual si se pulsa, el juego se pone en funcionamiento.
