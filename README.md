@@ -108,28 +108,29 @@ Escena que se muestra en caso de que los dos jugadores no hayan cogido el bol de
 ![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/BAD_ENDING_SCENE.png)
 	
 ### 4.- Arte
-#### 4.1.- Interfaz
-* **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “START”, el cual si se pulsa, el juego se pone en funcionamiento.
-
-* **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
-
-* **Pantalla de nivel completado:** sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le han impedido seguir jugando. Cuando esto ocurre, aparece quién es el ganador del nivel y un botón patra reiniciar la partida.
-
-#### 4.2.- Personajes
+#### 4.1.- Personajes
 * Jugables
 	* Ninja 1
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/ninjaAzul_CONCEPT.png)
 	* Ninja 2
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/ninjaVerde_CONCEPT.png)
 * No jugables
 	* Samurai
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/samurai_CONCEPT.png)
 	* El Todo Mítico
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/ETM.png)
 	
 #### 4.3.- Objetos
-Aparecen a lo largo del escenario de manera “semialeatoria” (tendrán unas posiciones determinadas en las que podrán o no aparecer), son de un solo uso y se utilizan en el momento en el que un jugador entra en contacto con la imagen que representa al objeto, afectando al otro jugador (si son perjudiciales) o al jugador que los obtiene (si son beneficiosos) . 
-Debido a que los objetos que se han diseñado se basan en un sistema de “invocaciones” a ayudantes, estos se mostrarán en pantalla para ambos jugadores antes de hacer efecto en el mismo. De esta forma el jugador que es afectado se puede preparar ante el ataque inminente según el tipo de objeto que haya obtenido el rival.
+PowerUp
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/POWERUP.png)
 
 #### 4.4.- Escenarios
 Hay un único escenario divido en dos capas para usar el efecto de parallax scrolling.
 
 * **Fondos** El fondo es dinamico conforme el nivel avance, pero no es acorde a la aparición de las plataformas a lo largo del nivel (parallax mapping).
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/Background1.png)
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/Background3.png)
+
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/PLATFORM2.png)
