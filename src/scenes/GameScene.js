@@ -672,9 +672,9 @@ class GameScene extends Phaser.Scene {
         this.player1.play("j1_stand");
         this.gameoverSFX.play();
         if(this.hasNoodles === 1){
-            this.scene.start('WINNER_P2_SCENE');
-        } else if(this.hasNoodles === 2){
             this.scene.start('WINNER_P1_SCENE');
+        } else if(this.hasNoodles === 2){
+            this.scene.start('WINNER_P2_SCENE');
         }
     }
 }
