@@ -525,10 +525,7 @@ class GameScene extends Phaser.Scene {
     }
     
     badEnding(){
-        console.log('bad gameOver FUNCIONA');
-
-        //this.P1Winner = new ResumeScene();
-        //this.P1Winner.setWinnerText(1);
+        //console.log('bad gameOver FUNCIONA');
 
         //Los jugadores ya no pueden moverse
         this.physics.pause();
@@ -539,7 +536,7 @@ class GameScene extends Phaser.Scene {
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
         
-        this.scene.start('RESUME_SCENE_KEY');
+        this.scene.start('BADENDING_SCENE_KEY');
     }
     
     destruirPlataforma(samurai, platafroma){
