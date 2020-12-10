@@ -539,7 +539,7 @@ class GameScene extends Phaser.Scene {
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
         
-        this.scene.start('resumenScene');
+        this.scene.start('RESUME_SCENE_KEY');
     }
     
     destruirPlataforma(samurai, platafroma){
@@ -718,9 +718,8 @@ class GameScene extends Phaser.Scene {
             this.fondoSpeed1 = 0;
             this.platforms.children.iterate(function (child) {
  
-            
-                 child.setVelocityX(0); 
-         });
+                child.setVelocityX(0); 
+            });
         }
 
     }
