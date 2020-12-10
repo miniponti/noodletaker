@@ -115,8 +115,10 @@ Escena que se muestra en caso de que los dos jugadores no hayan cogido el bol de
 * Jugables
 	* Ninja 1
 	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/ninjaAzul_CONCEPT.png)
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/BLUE_SPRITESHEET.png)
 	* Ninja 2
 	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/ninjaVerde_CONCEPT.png)
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/GREEN_SPRITESHEET.png)
 * No jugables
 	* Samurai
 	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/samurai_CONCEPT.png)
