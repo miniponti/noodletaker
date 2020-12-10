@@ -46,8 +46,9 @@ class GameScene extends Phaser.Scene {
 
     create() {
         //Variables
-        this.playerSpeed = 300;
-        this.worldSpeed = 270;
+        this.playerSpeed = 375;
+        this.fastSpeed = 400;
+        this.worldSpeed = 298;
         this.jumpSpeed = 450;
         this.platformSpawnSpeed = 1500;
         this.powerupSpawnSpeed = 6000;
@@ -272,7 +273,11 @@ class GameScene extends Phaser.Scene {
                 this.player1.play("j1_stand", true);
                 this.player1.setVelocityX(-this.worldSpeed);
             } else if (this.keyD.isDown) {
-                this.player1.setVelocityX(this.playerSpeed);
+                if(this.player1.x > this.player2.x){
+                    this.player1.setVelocityX(this.playerSpeed - this.worldSpeed);
+                }else{
+                    this.player1.setVelocityX(this.fastSpeed - this.worldSpeed);
+                }
                 this.player1.play("j1_anim", true);
                 this.player1.setFlip(false, false)
             } else {
@@ -301,7 +306,11 @@ class GameScene extends Phaser.Scene {
                 this.player2.play("j2_stand", true);
                 this.player2.setVelocityX(-this.worldSpeed);
             } else if (this.keyRIGHT.isDown) {
-                this.player2.setVelocityX(this.playerSpeed);
+                if(this.player1.x > this.player2.x){
+                    this.player2.setVelocityX(this.fastSpeed - this.worldSpeed);
+                }else{
+                    this.player2.setVelocityX(this.playerSpeed - this.worldSpeed);
+                }
                 this.player2.play("j2_anim", true);
                 this.player2.setFlip(false, false)
             } else {
