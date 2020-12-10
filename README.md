@@ -83,7 +83,7 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 En la pantalla del título, se le da la opción al jugador de pulsar un botón que muestre un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
 
 ### 3.- Escenas
-![](assets/interface/scenes/START_SCENE.png)
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/START_SCENE.PNG)
 	
 ### 4.- Arte
 #### 4.1.- Interfaz
