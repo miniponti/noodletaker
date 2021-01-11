@@ -82,38 +82,60 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 #### 2.8.- Guía
 En la pantalla del título, se le da la opción al jugador de pulsar un botón que muestre un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
 
-### 3.- Estados del juego
-NoodleTaker consta de los siguientes estados:
-	* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
-	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
-	* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
-	![](assets/interface/scenes/DIAGRAMA_ESCENAS.png)
+### 3.- Escenas
+Diagrama de escenas
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/diagrama%20de%20escenas.png)
+
+Escena de inicio al arrancar el juego, permite controlar el audio:
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/START_SCENE.PNG)
+
+Escena que muestra los controles para jugar:
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/CONTROLS_SCENE.PNG)
+
+Primera escena del tutorial:
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/TUTORIAL_1_SCENE.PNG)
+
+Segunda escena del tutorial:
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/TUTORIAL_2_SCENE.png)
+
+Captura de un instante del juego. Una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/GAME_SCENE.png)
+
+Escena que se muestra cuando gana el jugador 1 (ninja azul)
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/P1_WINS_SCENE.PNG)
+
+Escena que se muestra cuando gana el jugador 2 (ninja verde)
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/P2_WINS_SCENE.PNG)
+
+Escena que se muestra en caso de que los dos jugadores no hayan cogido el bol de fideos.
+![](https://github.com/miniponti/noodletaker/blob/main/assets/interface/scenes/BAD_ENDING_SCENE.png)
 	
 ### 4.- Arte
-#### 4.1.- Interfaz
-* **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “START”, el cual si se pulsa, el juego se pone en funcionamiento.
-
-* **Durante el juego:** una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
-
-* **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
-
-* **Pantalla de nivel completado:** sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le han impedido seguir jugando. Cuando esto ocurre, aparece quién es el ganador del nivel y un botón patra reiniciar la partida.
-
-#### 4.2.- Personajes
+#### 4.1.- Personajes
 * Jugables
 	* Ninja 1
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/ninjaAzul_CONCEPT.png)
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/BLUE_SPRITESHEET.png)
 	* Ninja 2
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/ninjaVerde_CONCEPT.png)
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/GREEN_SPRITESHEET.png)
 * No jugables
 	* Samurai
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/concept%20art/samurai_CONCEPT.png)
 	* El Todo Mítico
+	![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/ETM.png)
 	
 #### 4.3.- Objetos
-Aparecen a lo largo del escenario de manera “semialeatoria” (tendrán unas posiciones determinadas en las que podrán o no aparecer), son de un solo uso y se utilizan en el momento en el que un jugador entra en contacto con la imagen que representa al objeto, afectando al otro jugador (si son perjudiciales) o al jugador que los obtiene (si son beneficiosos) . 
-Debido a que los objetos que se han diseñado se basan en un sistema de “invocaciones” a ayudantes, estos se mostrarán en pantalla para ambos jugadores antes de hacer efecto en el mismo. De esta forma el jugador que es afectado se puede preparar ante el ataque inminente según el tipo de objeto que haya obtenido el rival.
+PowerUp
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/POWERUP.png)
 
 #### 4.4.- Escenarios
 Hay un único escenario divido en dos capas para usar el efecto de parallax scrolling.
 
 * **Fondos** El fondo es dinamico conforme el nivel avance, pero no es acorde a la aparición de las plataformas a lo largo del nivel (parallax mapping).
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/Background1.png)
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/Background3.png)
+
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
+![](https://github.com/miniponti/noodletaker/blob/main/assets/sprites/PLATFORM2.png)
