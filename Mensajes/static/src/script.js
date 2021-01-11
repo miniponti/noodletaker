@@ -3,9 +3,10 @@ var playerId;
 var timer;
 var conexion = false;
 $(document).ready(function () {
-    
+    console.log("Sand");
     
     $("#conectarse").click(function () {
+       
         startConexion();
     })
     $("#desconectarse").click(function () {
