@@ -2,7 +2,7 @@ var serverId;
 var playerId;
 var timer;
 var conexion = false;
-var anteriorP = [];
+
 $(document).ready(function () {
     console.log("Sand");
     
@@ -22,10 +22,11 @@ $(document).ready(function () {
 function startConexion(){
     if(!conexion){
         var message = $("#nick").val();
+        console.log(message);
         $.ajax({
             method: "POST",
             url: "http://localhost:8080/",
-            data: JSON.stringify(message),
+            data: message,
             processData: false,
             headers: {
                 "Content-Type": "application/json"
@@ -92,7 +93,7 @@ function ping(){
     $.ajax({
         url:"http://localhost:8080/" + serverId + "/" + playerId,
     }).done(function(data){   
-        console.log(data);
+
         $('#jugadores').empty();
         $('#jugadores').append("<p>Jugadores Conectados: " + data.jugadores.length + "</p>");
         for(var i = 0; i<data.jugadores.length;i++){
@@ -103,6 +104,7 @@ function ping(){
             var dato = data.mensajes[i];
             $("#info").append("<p>"+dato.autor+"[" + dato.fecha+"]: " + dato.texto+ "</p>")
         }
+    
     }).fail( function( jqXHR, textStatus, errorThrown ) {
         endConexion();
         $('#info').empty();
