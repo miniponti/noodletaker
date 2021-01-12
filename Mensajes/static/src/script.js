@@ -95,9 +95,9 @@ function ping(){
     }).done(function(data){   
 
         $('#jugadores').empty();
-        $('#jugadores').append("<p>Server id: " + serverId + "</p>");
-        $('#jugadores').append("<p>Jugador id: " + playerId + "</p>");
-        $('#jugadores').append("<p>Jugadores Conectados: " + data.jugadores.length + ":</p>");
+        $('#jugadores').append("<p>Server ID: " + serverId + "</p>");
+        $('#jugadores').append("<p>Jugador ID: " + playerId + "</p>");
+        $('#jugadores').append("<p>Jugadores conectados: " + data.jugadores.length + ":</p>");
         for(var i = 0; i<data.jugadores.length;i++){
             $("#jugadores").append("<p>"+data.jugadores[i]+ "</p>");
         }
