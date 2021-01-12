@@ -64,6 +64,7 @@ h1 {
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 2rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .info__button-wrap {
@@ -91,4 +92,11 @@ h1 {
 .chat__inputs {
   display: flex;
   flex-flow: row nowrap;
+  
+}
+
+.chat__button{
+    margin: 0 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
 }
