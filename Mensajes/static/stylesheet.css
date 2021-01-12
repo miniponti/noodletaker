@@ -1,48 +1,102 @@
 @font-face {
-    font-family: 'japaneseFont';
-    src: url('./assets/fonts/Shojumaru/Shojumaru-Regular.ttf');
+  font-family: "japaneseFont";
+  src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
 }
 
-body{
-    background-color: black;
+body {
+  background-color: black;
+  width: 100%;
+  display: flex;
+  flex-flow: column-reverse wrap;
+  align-items: flex-start;
 }
 
-/*headers*/
-h1{
-    text-align: center;
-    font-family: 'japaneseFont';
-    src: url('./assets/fonts/Shojumaru/Shojumaru-Regular.ttf');
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "japaneseFont";
+  src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
 }
 
-/*bloque que contiene todo el div del chat*/
-#chat{
-    background-color:#ff5757;
-    width: 30%;
-    padding: 10px;
-    position: absolute;
-    top: 750px;
-    border-style: solid;
-    border-color: white;
-    height: 500px;
+#chat {
+  background-color: #ff5757;
+  width: auto;
+  padding: 10px;
+  border-style: solid;
+  border-color: white;
 }
 
-/*div que contiene los jugadores*/
-#jugadores{
-    position: relative;
-    background-color: black;
-    width: 170px;
-    color: white;
-    float: left;
+#jugadores {
+  background-color: black;
+  color: white;
+  height: auto;
+  padding: 0.25rem 1rem;
+  word-wrap:break-word;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-/*div info que contiene los mensajes*/
-#info{
-    position: relative;
-    background-color:white;
-    width: 350px;
-    height: 400px;
-    overflow: scroll;
-    right: 0;
+#info {
+  width: 300px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0.25rem 0.5rem;
+  word-wrap:break-word;
 }
 
+.chat__wrap {
+  display: flex;
+  flex-flow: row nowrap;
+}
 
+.info__container {
+  margin: 0.5rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+}
+
+.info__players {
+  height: 50%;
+}
+
+.info__nickname {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 2rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.info__button-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.info__button {
+  margin: 0 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.chat__container {
+  margin: 0.5rem;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.chat__messages {
+  background-color: white;
+  height: 300px;
+  margin-bottom: 1rem;
+}
+
+.chat__inputs {
+  display: flex;
+  flex-flow: row nowrap;
+  
+}
+
+.chat__button{
+    margin: 0 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}

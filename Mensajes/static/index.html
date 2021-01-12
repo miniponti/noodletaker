@@ -20,29 +20,29 @@
 </head>
 
 <body>
-    <div id="chat">
-        <h1>CHAT ROOM</h1>
-
-        <div id="jugadores">Desconectado</div>
-        <div id='info'></div>
-
-        <input id='messageInput' type='text' style="display:none"></input>
-        <button id='sendButton' style="display:none">Send</button>
-
-        <input id='nick' type='text'>
-        <button id='conectarse' onclick='connectToChat()'>Conectarse</button>
-        <button id='desconectarse' style="display:none">Desconectarse</button>
+    <div id="chat" class="chat__container">
+        <h1>chat room</h1>
+        <div class="chat__wrap">
+            <section class="info__container">
+                <div id="jugadores" class="info_players">Desconectado</div>
+                <div>
+                    <input class="info__nickname" id='nick' type='text' placeholder="Nombre de usuario">
+                    <div class="info__button-wrap">
+                        <button class="info__button" id='conectarse'>Conexión</button>
+                        <button class="info__button" id='desconectarse'>Desconexión</button>
+                    </div>
+                </div>
+            </section>
+            <section class="chat__container">
+                <div class="chat__messages"><div id='info'></div></div>
+                <div class="chat__inputs">
+                    <input id='messageInput' type='text' placeholder="Escribir mensaje..."></input>
+                    <button class="chat__button" id='sendButton'>Enviar</button>
+                </div>
+               
+            </section>
+        </div>
     </div>
 </body>
-
-<script>
-    function connectToChat() {
-        document.getElementById('desconectarse').style.display = 'inline';
-        document.getElementById('messageInput').style.display = 'inline';
-        document.getElementById('sendButton').style.display = 'inline';
-        document.getElementById('conectarse').style.display = 'none';
-        document.getElementById('nick').style.display = 'none';
-    }
-</script>
 
 </html>
