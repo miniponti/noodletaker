@@ -11,7 +11,6 @@ body {
   align-items: flex-start;
 }
 
-/*headers*/
 h1 {
   text-align: center;
   text-transform: uppercase;
@@ -19,37 +18,30 @@ h1 {
   src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
 }
 
-/*bloque que contiene todo el div del chat*/
 #chat {
   background-color: #ff5757;
   width: auto;
   padding: 10px;
-  /* position: absolute; */
-  /* top: 750px; */
   border-style: solid;
   border-color: white;
-  /* height: 500px; */
 }
 
-/*div que contiene los jugadores*/
 #jugadores {
   background-color: black;
   color: white;
   height: auto;
   padding: 0.25rem 1rem;
+  word-wrap:break-word;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-/*div info que contiene los mensajes*/
 #info {
-  /* position: relative; */
-  /* background-color: white; */
   width: 300px;
   height: 100%;
   overflow-y: auto;
-  overflow-x: hidden;
   padding: 0.25rem 0.5rem;
   word-wrap:break-word;
-  /* right: 0; */
 }
 
 .chat__wrap {
@@ -79,10 +71,9 @@ h1 {
   flex-flow: row nowrap;
 }
 .info__button {
-  border: 3px solid rgb(97, 0, 0);
   margin: 0 0.5rem;
   padding: 0.25rem 0.5rem;
-  font-size: 0.65rem;
+  font-size: 0.8rem;
 }
 
 .chat__container {
