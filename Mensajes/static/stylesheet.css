@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'japaneseFont';
+    src: url('./assets/fonts/Shojumaru/Shojumaru-Regular.ttf');
+}
+
+body{
+    background-color: #ffb55e;
+}
+
+/*headers*/
+h1{
+    text-align: center;
+    font-family: 'japaneseFont';
+    src: url('./assets/fonts/Shojumaru/Shojumaru-Regular.ttf');
+    top: 10px;
+}
+
+/*bloque que contiene todo el div del chat*/
+#chat{
+    background-color: rgb(159, 255, 159);
+    width: 30%;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+/*div info que contiene los mensajes*/
+#info{
+    background-color: brown;
+}
+
+
