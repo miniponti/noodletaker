@@ -1,100 +1,111 @@
 @font-face {
-  font-family: "japaneseFont";
-  src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
+    font-family: "japaneseFont";
+    src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
 }
 
 body {
-  background-color: black;
-  width: 100%;
-  display: flex;
-  flex-flow: column-reverse wrap;
-  align-items: flex-start;
+    background-color: black;
+    width: 100%;
+    display: flex;
+    flex-flow: column-reverse wrap;
+    align-items: flex-start;
 }
 
 h1 {
-  text-align: center;
-  text-transform: uppercase;
-  font-family: "japaneseFont";
-  src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "japaneseFont";
+    src: url("./assets/fonts/Shojumaru/Shojumaru-Regular.ttf");
 }
 
 #chat {
-  background-color: #ff5757;
-  width: auto;
-  padding: 10px;
-  border-style: solid;
-  border-color: white;
+    background-color: #ff5757;
+    width: auto;
+    padding: 10px;
+    border-style: solid;
+    border-color: white;
 }
 
 #jugadores {
-  background-color: black;
-  color: white;
-  height: auto;
-  padding: 0.25rem 1rem;
-  word-wrap:break-word;
-  overflow-y: auto;
-  overflow-x: hidden;
+    background-color: black;
+    color: white;
+    height: 75%;
+    padding: 0.25rem 1rem;
+    word-wrap:break-word;
+    overflow-y: auto;
 }
 
 #info {
-  width: 300px;
-  height: 100%;
-  overflow-y: auto;
-  padding: 0.25rem 0.5rem;
-  word-wrap:break-word;
+    width: 300px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 0.25rem 0.5rem;
+    word-wrap:break-word;
 }
 
 .chat__wrap {
-  display: flex;
-  flex-flow: row nowrap;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
+/*------------------------------------------------------*/
+/*SECCION DE TODO LO QUE TIENE QUE VER CON LOS JUGADORES*/
+/*------------------------------------------------------*/
 .info__container {
-  margin: 0.5rem;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: space-between;
+    margin: 0.5rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
 }
 
+/*caja de los jugadores conectados*/
 .info__players {
-  height: 50%;
+    height: 300px;
+    margin-bottom: 1rem;
 }
 
+/*caja para meter el nombre de usuario*/
 .info__nickname {
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 2rem;
-  padding: 0.25rem 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.8rem;
+    padding: 0.25rem 0.5rem;
 }
 
+/*botones conectarse y desconectarse*/
 .info__button-wrap {
-  display: flex;
-  flex-flow: row nowrap;
+    display: flex;
+    flex-flow: row nowrap;
 }
 .info__button {
-  margin: 0 0.5rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.8rem;
+    margin: 0 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
 }
 
+/*------------------------------------------------*/
+/*SECCION DE TODO LO QUE TIENE QUE VER CON EL CHAT*/
+/*------------------------------------------------*/
 .chat__container {
-  margin: 0.5rem;
-  display: flex;
-  flex-flow: column wrap;
+    margin: 0.5rem;
+    display: flex;
+    flex-flow: column wrap;
 }
 
+/*caja donde salen los mensajes*/
 .chat__messages {
-  background-color: white;
-  height: 300px;
-  margin-bottom: 1rem;
+    background-color: white;
+    height: 400px;
+    margin-bottom: 1rem;
 }
 
+/*div de la caja para escribir y boton enviar*/
 .chat__inputs {
-  display: flex;
-  flex-flow: row nowrap;
-  
+    display: flex;
+    flex-flow: row nowrap;
 }
 
+/*boton enviar*/
 .chat__button{
     margin: 0 0.5rem;
     padding: 0.25rem 0.5rem;
