@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>NOODLETAKER</title>
+    <link rel="stylesheet" href="stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="src/script.js"></script>
     <script type="text/javascript" src="src/phaser.min.js"></script>
@@ -15,32 +16,33 @@
     <script type="text/javascript" src="src/scenes/ControlKeysScene.js"></script>
     <script type="text/javascript" src="src/scenes/TutorialScene.js"></script>
     <script type="text/javascript" src="src/code.js"></script>
-
-    <style>
-        @font-face {
-            font-family: 'japaneseFont';
-            src: url('./assets/fonts/Shojumaru/Shojumaru-Regular.ttf');
-        }
-    </style>
+    
 </head>
 
-<body style="background-color: #ffb55e">
+<body>
     <div id="chat">
         <h1>CHAT ROOM</h1>
+
         <div id="jugadores">Desconectado</div>
-        <p>------------------------------------------------------------------------------------------------</p>
         <div id='info'></div>
-        <input id='messageInput' type='text'>
-        <button id='sendButton'>Send</button>
-        <p>------------------------------------------------------------------------------------------------</p>
+
+        <input id='messageInput' type='text' style="display:none"> escribe</input>
+        <button id='sendButton' style="display:none">Send</button>
+
         <input id='nick' type='text'>
-        <button id='conectarse'>Conectarse</button>
-        <button>Muestra titulo 1</button>
-        <p></p>
-        <button id='desconectarse'>Desconectarse</button>
+        <button id='conectarse' onclick='connectToChat()'>Conectarse</button>
+        <button id='desconectarse' style="display:none">Desconectarse</button>
     </div>
 </body>
 
-
+<script>
+    function connectToChat() {
+        document.getElementById('desconectarse').style.display = 'inline';
+        document.getElementById('messageInput').style.display = 'inline';
+        document.getElementById('sendButton').style.display = 'inline';
+        document.getElementById('conectarse').style.display = 'none';
+        document.getElementById('nick').style.display = 'none';
+    }
+</script>
 
 </html>
