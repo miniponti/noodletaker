@@ -22,6 +22,7 @@ $(document).ready(function () {
 function startConexion(){
     if(!conexion){
         var message = $("#nick").val();
+        $("#nick").val("");
         console.log(message);
         $.ajax({
             method: "POST",
@@ -69,6 +70,7 @@ function postMessage() {
     var n = d.toLocaleTimeString();
     if(conexion){
     var message = $("#messageInput").val();
+    $("#messageInput").val("");
     var mensaje = {
         autor: "" + playerId + "", 
         fecha: n,
