@@ -117,3 +117,6 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 * **Fondos** El fondo es dinamico conforme el nivel avance, pero no es acorde a la aparición de las plataformas a lo largo del nivel (parallax mapping).
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
+
+### 5.- Diagrama de clases
+![](DiagramaDeClases.jpg)
