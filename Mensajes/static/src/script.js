@@ -24,6 +24,10 @@ function startConexion(){
         var message = $("#nick").val();
         $("#nick").val("");
         console.log(message);
+        if(message == ""){
+            $('#info').empty();
+            $("#info").append("<p> Nombre invalido </p>" );
+        }else{
         $.ajax({
             method: "POST",
             url: "http://localhost:8080/",
@@ -53,6 +57,7 @@ function startConexion(){
         });
 
         
+    }
     }
 }
 
