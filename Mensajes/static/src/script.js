@@ -2,6 +2,7 @@ var serverId;
 var playerId;
 var timer;
 var conexion = false;
+var anteriorP = [];
 $(document).ready(function () {
     console.log("Sand");
     
@@ -43,7 +44,11 @@ function startConexion(){
             },1000);
             conexion = true;
             }
-        })
+        }).fail( function( jqXHR, textStatus, errorThrown ) {
+            endConexion();
+            $('#info').empty();
+            $("#info").append("<p>Servidor desconectado</p>");
+        });
 
         
     }
@@ -87,6 +92,7 @@ function ping(){
     $.ajax({
         url:"http://localhost:8080/" + serverId + "/" + playerId,
     }).done(function(data){   
+        console.log(data);
         $('#jugadores').empty();
         $('#jugadores').append("<p>Jugadores Conectados: " + data.jugadores.length + "</p>");
         for(var i = 0; i<data.jugadores.length;i++){
@@ -97,7 +103,11 @@ function ping(){
             var dato = data.mensajes[i];
             $("#info").append("<p>"+dato.autor+"[" + dato.fecha+"]: " + dato.texto+ "</p>")
         }
-    })
+    }).fail( function( jqXHR, textStatus, errorThrown ) {
+        endConexion();
+        $('#info').empty();
+        $("#info").append("<p>Servidor desconectado</p>");
+    });
     
 }
 
