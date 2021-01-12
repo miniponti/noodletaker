@@ -96,6 +96,8 @@ function ping(){
 
         $('#jugadores').empty();
         $('#jugadores').append("<p>Jugadores Conectados: " + data.jugadores.length + "</p>");
+        $('#jugadores').append("<p>Server id: " + serverId + "</p>");
+        $('#jugadores').append("<p>Jugador id: " + playerId + "</p>");
         for(var i = 0; i<data.jugadores.length;i++){
             $("#jugadores").append("<p>"+data.jugadores[i]+ "</p>");
         }
