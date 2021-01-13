@@ -1,0 +1,51 @@
+SERVER#00:25:19#Isma se conectó
+SERVER#00:25:27#Isma se desconectó
+SERVER#00:25:59#sadasdswaswsdsws se conectó
+sadasdswaswsdsws#0:26:05#minue
+sadasdswaswsdsws#0:26:06#asd
+sadasdswaswsdsws#0:26:08#asd
+sadasdswaswsdsws#0:26:09#asd
+sadasdswaswsdsws#0:26:11#asd
+sadasdswaswsdsws#0:26:12#ad
+sadasdswaswsdsws#0:26:13#d
+sadasdswaswsdsws#0:26:15#s
+sadasdswaswsdsws#0:26:16#a
+sadasdswaswsdsws#0:26:27#asd
+SERVER#00:28:55#sadasdswaswsdsws se desconectó
+SERVER#00:28:56#s se conectó
+SERVER#00:29:15#s se desconectó
+SERVER#00:30:12#dake se conectó
+dake#0:30:22#dwasfdsafvdsavdsavafsadadasdad
+dake#0:30:29#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SERVER#00:30:50#dake se desconectó
+SERVER#00:30:54#sadasa se conectó
+SERVER#00:32:32#Dakes se conectó
+SERVER#00:32:40#s se conectó
+SERVER#00:32:55#assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss se conectó
+SERVER#00:33:17#http://127.0.0.1:8887/ se conectó
+SERVER#00:33:21#http://127.0.0.1:8887/ se desconectó
+SERVER#00:33:22#as se conectó
+SERVER#00:33:33#a se conectó
+SERVER#00:33:44#fsads se conectó
+SERVER#00:35:14#fsads se desconectó
+SERVER#00:35:18#fdg se conectó
+SERVER#00:36:02#fdg se desconectó
+SERVER#00:36:07#sc se conectó
+SERVER#00:37:25#sc se desconectó
+SERVER#00:37:27#sad se conectó
+SERVER#00:38:27#sad se desconectó
+SERVER#00:38:28#fwf se conectó
+SERVER#00:38:51#fwf se desconectó
+SERVER#00:38:57#efa se conectó
+SERVER#00:39:14#efa se desconectó
+SERVER#00:39:16#adsa se conectó
+SERVER#00:40:05#adsa se desconectó
+SERVER#00:40:12#werw se conectó
+SERVER#00:40:40#werw se desconectó
+SERVER#00:40:41#ad se conectó
+SERVER#00:40:51#ad se desconectó
+SERVER#00:41:17#hola se conectó
+SERVER#00:42:01#hola se desconectó
+SERVER#00:42:15#polo se conectó
+SERVER#00:43:00#polo se desconectó
+SERVER#00:43:02#h se conectó
