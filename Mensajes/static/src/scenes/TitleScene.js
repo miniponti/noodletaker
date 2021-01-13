@@ -20,6 +20,9 @@ class TitleScene extends Phaser.Scene {
         this.load.image('TUTORIAL_BUTTON','assets/sprites/buttons/TUTORIAL_BUTTON.png');
         this.load.image('TUTORIAL_BUTTON_HOVER','assets/sprites/buttons/TUTORIAL_BUTTON_HOVER.png');
         this.load.image('TUTORIAL_BUTTON_DOWN','assets/sprites/buttons/TUTORIAL_BUTTON_DOWN.png');
+        this.load.image('CHAT_BUTTON','assets/sprites/buttons/CHAT_BUTTON.png');
+        this.load.image('CHAT_BUTTON_HOVER','assets/sprites/buttons/CHAT_BUTTON_HOVER.png');
+        this.load.image('CHAT_BUTTON_DOWN','assets/sprites/buttons/CHAT_BUTTON_DOWN.png');
 
         //AUDIO
         this.load.audio('TITLESCENE_MUSIC','assets/audio/TITLE_BGM.mp3');
@@ -93,6 +96,22 @@ class TitleScene extends Phaser.Scene {
         this.tutorialButtonDown.setInteractive({useHandCursor: true});
         this.tutorialButtonDown.on('pointerup', () => this.tutorialUp());
         this.tutorialButtonDown.setVisible(false);
+
+        //BOTON CHAT---------------------------------------------------------------------------------
+        this.chatButton = this.add.image(50, 50, 'CHAT_BUTTON');
+        this.chatButton.setInteractive({useHandCursor: true});
+        this.chatButton.on('pointerover', () => this.chatDown());
+
+        this.chatButtonHover = this.add.image(50, 50, 'CHAT_BUTTON_HOVER');
+        this.chatButtonHover.setInteractive({useHandCursor: true});
+        this.chatButtonHover.on('pointerdown', () => this.chatDown());
+        this.chatButtonHover.on('pointerout', () => this.chatOut());
+        this.chatButtonHover.setVisible(false);
+
+        this.chatButtonDown = this.add.image(50, 50, 'CHAT_BUTTON_DOWN');
+        this.chatButtonDown.setInteractive({useHandCursor: true});
+        this.chatButtonDown.on('pointerup', () => this.chatUp());
+        this.chatButtonDown.setVisible(false);
 
         this.startTitle();        
     }
@@ -191,6 +210,25 @@ class TitleScene extends Phaser.Scene {
     startTitle(){
         this.titleBGM.play();
         //console.log('start title funciona');
+    }
+
+    //PARA CUANDO NO ESTA ENCIMA
+    chatOut(){      
+        //console.log('controls not hovered');
+        this.chatButtonHover.setVisible(false);
+    }
+
+    chatDown(){
+        //console.log('controls clicked');
+        this.chatButtonDown.setVisible(true);
+    }
+
+    chatUp(){
+        //console.log('controls up');
+        this.chatButtonDown.setVisible(false);
+        this.scene.pause('TITLE_SCENE_KEY');
+        this.scene.run('CHAT_SCENE_KEY');
+	document.getElementById('chat').style.display = 'block';
     }
     
 }
