@@ -123,6 +123,11 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 
 ### 6.- Gestion de cliente/servidor
 El servidor esta formado por una sala principal (pero esta planificado actualizar para que permita controlar varias salas a la vez) que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
-Los clientes se pueden conectar al servidor con una peticion de tipo POST en la que se incluya en el cuerpo de la petición el ID que va a tener el cliente dentro del servidor. El servidor enviará como respuesta un objeto de la clase Jugador, donde estarán incluidos como atributos la ID del jugador y la ID de la sala a la que se ha conectado. 
+
+Los clientes se pueden conectar al servidor con una peticion de tipo POST en la que se incluya en el cuerpo de la petición el ID que va a tener el cliente dentro del servidor. 
+
+El servidor enviará como respuesta un objeto de la clase Jugador, donde estarán incluidos como atributos la ID del jugador y la ID de la sala a la que se ha conectado. 
+
 Una vez un cliente esté conectado, tendrá que enviar una petición de tipo GET (un ping) constantemente indicando la ID del jugador y la ID de la sala a la que se hace, la cual enviará en el cuerpo de la respuesta objeto con la lista de jugadores conectados a la sala y la lista de mensajes enviados en la sala. Si alguno de los clientes conectados no envía un ping en un tiempo determinado (2 segundos) se le desconectará de la sala, por lo cual no podrá enviar ni recibir mensajes de la sala hasta que se vuelva a conectar. Si un cliente intenta conectarse con la ID de un jugador ya conectado, el servidor devolvera null, que en el cliente se interpretará como que esa ID ya está registrada. 
+
 Si el servidor no está conectado, el cliente interpretará los fallos en sus peticiones de GET o POST como que el servidor esta offline.  
