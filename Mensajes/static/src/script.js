@@ -68,7 +68,12 @@ function postMessage() {
     var d = new Date();
     var n = d.toLocaleTimeString();
     if(conexion){
+<<<<<<< Updated upstream
     var message = $("#messageInput").val();
+=======
+    var message = $("#msg__input").val();
+    $("#msg__input").val("");
+>>>>>>> Stashed changes
     var mensaje = {
         autor: "" + playerId + "", 
         fecha: n,
