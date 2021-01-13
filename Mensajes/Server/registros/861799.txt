@@ -1,7 +1,0 @@
-SERVER#00:49:25#Isma se conectó
-Isma#0:49:43#Hola :D
-Isma#0:49:55#Me cas a comer ls cojones
-SERVER#00:50:30#Isma se desconectó
-SERVER#00:50:32#asda se conectó
-SERVER#00:51:15#dfc se conectó
-

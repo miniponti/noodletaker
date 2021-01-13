@@ -1,5 +1,0 @@
-SERVER#01:02:13#Dake se conectó
-SERVER#01:03:03#Sayotito se conectó
-Dake#1:03:12#Manuel
-Sayotito#1:03:44#Sos puto
-SERVER#01:03:51#Sayotito se desconectó
