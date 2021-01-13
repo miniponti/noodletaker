@@ -22,7 +22,12 @@ $(document).ready(function () {
 function startConexion(){
     if(!conexion){
         var message = $("#nick").val();
+        $("#nick").val("");
         console.log(message);
+        if(message == ""){
+            $('#info').empty();
+            $("#info").append("<p> Nombre invalido </p>" );
+        }else{
         $.ajax({
             method: "POST",
             url: "http://localhost:8080/",
@@ -53,6 +58,7 @@ function startConexion(){
 
         
     }
+    }
 }
 
 function endConexion(){
@@ -68,7 +74,9 @@ function postMessage() {
     var d = new Date();
     var n = d.toLocaleTimeString();
     if(conexion){
-    var message = $("#messageInput").val();
+    var message = $("#msg__input").val();
+    $("#msg__input").val("");
+    $("#messageInput").val("");
     var mensaje = {
         autor: "" + playerId + "", 
         fecha: n,
@@ -95,9 +103,11 @@ function ping(){
     }).done(function(data){   
 
         $('#jugadores').empty();
-        $('#jugadores').append("<p>Jugadores Conectados: " + data.jugadores.length + "</p>");
+        $('#jugadores').append("<p>Server ID: " + serverId + "</p>");
+        $('#jugadores').append("<p>Jugador ID: " + playerId + "</p>");
+        $('#jugadores').append("<p>Jugadores conectados: " + data.jugadores.length + ":</p>");
         for(var i = 0; i<data.jugadores.length;i++){
-            $("#jugadores").append("<p>"+data.jugadores[i]+ "</p>");
+            $("#jugadores").append("<p>-"+data.jugadores[i]+ "</p>");
         }
         $('#info').empty();
         for(var i = 0; i<data.mensajes.length;i++){

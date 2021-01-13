@@ -171,16 +171,16 @@ class GameScene extends Phaser.Scene {
         this.elTodoMitico.setVisible(false);
         
         //TECLAS
-        this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W,false);
+        this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A,false);
+        this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S,false);
+        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D,false);
+        this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP,false);
+        this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT,false);
+        this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN,false);
+        this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT,false);
+        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E,false);
+        this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER,false);
 
         //Colisiones con los límites del canvas
         this.player1.setCollideWorldBounds(true);
