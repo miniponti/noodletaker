@@ -119,4 +119,4 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
 
 ### 5.- Diagrama de clases
-![](DiagramaDeClases.jpg)
+![](assets/interface/scenes/DiagramaDeClases.jpg)
