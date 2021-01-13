@@ -122,7 +122,7 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 ![](Mensajes/static/assets/interface/scenes/DiagramaDeClases.jpg)
 
 ### 6.- Gestion de cliente/servidor
-El servidor está formado por una sala principal (pero está planificado actualizar para que permita controlar varias salas a la vez) que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
+El servidor está formado por una sala principal que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
 
 Los clientes se pueden conectar al servidor con una petición de tipo POST, en la que se incluye en el cuerpo de la petición el ID que va a tener el cliente dentro del servidor. 
 
