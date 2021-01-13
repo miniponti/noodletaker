@@ -106,7 +106,7 @@ function ping(){
         $('#jugadores').append("<p>Jugador ID: " + playerId + "</p>");
         $('#jugadores').append("<p>Jugadores conectados: " + data.jugadores.length + ":</p>");
         for(var i = 0; i<data.jugadores.length;i++){
-            $("#jugadores").append("<p>"+data.jugadores[i]+ "</p>");
+            $("#jugadores").append("<p>-"+data.jugadores[i]+ "</p>");
         }
         $('#info').empty();
         for(var i = 0; i<data.mensajes.length;i++){
