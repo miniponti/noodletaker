@@ -7,7 +7,7 @@ INSTRUCCIONES PARA EJECUTAR EL SERVIDOR:
 	-usar el comando "netstat -aon" para ver la lista de puertos del ordenador
 	-usar el comando "taskkill /F /PID nºPID" para cerrar el proceso que ocupa el puero, poniendo el numero de PID
 	 del proceso que ocupa el puerto 8080 (para esto puede ser necesario permisos de administrador).
-3: Acceder a la carpeta Server incluida en los archivos mediante el comando "cd DirrecionDeLaCarpeta\Server"
+3: Acceder a la carpeta Server incluida en los archivos (Mensajes\Server) mediante el comando "cd DirrecionDeLaCarpeta\Server"
 4: Ejecutar el comando java -jar server.jar para ejecutar el servidor en el puerto 8080. (Para este proceso se encesita un
  jdk instalado en windows que soporte ajva 1.8 o superior)
 4.5: Si no se tiene el JDK o no se pueden ejecutar comandos de java en la consola, se puede ejecutar el servidor haciendo doble
