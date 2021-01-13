@@ -224,11 +224,14 @@ class TitleScene extends Phaser.Scene {
     }
 
     chatUp() {
-        //console.log('controls up');
         this.chatButtonDown.setVisible(false);
+        document.getElementById('chat').style.display = 'block'
+        
+        //console.log('controls up');
+        
         this.scene.pause('TITLE_SCENE_KEY');
         this.scene.run('CHAT_SCENE_KEY');
-        document.getElementById('chat').style.display = 'block';
+        
     }
 }
 

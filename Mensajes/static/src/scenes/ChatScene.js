@@ -1,9 +1,9 @@
-class ChatScene extends Phaser.Scene{
+class ChatScene extends Phaser.Scene {
     constructor() {
         super('CHAT_SCENE_KEY');
     }
 
-    preload(){
+    preload() {
         console.log("PRELOAD CHAT SCENE");
         this.load.image('TITLE_BG', 'assets/sprites/TITLE_BACKGROUND.png');
 
@@ -12,10 +12,10 @@ class ChatScene extends Phaser.Scene{
         this.load.image('CHAT_BUTTON_DOWN', 'assets/sprites/buttons/CHAT_BUTTON_DOWN.png');
     }
 
-    create(){
+    create() {
         console.log("CREATE CHAT SCENE");
         let bg = this.add.sprite(0, 0, 'TITLE_BG');
-        bg.setOrigin(0,0);
+        bg.setOrigin(0, 0);
 
         this.chatButton = this.add.image(50, 50, 'CHAT_BUTTON');
         this.chatButton.setInteractive({ useHandCursor: true });
@@ -33,7 +33,7 @@ class ChatScene extends Phaser.Scene{
         this.chatButtonDown.setVisible(false);
     }
 
-    update(){
+    update() {
 
     }
 
@@ -50,8 +50,8 @@ class ChatScene extends Phaser.Scene{
     chatUp() {
         //console.log('controls up');
         this.chatButtonDown.setVisible(false);
-        this.scene.pause('CHAT_SCENE_KEY');
-        this.scene.start('TITLE_SCENE_KEY');
+        this.scene.stop('CHAT_SCENE_KEY');
+        this.scene.run('TITLE_SCENE_KEY');
         document.getElementById('chat').style.display = 'none';
     }
 }

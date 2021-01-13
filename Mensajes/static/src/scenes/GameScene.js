@@ -41,7 +41,7 @@ class GameScene extends Phaser.Scene {
         this.load.audio('GAMEOVER_AUDIO','assets/audio/gameover.mp3');
         this.load.audio('GONG_SFX', 'assets/audio/GONG.mp3');
         this.load.audio('LITTLE_GONG_SFX', 'assets/audio/littleGONG.mp3');
-        this.load.audio('PUNCH_SFX', 'assets/audio/PUNCH.mp3');
+        this.load.audio('PUNCH_SFX', 'assets/audio/punch.mp3');
         this.load.audio('JUMP_SFX', 'assets/audio/JUMP.mp3');
         this.load.audio('SAMURAI_SFX','assets/audio/samuraiDEAD.mp3');
     }
