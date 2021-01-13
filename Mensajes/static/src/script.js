@@ -74,7 +74,8 @@ function postMessage() {
     var d = new Date();
     var n = d.toLocaleTimeString();
     if(conexion){
-    var message = $("#messageInput").val();
+    var message = $("#msg__input").val();
+    $("#msg__input").val("");
     $("#messageInput").val("");
     var mensaje = {
         autor: "" + playerId + "", 

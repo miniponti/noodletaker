@@ -29,12 +29,11 @@ h1 {
 #jugadores {
     background-color: black;
     color: white;
-    width: 250px;
-    height: 75%;
+    width: 200px;
+    height: 80%;
     padding: 0.25rem 1rem;
     word-wrap:break-word;
     overflow: auto;
-    
 }
 
 #info {
@@ -62,7 +61,6 @@ h1 {
 
 /*caja de los jugadores conectados*/
 .info__players {
-    height: 300px;
     margin-bottom: 1rem;
 }
 
@@ -78,8 +76,10 @@ h1 {
 .info__button-wrap {
     display: flex;
     flex-flow: row nowrap;
+    
 }
 .info__button {
+    width: 100%;
     margin: 0 0.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
@@ -109,7 +109,14 @@ h1 {
 
 /*boton enviar*/
 .chat__button{
-    margin: 0 0.5rem;
-    padding: 0.25rem 0.5rem;
+    margin: 1 0.5rem;
+    padding: 0.5rem 0.5rem;
     font-size: 0.8rem;
+}
+
+/*caja para escribir mensajes*/
+#msg__input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.5rem;
 }
