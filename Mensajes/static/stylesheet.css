@@ -5,10 +5,6 @@
 
 body {
     background-color: black;
-    width: 100%;
-    display: flex;
-    flex-flow: column-reverse wrap;
-    align-items: flex-start;
 }
 
 h1 {
@@ -20,10 +16,13 @@ h1 {
 
 #chat {
     background-color: #ff5757;
-    width: auto;
+    width: 700px;
     padding: 10px;
     border-style: solid;
     border-color: white;
+    position: absolute;
+    display: none;
+    left: 100px
 }
 
 #jugadores {
