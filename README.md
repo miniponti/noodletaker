@@ -87,7 +87,7 @@ NoodleTaker consta de los siguientes estados:
 	* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
 	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
 	* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
-	![](assets/interface/scenes/DIAGRAMA.png)
+	![](Mensajes/static/assets/interface/scenes/DIAGRAMA.png)
 	
 ### 4.- Arte
 #### 4.1.- Interfaz
@@ -119,4 +119,4 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
 
 ### 5.- Diagrama de clases
-![](DiagramaDeClases.jpg)
+![](Mensajes/static/assets/interface/scenes/DiagramaDeClases.jpg)
