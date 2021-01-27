@@ -2,6 +2,7 @@ var serverId;
 var playerId;
 var timer;
 var conexion = false;
+var linkS = "http://localhost:8080/get/"
 
 $(document).ready(function () {
     console.log("Sand");
@@ -29,7 +30,7 @@ function startConexion() {
         } else {
             $.ajax({
                 method: "POST",
-                url: "http://localhost:8080/",
+                url: linkS,
                 data: message,
                 processData: false,
                 headers: {
@@ -82,7 +83,7 @@ function postMessage() {
         }
         $.ajax({
             method: "POST",
-            url: "http://localhost:8080/" + serverId,
+            url: linkS + serverId,
             data: JSON.stringify(mensaje),
             processData: false,
             headers: {
@@ -97,7 +98,7 @@ function postMessage() {
 function ping() {
     //console.log("ping");
     $.ajax({
-        url: "http://localhost:8080/" + serverId + "/" + playerId,
+        url: linkS + serverId + "/" + playerId,
     }).done(function (data) {
 
         $('#jugadores').empty();
