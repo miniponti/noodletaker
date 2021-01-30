@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="src/script.js"></script>
     <script type="text/javascript" src="src/phaser.min.js"></script>
+    <script type="text/javascript" src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script tipe="text/javascript" src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script type="text/javascript" src="src/scenes/TitleScene.js"></script>
     <script type="text/javascript" src="src/scenes/GameScene.js"></script>
     <script type="text/javascript" src="src/scenes/BadEndingScene.js"></script>
@@ -21,6 +23,9 @@
 </head>
 
 <body>
+    <noscript><h2 style="color: #ff0000">Parece que tu navegador no soporta JavaScript! Los WebSockets requieren que JS este
+    activado, por favor, activa JavaScript y recarga la pagina</h2></noscript>
+    
     <div id="chat" class="chat__container">
         <h1>chat room</h1>
         <div class="chat__wrap">

@@ -1,3 +1,29 @@
+var stompClient = null;
+function conexion(){
+    var socket = new SockJS('/ws');
+    /*console.log("SOCKET Start: " + JSON.stringify(socket));
+    console.log("QUE TE JODAN");*/
+    stompClient = Stomp.over(socket);
+    //console.log("SOCKET ABIERTO: " + JSON.stringify(stompClient));
+    stompClient.connect({}, onConnected, onError) 
+    //console.log('CONNECTED: ' + frame);
+    
+    
+    //JSON.stringify({sender: username, id: 1234});
+   // stompClient.send("/game/search", {}, JSON.stringify({'name': "Dake"}));
+   // stompClient.send("/game/search", {}, JSON.stringify({'name': "Dake"}));
+}
+
+function onConnected(){
+    stompClient.subscribe('/topic/searching', function (greeting) {
+        console.log(JSON.parse(greeting.body).content);
+    });
+
+    stompClient.send("/game/search", {}, "dake"); 
+}
+function onError(){
+    console.log("Me voy a pegar un puto tiro");
+}
 class TitleScene extends Phaser.Scene {
 
     constructor() {
@@ -152,6 +178,7 @@ class TitleScene extends Phaser.Scene {
     //PARA CUANDO DEJA DE PULSARSE
     startUp() {
         //console.log('start up');
+        conexion();
         this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }

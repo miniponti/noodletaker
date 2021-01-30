@@ -1,3 +1,4 @@
+
 class GameScene extends Phaser.Scene {
 
     constructor() {

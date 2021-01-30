@@ -1,0 +1,9 @@
+Dake#20:25:06#a
+SERVER#20:25:10#Hola ^^ se conectó
+SERVER#20:25:12#Dake se desconectó
+Hola ^^#20:25:17#asdadasd
+SERVER#20:25:22#Hola ^^ se desconectó
+SERVER#20:25:22#dake se conectó
+SERVER#20:25:30#dake se desconectó
+SERVER#20:25:31#dake se conectó
+SERVER#20:25:40#dake se desconectó
