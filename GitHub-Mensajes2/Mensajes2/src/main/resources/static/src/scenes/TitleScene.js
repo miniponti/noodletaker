@@ -1,13 +1,8 @@
 var stompClient = null;
 function conexion(){
-    var socket = new SockJS('/ws');
-    /*console.log("SOCKET Start: " + JSON.stringify(socket));
-    console.log("QUE TE JODAN");*/
+    var socket = new SockJS('/javatechie');
     stompClient = Stomp.over(socket);
-    //console.log("SOCKET ABIERTO: " + JSON.stringify(stompClient));
-    stompClient.connect({}, onConnected, onError) 
-    //console.log('CONNECTED: ' + frame);
-    
+    stompClient.connect({}, onConnected, onError);
     
     //JSON.stringify({sender: username, id: 1234});
    // stompClient.send("/game/search", {}, JSON.stringify({'name': "Dake"}));
