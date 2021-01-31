@@ -1,6 +1,6 @@
 var stompClient = null;
 function conexion(){
-    var socket = new SockJS('/javatechie');
+    var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, onConnected, onError);
     
@@ -10,14 +10,27 @@ function conexion(){
 }
 
 function onConnected(){
-    stompClient.subscribe('/topic/searching', function (greeting) {
-        console.log(JSON.parse(greeting.body).content);
-    });
+    stompClient.subscribe('topic/searching',  onMessageReceived);
 
-    stompClient.send("/game/search", {}, "dake"); 
+    var chatMessage = {
+        positionX: 0,
+	    positionY: 0,
+	    speedX: 0,
+	    pspeedY: 0,
+	    attacking: false,
+	    saltando: false,
+	    player: 'Dake'
+    };
+
+    stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
 }
 function onError(){
     console.log("Me voy a pegar un puto tiro");
+}
+
+function onMessageReceived(message){
+    console.log("Mensaje recibido:")
+    console.log(message);
 }
 class TitleScene extends Phaser.Scene {
 
