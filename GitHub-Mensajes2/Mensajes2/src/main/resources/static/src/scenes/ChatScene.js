@@ -19,7 +19,7 @@ class ChatScene extends Phaser.Scene {
 
         this.chatButton = this.add.image(50, 50, 'CHAT_BUTTON');
         this.chatButton.setInteractive({ useHandCursor: true });
-        this.chatButton.on('pointerover', () => this.chatDown());
+        this.chatButton.on('pointerover', () => this.chatHover());
 
         this.chatButtonHover = this.add.image(50, 50, 'CHAT_BUTTON_HOVER');
         this.chatButtonHover.setInteractive({ useHandCursor: true });
@@ -37,6 +37,10 @@ class ChatScene extends Phaser.Scene {
 
     }
 
+    chatHover() {
+        //console.log('controls not hovered');
+        this.chatButtonHover.setVisible(true);
+    }
     chatOut() {
         //console.log('controls not hovered');
         this.chatButtonHover.setVisible(false);
