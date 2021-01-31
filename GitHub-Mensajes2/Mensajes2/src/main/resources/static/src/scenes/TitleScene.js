@@ -1,4 +1,6 @@
 var stompClient = null;
+var nick = Math.floor(Math.random() * 999999).toString();
+var jugador = -1;
 function conexion(){
     var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
@@ -10,8 +12,7 @@ function conexion(){
 }
 
 function onConnected(){
-    stompClient.subscribe('/topic/searching', onMessageReceived);
-
+    stompClient.subscribe('/topic/searching', onMessageReceived, { id: nick});
     var chatMessage = {
         positionX: 0,
 	    positionY: 0,
@@ -19,7 +20,7 @@ function onConnected(){
 	    pspeedY: 0,
 	    attacking: false,
 	    saltando: false,
-	    player: 'Dake'
+	    player: nick
     };
 
     stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
@@ -29,8 +30,19 @@ function onError(){
 }
 
 function onMessageReceived(message){
-    console.log("Mensaje recibido:")
-    console.log(message);
+    console.log("Mensaje recibido:" + message.body)
+    if(message.body!="waiting"){
+        var ids = message.body.split("%");
+        if(ids[0]==nick){
+            jugador = 0;
+            stompClient.unsubscribe( nick);
+        }
+        if(ids[1]==nick){
+            jugador = 1;
+            stompClient.unsubscribe( nick);
+        }
+    }
+    //var message = JSON.parse(payload.body); para convertir a objeto
 }
 class TitleScene extends Phaser.Scene {
 
