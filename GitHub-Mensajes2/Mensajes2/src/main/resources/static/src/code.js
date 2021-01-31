@@ -14,7 +14,7 @@ let config = {
         }
     },
 
-    scene: [TitleScene, ChatScene, ControlKeysScene, TutorialScene, GameScene, BadEndingScene, P1WinnerScene, P2WinnerScene]
+    scene: [TitleScene, ChatScene, NicknameScene, MatchmakingScene, ControlKeysScene, TutorialScene, GameScene, BadEndingScene, P1WinnerScene, P2WinnerScene]
 
 };
 
