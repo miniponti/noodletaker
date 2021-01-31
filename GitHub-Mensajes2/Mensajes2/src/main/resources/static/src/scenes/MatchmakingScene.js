@@ -4,4 +4,8 @@ class MatchmakingScene extends Phaser.Scene {
         super('MATCHMAKING_SCENE_KEY');
     }
 
+    create(){
+        document.getElementById('matchmaking').style.display = 'block';
+    }
+
 }

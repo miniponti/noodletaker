@@ -17,7 +17,6 @@
     <script type="text/javascript" src="src/scenes/P2WinnerScene.js"></script>
     <script type="text/javascript" src="src/scenes/ControlKeysScene.js"></script>
     <script type="text/javascript" src="src/scenes/MatchmakingScene.js"></script>
-    <script type="text/javascript" src="src/scenes/NicknameScene.js"></script>
     <script type="text/javascript" src="src/scenes/TutorialScene.js"></script>
     <script type="text/javascript" src="src/scenes/ChatScene.js"></script>
     <script type="text/javascript" src="src/code.js"></script>
@@ -27,7 +26,12 @@
 <body>
     <noscript><h2 style="color: #ff0000">Parece que tu navegador no soporta JavaScript! Los WebSockets requieren que JS este
     activado, por favor, activa JavaScript y recarga la pagina</h2></noscript>
-    
+
+    <!--Contenedor para el matchmaking-->
+    <div id="matchmaking">
+    </div>
+
+    <!--Contenedores para el chat-->
     <div id="chat" class="chat__container">
         <h1>chat room</h1>
         <div class="chat__wrap">
@@ -37,7 +41,7 @@
 
                 <div>
                     <!--caja para meter el nombre de usuario-->
-                    <input class="info__nickname" id='nick' type='text' placeholder="Nombre de usuario">
+                    <input class="info__nickname" id='nick' type='text' placeholder="Introducir nombre de usuario...">
 
                     <!--botones conectarse y desconectarse-->
                     <div class="info__button-wrap">
@@ -65,6 +69,7 @@
             </section>
         </div>
     </div>
+
 </body>
 
 </html>

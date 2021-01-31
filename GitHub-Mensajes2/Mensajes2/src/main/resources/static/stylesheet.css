@@ -119,3 +119,13 @@ h1 {
     box-sizing: border-box;
     padding: 0.5rem 0.5rem;
 }
+
+
+#matchmaking{
+    position: absolute;
+    margin-left: auto;
+    border: 3px solid #ffffff;
+    display: none;
+    width: 50%;
+    height: 50%;
+}

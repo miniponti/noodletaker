@@ -240,7 +240,7 @@ class TitleScene extends Phaser.Scene {
     offlineUp() {
         //console.log('offline up');
         conexion();
-        this.scene.start('NICKNAME_SCENE_KEY');
+        this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }
 
