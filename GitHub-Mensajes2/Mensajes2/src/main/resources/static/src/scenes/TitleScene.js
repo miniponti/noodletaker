@@ -10,7 +10,7 @@ function conexion(){
 }
 
 function onConnected(){
-    stompClient.subscribe('topic/searching',  onMessageReceived);
+    stompClient.subscribe('/topic/searching', onMessageReceived);
 
     var chatMessage = {
         positionX: 0,

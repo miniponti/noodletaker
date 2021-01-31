@@ -7,6 +7,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+
+
 @Controller
 public class GameController{
 	
@@ -15,7 +17,7 @@ public class GameController{
 	int sala = 0;
 	
 	@MessageMapping("/search")
-	@SendTo("topic/searching")
+	@SendTo("/topic/searching")
 	public String findServer(@Payload GameMessage message) {
 		System.out.println(message.getPlayer());
 		/*ids.add(message.getPlayer());
@@ -27,9 +29,10 @@ public class GameController{
 		return "waiting";
 	}
 	
-	@MessageMapping("/playing")
-	@SendTo("topic/gameId")
-	public GameMessage upload(@Payload GameMessage message) {
+	@MessageMapping("/playing.send")
+	@SendTo("/topic/gameId")
+	public GameMessage sendMessage2(@Payload GameMessage message) {
+		System.out.println(message.getPlayer());
 		return message;
 	}
 	
