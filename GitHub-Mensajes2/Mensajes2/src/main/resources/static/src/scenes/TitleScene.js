@@ -1,6 +1,7 @@
 var stompClient = null;
 var nick = Math.floor(Math.random() * 999999).toString();
 var jugador = -1;
+var server = -1;
 function conexion(){
     var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
@@ -17,7 +18,7 @@ function onConnected(){
         positionX: 0,
 	    positionY: 0,
 	    speedX: 0,
-	    pspeedY: 0,
+	    speedY: 0,
 	    attacking: false,
 	    saltando: false,
 	    player: nick
@@ -35,10 +36,12 @@ function onMessageReceived(message){
         var ids = message.body.split("%");
         if(ids[0]==nick){
             jugador = 0;
+            server = ids[2];
             stompClient.unsubscribe( nick);
         }
         if(ids[1]==nick){
             jugador = 1;
+            server = ids[2];
             stompClient.unsubscribe( nick);
         }
     }

@@ -1,15 +1,16 @@
 
 class GameScene extends Phaser.Scene {
-
+    
     constructor() {
         super('GAME_SCENE_KEY');
     }
 
     init() {
-
+        
     }
 
     preload() {
+        stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived, { id: nick});
         //CARGA DE TODAS LAS IMAGENES
         this.load.image('BG1', 'assets/sprites/Background1.png');
         this.load.image('BG2', 'assets/sprites/Background3.png');
@@ -747,5 +748,21 @@ class GameScene extends Phaser.Scene {
             this.gameoverSFX.play();
             this.scene.start('WINNER_P2_SCENE');
         }
+    }
+
+    sendMessage( positionX, positionY, speedX, speedY, attacking, saltando){
+        var chatMessage = {
+            positionX: positionX,
+            positionY: positionY,
+            speedX: speedX,
+            speedY: speedY,
+            attacking: attacking,
+            saltando: saltando,
+            player: nick
+        };
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage)); 
+    }
+    onMessageReceived(message){
+        var messageObj = JSON.parse(message.body);
     }
 }
