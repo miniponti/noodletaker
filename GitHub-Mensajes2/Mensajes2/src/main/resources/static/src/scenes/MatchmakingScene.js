@@ -4,8 +4,17 @@ class MatchmakingScene extends Phaser.Scene {
         super('MATCHMAKING_SCENE_KEY');
     }
 
+    preload(){
+        this.load.image('MATCHMAKING', 'assets/sprites/matchmaking.png');
+    }
+
     create(){
-        document.getElementById('matchmaking').style.display = 'block';
+        this.bg = this.add.sprite(0, 0, 'MATCHMAKING').setOrigin(0,0);
+        //console.log("create matchmaking");
+    }
+
+    update(){
+
     }
 
 }

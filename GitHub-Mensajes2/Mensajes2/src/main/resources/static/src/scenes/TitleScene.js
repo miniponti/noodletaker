@@ -229,8 +229,9 @@ class TitleScene extends Phaser.Scene {
     }
     //PARA CUANDO DEJA DE PULSARSE
     onlineUp() {
-        //console.log('online up');
+        //console.log('POR QUE NO FUNCIONAS PUTA');
         conexion();
+        this.onlineButtonDown.setVisible(false);
         this.scene.start('MATCHMAKING_SCENE_KEY');
         this.titleBGM.stop();
     }
@@ -254,7 +255,8 @@ class TitleScene extends Phaser.Scene {
     //PARA CUANDO DEJA DE PULSARSE
     offlineUp() {
         //console.log('offline up');
-        conexion();
+        //conexion();
+        this.offlineButtonDown.setVisible(false);
         this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }

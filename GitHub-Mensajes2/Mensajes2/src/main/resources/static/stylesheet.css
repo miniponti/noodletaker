@@ -121,11 +121,8 @@ h1 {
 }
 
 
-#matchmaking{
-    position: absolute;
-    margin-left: auto;
-    border: 3px solid #ffffff;
+#matchmaking_text{
+    
+    color: solid #ffffff;
     display: none;
-    width: 50%;
-    height: 50%;
 }
