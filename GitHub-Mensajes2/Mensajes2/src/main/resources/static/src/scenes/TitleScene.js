@@ -1,54 +1,12 @@
 var stompClient = null;
+var socket = null;
 var nick = Math.floor(Math.random() * 999999).toString();
 var jugador = -1;
 var server = -1;
-function conexion(){
-    var socket = new SockJS('/ws');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, onConnected, onError);
-    
-    //JSON.stringify({sender: username, id: 1234});
-   // stompClient.send("/game/search", {}, JSON.stringify({'name': "Dake"}));
-   // stompClient.send("/game/search", {}, JSON.stringify({'name': "Dake"}));
-}
 
-function onConnected(){
-    stompClient.subscribe('/topic/searching', onMessageReceived, { id: nick});
-    var chatMessage = {
-        positionX: 0,
-	    positionY: 0,
-	    speedX: 0,
-	    speedY: 0,
-	    attacking: false,
-	    saltando: false,
-	    player: nick
-    };
-
-    stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
-}
-function onError(){
-    console.log("Me voy a pegar un puto tiro");
-}
-
-function onMessageReceived(message){
-    console.log("Mensaje recibido:" + message.body)
-    if(message.body!="waiting"){
-        var ids = message.body.split("%");
-        if(ids[0]==nick){
-            jugador = 0;
-            server = ids[2];
-            stompClient.unsubscribe( nick);
-        }
-        if(ids[1]==nick){
-            jugador = 1;
-            server = ids[2];
-            stompClient.unsubscribe( nick);
-        }
-    }
-    //var message = JSON.parse(payload.body); para convertir a objeto
-}
 class TitleScene extends Phaser.Scene {
 
+    
     constructor() {
         super({ key: 'TITLE_SCENE_KEY' });
     }
@@ -229,9 +187,14 @@ class TitleScene extends Phaser.Scene {
     }
     //PARA CUANDO DEJA DE PULSARSE
     onlineUp() {
+<<<<<<< Updated upstream
         //console.log('POR QUE NO FUNCIONAS PUTA');
         conexion();
         this.onlineButtonDown.setVisible(false);
+=======
+        //console.log('online up');
+        this.conexion();
+>>>>>>> Stashed changes
         this.scene.start('MATCHMAKING_SCENE_KEY');
         this.titleBGM.stop();
     }
@@ -256,7 +219,10 @@ class TitleScene extends Phaser.Scene {
     offlineUp() {
         //console.log('offline up');
         //conexion();
+<<<<<<< Updated upstream
         this.offlineButtonDown.setVisible(false);
+=======
+>>>>>>> Stashed changes
         this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }
@@ -343,6 +309,56 @@ class TitleScene extends Phaser.Scene {
         //console.log('start title funciona');
     }
 
+    conexion(){
+        socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, this.onConnected, this.onError);
+        
+        //JSON.stringify({sender: username, id: 1234});
+       // stompClient.send("/game/search", {}, JSON.stringify({'name': "Dake"}));
+       // stompClient.send("/game/search", {}, JSON.stringify({'name': "Dake"}));
+    }
     
+    onConnected(){
+        stompClient.subscribe('/topic/searching', this.onMessageReceived, { id: nick});
+        var chatMessage = {
+            positionX: 0,
+            positionY: 0,
+            speedX: 0,
+            speedY: 0,
+            attacking: false,
+            saltando: false,
+            player: nick
+        };
+    
+        stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
+    }
+    onError(){
+        console.log("Ha habido un error en la conecion");
+    }
+    
+    onMessageReceived(message){
+        console.log("Mensaje recibido:" + message.body)
+        if(message.body!="waiting"){
+            var ids = message.body.split("%");
+            if(ids[0]==nick){
+                jugador = 0;
+                server = ids[2];
+                stompClient.unsubscribe( nick);
+                console.log("Pasando a escena de juego");
+                this.scene.start('GAME_SCENE_KEY');
+                this.titleBGM.stop();
+            }
+            if(ids[1]==nick){
+                jugador = 1;
+                server = ids[2];
+                stompClient.unsubscribe( nick);
+                console.log("Pasando a escena de juego");
+                this.scene.start('GAME_SCENE_KEY');
+                this.titleBGM.stop();
+            }
+        }
+        //var message = JSON.parse(payload.body); para convertir a objeto
+    }
 }
 
