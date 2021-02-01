@@ -187,14 +187,11 @@ class TitleScene extends Phaser.Scene {
     }
     //PARA CUANDO DEJA DE PULSARSE
     onlineUp() {
-<<<<<<< Updated upstream
         //console.log('POR QUE NO FUNCIONAS PUTA');
         conexion();
         this.onlineButtonDown.setVisible(false);
-=======
         //console.log('online up');
         this.conexion();
->>>>>>> Stashed changes
         this.scene.start('MATCHMAKING_SCENE_KEY');
         this.titleBGM.stop();
     }
@@ -219,10 +216,7 @@ class TitleScene extends Phaser.Scene {
     offlineUp() {
         //console.log('offline up');
         //conexion();
-<<<<<<< Updated upstream
         this.offlineButtonDown.setVisible(false);
-=======
->>>>>>> Stashed changes
         this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }
