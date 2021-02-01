@@ -37,7 +37,7 @@ public class GameController{
 	@MessageMapping("/playing.send/{serverId}")
 	@SendTo("/topic/gameId/{serverId}")
 	public GameMessage sendMessage2(@DestinationVariable String serverId, @Payload GameMessage message) {
-		System.out.println(message.getPlayer());
+		//System.out.println(message.getPlayer());
 		return message;
 	}
 	

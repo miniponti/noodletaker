@@ -815,4 +815,8 @@ class GameScene extends Phaser.Scene {
             this.player1.setVelocityY(messageObj.speedY);
         }
     }
+
+    seguro(){
+        
+    }
 }
