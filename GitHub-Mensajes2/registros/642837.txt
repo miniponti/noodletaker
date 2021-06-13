@@ -1,4 +1,0 @@
-SERVER#12:39:18#Manuel se conectó
-SERVER#12:40:05#o se conectó
-o#12:40:17#xdn´t
-SERVER#12:43:58#Manuel se desconectó

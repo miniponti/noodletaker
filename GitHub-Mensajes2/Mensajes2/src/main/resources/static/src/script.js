@@ -2,12 +2,10 @@ var serverId;
 var playerId;
 var timer;
 var conexion = false;
-var linkS =  window.location;//"http://localhost:8080/get/"
-alert(linkS);
+var linkS = "http://localhost:8080/get/"
 
 $(document).ready(function () {
-    alert(linkS);
-    console.log("Sand - " + linkS);
+    console.log("Sand");
 
     $("#conectarse").click(function () {
         startConexion();
