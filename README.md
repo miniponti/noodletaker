@@ -89,6 +89,7 @@ NoodleTaker consta de los siguientes estados:
 	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
 	* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
 	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="1080" height="720">
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/esquema.png" width="1080" height="720">
 	
 ### 4.- Arte
 #### 4.1.- Interfaz
@@ -115,12 +116,13 @@ Debido a que los objetos que se han diseñado se basan en un sistema de “invoc
 #### 4.4.- Escenarios
 Hay un único escenario divido en dos capas para usar el efecto de parallax scrolling.
 
-* **Fondos** El fondo es dinamico conforme el nivel avance, pero no es acorde a la aparición de las plataformas a lo largo del nivel (parallax mapping).
+* **Fondos** El fondo es dinamico conforme el avance del nivel.
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background3.png" width="1080" height="720">
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
 
 ### 5.- Diagrama de clases
-![](Mensajes/static/assets/interface/scenes/DiagramaDeClases.jpg)
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DiagramaDeClases.jpg" width="1080" height="720">
 
 ### 6.- Gestion de cliente/servidor
 El servidor está formado por una sala principal que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
