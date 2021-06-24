@@ -1,0 +1,4 @@
+SERVER#17:58:44#"Hola" se conectó
+"Hola"#5:59:03 PM#sad
+SERVER#17:59:23#"a" se conectó
+SERVER#17:59:29#"a" se desconectó

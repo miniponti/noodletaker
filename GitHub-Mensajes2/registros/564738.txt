@@ -1,5 +1,0 @@
-|SERVER|#01:55:47#"Isma" se conecto
-"Isma"#1:55:54#Hola
-|SERVER|#01:56:04#Saya se conecto
-|SERVER|#01:56:07#"Isma" se desconecto
-Saya#1:56:22#Comeme el pico

@@ -1,0 +1,20 @@
+------------------------------------------------------------
+INSTRUCCIONES PARA EJECUTAR EL SERVIDOR:
+------------------------------------------------------------
+1: Descargar y descomprimir el rar con los archivos del proyecto
+2: Abrir la consola de comandos 
+2.5: Si el puerto 8080 del ordenador esta abierto, cerrarlo.
+	-usar el comando "netstat -aon" para ver la lista de puertos del ordenador
+	-usar el comando "taskkill /F /PID nºPID" para cerrar el proceso que ocupa el puero, poniendo el numero de PID
+	 del proceso que ocupa el puerto 8080 (para esto puede ser necesario permisos de administrador).
+3: Acceder a la carpeta Server incluida en los archivos (Mensajes\Server) mediante el comando "cd DirrecionDeLaCarpeta\Server"
+4: Ejecutar el comando java -jar server.jar para ejecutar el servidor en el puerto 8080. (Para este proceso se encesita un
+ jdk instalado en windows que soporte ajva 1.8 o superior)
+4.5: Si no se tiene el JDK o no se pueden ejecutar comandos de java en la consola, se puede ejecutar el servidor haciendo doble
+click en el archivo server.jar, pero no sera posible cerrar facilmente el proceso o ver la consola del servidor por si hay 
+algun problema
+5: Para cerrar el servidor bastara con cerrar la consola de comandos
+------------------------------------------------------------
+INSTRUCCIONES PARA EJECUTAR EL CLIENTE:
+------------------------------------------------------------
+1: Abrir la direccion http://localhost:8080/ en un navegador web

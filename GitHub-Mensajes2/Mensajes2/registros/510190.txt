@@ -1,6 +1,0 @@
-SERVER#15:24:01#Manuel se conectó
-SERVER#15:24:21#Elena se conectó
-Elena#15:24:25#a
-Manuel#15:24:30#b
-SERVER#15:25:06#Elena se desconectó
-SERVER#15:25:12#Manuel se desconectó

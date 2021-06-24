@@ -1,3 +1,0 @@
-|SERVER|#01:54:03#"Isma" se conecto
-|SERVER|#01:54:11#"Elena" se conecto
-|SERVER|#01:54:26#com.example.demo.Salas.Jugador@1a7024e1 se desconecto

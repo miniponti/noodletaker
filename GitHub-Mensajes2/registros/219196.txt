@@ -1,8 +1,0 @@
-SERVER#18:26:56#Manuel se conecto
-Manuel#18:27:05#Hola
-SERVER#18:27:11#Manuel se desconecto
-SERVER#18:27:11#Manuel se conecto
-SERVER#18:27:22#Elena se conecto
-SERVER#18:27:35#Manuel se desconecto
-SERVER#18:27:51#Elena se desconecto
-SERVER#18:27:53#Elena se conecto

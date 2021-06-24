@@ -1,6 +1,0 @@
-|SERVER|#01:49:22#"Dake" se conecto
-"Dake"#1:49:31#Hola
-|SERVER|#01:49:49#"Elena" se conecto
-|SERVER|#01:50:05#com.example.demo.Salas.Jugador@22c278df se desconecto
-|SERVER|#01:52:47#"Isma" se conecto
-|SERVER|#01:52:48#com.example.demo.Salas.Jugador@5edf87dc se desconecto

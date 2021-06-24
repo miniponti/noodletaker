@@ -1,0 +1,2 @@
+SERVER#14:08:42#a se conectó
+SERVER#14:08:56#a se desconectó
