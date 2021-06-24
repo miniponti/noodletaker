@@ -10,7 +10,7 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived, { id: nick});
+        
         
         //CARGA DE TODAS LAS IMAGENES
         this.load.image('BG1', 'assets/sprites/Background1.png');
@@ -237,7 +237,8 @@ class GameScene extends Phaser.Scene {
         }
         this.boolOnlineAtacking = false;
         this.boolOnlineJumping = false;
-        
+
+        stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick});
     }
 
     update() {
@@ -793,11 +794,13 @@ class GameScene extends Phaser.Scene {
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage)); 
     }
+
     onMessageReceived(message){
         var messageObj = JSON.parse(message.body);
-        this.actualizarJugador(jugador, messageObj);
         this.boolOnlineAtacking = messageObj.attacking;
         this.boolOnlineJumping = messageObj.saltando;
+        this.actualizarJugador(jugador, messageObj);
+        
 
     }
 

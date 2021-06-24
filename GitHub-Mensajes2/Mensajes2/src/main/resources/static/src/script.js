@@ -2,11 +2,11 @@ var serverId;
 var playerId;
 var timer;
 var conexion = false;
-var linkS =  window.location;//"http://localhost:8080/get/"
-alert(linkS);
+//Url de la pagina
+var linkS =  window.location + "get/";	//"http://localhost:8080/get/"
 
+//
 $(document).ready(function () {
-    alert(linkS);
     console.log("Sand - " + linkS);
 
     $("#conectarse").click(function () {
@@ -17,9 +17,10 @@ $(document).ready(function () {
     })
 
     $("#sendButton").click(function () {
-        postMessage();
+        postMessage(); 
     })
 })
+
 
 function startConexion() {
     if (!conexion) {
