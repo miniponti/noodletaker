@@ -7,6 +7,12 @@ La temática del juego es "Japón moderno mezclado con figuras del Japón feudal
 3. **NOMBRE:** Manuel Abarca Crespo | **CORREO:** m.abarca.2018@alumnos.urjc.es | **USUARIO:** _dakeXd_
 4. **NOMBRE:** Elena Pontijas Martín | **CORREO:** e.pontijas.2018@alumnos.urjc.es | **USUARIO:** _miniponti_
 
+|           NOMBRE           |              CORREO             |     USUARIO    |
+|:--------------------------:|:-------------------------------:|:--------------:|
+|    Manuel Abarca Crespo    |  m.abarca.2018@alumnos.urjc.es  |     dakeXd     |
+| Juan Antonio Calero Crespo |  ja.calero.2017@alumnos.urjc.es |     C4lipo     |
+|   Ismael Jiménez Martínez  | i.jimenezm.2018@alumnos.urjc.es | gossipxbabylon |
+|    Elena Pontijas Martín   | e.pontijas.2018@alumnos.urjc.es |    miniponti   |
 
 
 ### 1.- Introducción
