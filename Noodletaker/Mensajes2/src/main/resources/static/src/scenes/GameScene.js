@@ -1,17 +1,17 @@
 
 class GameScene extends Phaser.Scene {
-    
+
     constructor() {
         super('GAME_SCENE_KEY');
     }
 
     init() {
-        
+
     }
 
     preload() {
-        
-        
+
+
         //CARGA DE TODAS LAS IMAGENES
         this.load.image('BG1', 'assets/sprites/Background1.png');
         this.load.image('BG2', 'assets/sprites/Background3.png');
@@ -19,7 +19,7 @@ class GameScene extends Phaser.Scene {
         this.load.image('OBSTACLE', 'assets/sprites/PLATFORM2.png');
         this.load.image('FINISHLINE', 'assets/sprites/FINISHLINE.png');
         this.load.image('NOODLES', 'assets/sprites/NOODLECUP.png');
-        this.load.image('ELTODOMITICO','assets/sprites/ETM.png');
+        this.load.image('ELTODOMITICO', 'assets/sprites/ETM.png');
 
         //Carga de las animaciones, indicando el ancho y alto de cada sprite dentro del sprite sheet
         this.load.spritesheet('P1', 'assets/sprites/BLUE_SPRITESHEET.png', {
@@ -38,15 +38,15 @@ class GameScene extends Phaser.Scene {
             frameWidth: 871,
             frameHeight: 1303
         });
-        
+
         //AUDIO
-        this.load.audio('GAME_AUDIO','assets/audio/GAME_BGM.mp3');
-        this.load.audio('GAMEOVER_AUDIO','assets/audio/gameover.mp3');
+        this.load.audio('GAME_AUDIO', 'assets/audio/GAME_BGM.mp3');
+        this.load.audio('GAMEOVER_AUDIO', 'assets/audio/gameover.mp3');
         this.load.audio('GONG_SFX', 'assets/audio/GONG.mp3');
         this.load.audio('LITTLE_GONG_SFX', 'assets/audio/littleGONG.mp3');
         this.load.audio('PUNCH_SFX', 'assets/audio/punch.mp3');
         this.load.audio('JUMP_SFX', 'assets/audio/JUMP.mp3');
-        this.load.audio('SAMURAI_SFX','assets/audio/samuraiDEAD.mp3');
+        this.load.audio('SAMURAI_SFX', 'assets/audio/samuraiDEAD.mp3');
     }
 
     create() {
@@ -85,8 +85,8 @@ class GameScene extends Phaser.Scene {
         this.gameoverSFX = this.sound.add('GAMEOVER_AUDIO');
         this.gongSFX = this.sound.add('GONG_SFX');
         this.littleGongSFX = this.sound.add('LITTLE_GONG_SFX');
-        this.punchSFX = this.sound.add('PUNCH_SFX', {volume: 0.3});
-        this.jumpSFX = this.sound.add('JUMP_SFX', {volume: 0.3});
+        this.punchSFX = this.sound.add('PUNCH_SFX', { volume: 0.3 });
+        this.jumpSFX = this.sound.add('JUMP_SFX', { volume: 0.3 });
         this.samuraiSFX = this.sound.add('SAMURAI_SFX');
 
         //FONDO DEL JUEGO
@@ -101,7 +101,7 @@ class GameScene extends Phaser.Scene {
 
         //SUELO ESTATICO
         this.suelo = this.physics.add.staticGroup();
-        this.suelo.create(0, 736, 'ROAD').setScale(5,0.001).refreshBody(); //INICIALIZACION SUELO
+        this.suelo.create(0, 736, 'ROAD').setScale(5, 0.001).refreshBody(); //INICIALIZACION SUELO
 
         //PLATAFORMAS
         this.platforms = this.physics.add.group({
@@ -111,7 +111,7 @@ class GameScene extends Phaser.Scene {
 
         //JUGADOR 1-----------------------------------------------------------------------------------------------------
 
-        this.player1 = this.physics.add.sprite(600, 550+86, 'P1');  //INICIALIZACION J1
+        this.player1 = this.physics.add.sprite(600, 550 + 86, 'P1');  //INICIALIZACION J1
         this.player1.setScale(0.15, 0.15);                        //ESCALADO J1
 
         //ANIMACIONES JUGADOR 1
@@ -123,15 +123,15 @@ class GameScene extends Phaser.Scene {
         });
         this.anims.create({//ANIMACION SPRITE J1
             key: 'P1_stand',
-            frames: [{key: 'P1', frame: 3}],
+            frames: [{ key: 'P1', frame: 3 }],
             frameRate: 20,
         });
 
         this.player1.play('P1_stand');
-        
+
 
         //JUGADOR 2-----------------------------------------------------------------------------------------------------
-        this.player2 = this.physics.add.sprite(650, 550+86, 'P2');  //INICIALIZACION J2
+        this.player2 = this.physics.add.sprite(650, 550 + 86, 'P2');  //INICIALIZACION J2
 
         this.player2.setScale(0.15, 0.15);                        //ESCALADO J2
 
@@ -144,15 +144,15 @@ class GameScene extends Phaser.Scene {
         });
         this.anims.create({//ANIMACION SPRITE J1
             key: 'P2_stand',
-            frames: [{key: 'P2', frame: 3}],
+            frames: [{ key: 'P2', frame: 3 }],
             frameRate: 20,
         });
         this.player2.play('P2_stand');
-       
+
 
         //SAMURAI
 
-        this.samurai = this.physics.add.sprite(100, 545+86, 'SAMURAI');  //INICIALIZACION SAMURAI
+        this.samurai = this.physics.add.sprite(100, 545 + 86, 'SAMURAI');  //INICIALIZACION SAMURAI
         this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
 
         //NOODLES
@@ -163,16 +163,16 @@ class GameScene extends Phaser.Scene {
 
         this.noodlesHolder.setScale(0.5, 0.5);
         this.noodlesHolder.setVisible(false);
-        
+
         //PowerUps
         this.powerUps = this.physics.add.group();
 
         //EL TODO MITICO
-        this.elTodoMitico = this.add.sprite(0,0,'ELTODOMITICO');
-        this.elTodoMitico.setOrigin(0,0);
+        this.elTodoMitico = this.add.sprite(0, 0, 'ELTODOMITICO');
+        this.elTodoMitico.setOrigin(0, 0);
         this.elTodoMitico.setDepth(15);
         this.elTodoMitico.setVisible(false);
-        
+
         //TECLAS
         this.wDown = false;
         this.aDown = false;
@@ -186,51 +186,52 @@ class GameScene extends Phaser.Scene {
         this.rightDown = false;
         this.enterDown = false;
 
-        if(!online || jugador == 0){
-        this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W,false);
-        this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A,false);
-        this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S,false);
-        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D,false);
-        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E,false);
+        if (!online || jugador == 0) {
+            this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W, false);
+            this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A, false);
+            this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S, false);
+            this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D, false);
+            this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E, false);
 
-        this.keyW.on('down', this.wDown = true, this);
-        this.keyA.on('down', this.aDown = true, this);
-        this.keyS.on('down', this.sDown = true, this);
-        this.keyD.on('down', this.dDown = true, this);
-        this.keyE.on('down', this.eDown = true, this);
+            this.keyW.on('down', this.wDown = true, this);
+            this.keyA.on('down', this.aDown = true, this);
+            this.keyS.on('down', this.sDown = true, this);
+            this.keyD.on('down', this.dDown = true, this);
+            this.keyE.on('down', this.eDown = true, this);
 
-        this.keyW.on('up', this.wDown = false, this);
-        this.keyA.on('up', this.aDown = false, this);
-        this.keyS.on('up', this.sDown = false, this);
-        this.keyD.on('up', this.dDown = false, this);
-        this.keyE.on('up', this.dDown = false, this);
+            this.keyW.on('up', this.wDown = false, this);
+            this.keyA.on('up', this.aDown = false, this);
+            this.keyS.on('up', this.sDown = false, this);
+            this.keyD.on('up', this.dDown = false, this);
+            this.keyE.on('up', this.dDown = false, this);
         }
 
-        if(!online || jugador == 1){
-        this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP,false);
-        this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT,false);
-        this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN,false);
-        this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT,false);
-        this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER,false);
-        
-        this.keyUP.on('down', this.upDown = true, this);
-        this.keyLEFT.on('down', this.leftDown = true, this);
-        this.keyDOWN.on('down', this.downDown = true, this);
-        this.keyRIGHT.on('down', this.rightDown = true, this);
-        this.keyENTER.on('down', this.enterDown = true, this);
+        if (!online || jugador == 1) {
+            this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP, false);
+            this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT, false);
+            this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN, false);
+            this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT, false);
+            this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
 
-        this.keyW.on('up', this.upDown = false, this);
-        this.keyA.on('up', this.leftDown = false, this);
-        this.keyS.on('up', this.downDown = false, this);
-        this.keyD.on('up', this.rightDown = false, this);
-        this.keyE.on('up', this.enterDown = false, this);
+            this.keyUP.on('down', this.upDown = true, this);
+            this.keyLEFT.on('down', this.leftDown = true, this);
+            this.keyDOWN.on('down', this.downDown = true, this);
+            this.keyRIGHT.on('down', this.rightDown = true, this);
+            this.keyENTER.on('down', this.enterDown = true, this);
+
+            this.keyW.on('up', this.upDown = false, this);
+            this.keyA.on('up', this.leftDown = false, this);
+            this.keyS.on('up', this.downDown = false, this);
+            this.keyD.on('up', this.rightDown = false, this);
+            this.keyE.on('up', this.enterDown = false, this);
         }
-        
+
         //Colisiones con los límites del canvas
         this.player1.setCollideWorldBounds(true);
         this.player2.setCollideWorldBounds(true);
         this.samurai.setCollideWorldBounds(true);
         this.noodlesHolder.setCollideWorldBounds(true);
+
         //COLISIONES CON SUELO
         this.physics.add.collider(this.samurai, this.suelo);
         this.physics.add.collider(this.player2, this.suelo);
@@ -282,14 +283,14 @@ class GameScene extends Phaser.Scene {
         //this.boolOnlineAtacking = false;
         //this.boolOnlineJumping = false;
 
-        stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick});
+        stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick });
     }
 
     update() {
         if (!this.gameOver && this.startGameBool) {
             //ACTUALIZAR BARRA DE PROGRESO
             //this.progressBarText.setText(this.progressBarText + this.progressBar.getProgress().toString().substr(0, 4));
-            
+
             this.graphics.fillStyle(0xff5757, 1);
             this.graphics.fillRect(0, 10, 1000 * this.progressBar.getProgress(), 20);
 
@@ -306,18 +307,18 @@ class GameScene extends Phaser.Scene {
                 
             }
             */
-           var childs = [];
-           var contador = 0;
-           this.platforms.children.iterate(function (child) {
+            var childs = [];
+            var contador = 0;
+            this.platforms.children.iterate(function (child) {
 
-            if(child.x<=0){
-                childs[contador] = child;
-                contador++;
-            }
-            
+                if (child.x <= 0) {
+                    childs[contador] = child;
+                    contador++;
+                }
 
-        });
-            for(var i = 0; i<contador; i++){
+
+            });
+            for (var i = 0; i < contador; i++) {
                 childs[i].destroy();
             }
 
@@ -328,37 +329,37 @@ class GameScene extends Phaser.Scene {
 
     movePlayers() {
 
-        if(!this.p1Jump){
-            if(this.jumpTimerP1<=this.time.now){
+        if (!this.p1Jump) {
+            if (this.jumpTimerP1 <= this.time.now) {
                 this.p1Jump = true;
             }
         }
 
-        if(!this.p2Jump){
-            if(this.jumpTimerP2<=this.time.now){
+        if (!this.p2Jump) {
+            if (this.jumpTimerP2 <= this.time.now) {
                 this.p2Jump = true;
             }
         }
         //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
-        
-        if(this.p1Moving){
-            if (this.keyW.isDown && this.player1.body.touching.down && this.p1Jump) {
+
+        if (this.p1Moving) {
+            if (this.wDown && this.player1.body.touching.down && this.p1Jump) {
                 this.jumpSFX.play();
                 this.player1.setVelocityY(-this.jumpSpeed);
                 this.p1Jump = false;
-                this.jumpTimerP1 = this.time.now+this.jumpTime;
-            } else if (this.keyA.isDown) {
+                this.jumpTimerP1 = this.time.now + this.jumpTime;
+            } else if (this.aDown) {
                 this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                 this.player1.play('P1_anim', true);
                 this.player1.setFlip(true, false)
-            } else if (this.keyS.isDown) {
+            } else if (this.sDown) {
                 this.player1.play('P1_stand', true);
                 this.player1.setVelocityX(-this.worldSpeed);
-            } else if (this.keyD.isDown) {
+            } else if (this.dDown) {
 
-                if(this.player1.x > this.player2.x){
+                if (this.player1.x > this.player2.x) {
                     this.player1.setVelocityX(this.playerSpeed - this.worldSpeed);
-                }else{
+                } else {
                     this.player1.setVelocityX(this.fastSpeed - this.worldSpeed);
                 }
                 this.player1.play('P1_anim', true);
@@ -369,33 +370,32 @@ class GameScene extends Phaser.Scene {
                 this.player1.setVelocityX(-this.worldSpeed);
             }
             //this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY, false, false);
-        }else{
+        } else {
             //console.log(this.temporizadorP1);
-            if(this.time.now> this.timerP1){
+            if (this.time.now > this.timerP1) {
                 this.reactivateP1();
             }
         }
-        
+
         //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
-        
-        if(this.p2Moving){
-            if (this.keyUP.isDown && this.player2.body.touching.down && this.p2Jump) {
+        if (this.p2Moving) {
+            if (this.upDown && this.player2.body.touching.down && this.p2Jump) {
                 this.jumpSFX.play();
                 this.player2.setVelocityY(-this.jumpSpeed);
                 this.p2Jump = false;
-                this.jumpTimerP2 = this.time.now+this.jumpTime;
-            } else if (this.keyLEFT.isDown) {
+                this.jumpTimerP2 = this.time.now + this.jumpTime;
+            } else if (this.leftDown) {
                 this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                 this.player2.play('P2_anim', true);
                 this.player2.setFlip(true, false)
-            } else if (this.keyDOWN.isDown) {
+            } else if (this.downDown) {
                 this.player2.play('P2_stand', true);
                 this.player2.setVelocityX(-this.worldSpeed);
-            } else if (this.keyRIGHT.isDown) {
+            } else if (this.rightDown) {
 
-                if(this.player1.x > this.player2.x){
+                if (this.player1.x > this.player2.x) {
                     this.player2.setVelocityX(this.fastSpeed - this.worldSpeed);
-                }else{
+                } else {
                     this.player2.setVelocityX(this.playerSpeed - this.worldSpeed);
                 }
                 this.player2.play('P2_anim', true);
@@ -406,29 +406,29 @@ class GameScene extends Phaser.Scene {
                 this.player2.setVelocityX(-this.worldSpeed);
             }
             //this.sendMessage(this.player2.x, this.player2.y, this.player2.velocityX, this.player2.velocityY, false, false);
-        }else{
+        } else {
             //console.log(this.temporizadorP2);
-            if(this.time.now> this.timerP2){
+            if (this.time.now > this.timerP2) {
                 this.reactivateP2();
             }
-        }  
-        
+        }
 
-        if(this.hasNoodles==0){
+
+        if (this.hasNoodles == 0) {
             console.log(this.noodlesHolder.y);
             this.noodlesHolder.setVelocityX(-this.worldSpeed);
             this.noodles.x = this.noodlesHolder.x;
             this.noodles.y = this.noodlesHolder.y;
 
-        }else if(this.hasNoodles==1){
-            this.noodles.x = this.player1.x +20;
-            this.noodles.y = this.player1.y -140;
+        } else if (this.hasNoodles == 1) {
+            this.noodles.x = this.player1.x + 20;
+            this.noodles.y = this.player1.y - 140;
 
-        }else if(this.hasNoodles==2){
-            this.noodles.x = this.player2.x +20;
-            this.noodles.y = this.player2.y -140;
+        } else if (this.hasNoodles == 2) {
+            this.noodles.x = this.player2.x + 20;
+            this.noodles.y = this.player2.y - 140;
         }
-        
+
     }
 
     gameOverP1() {
@@ -445,7 +445,7 @@ class GameScene extends Phaser.Scene {
         this.player2.play('P2_stand');
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
-        
+
         this.scene.start('WINNER_P2_SCENE');
     }
 
@@ -463,12 +463,12 @@ class GameScene extends Phaser.Scene {
         this.player2.play('P2_stand');
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
-        
+
         this.scene.start('WINNER_P1_SCENE');
     }
 
     //FUNCION PARA EL TEXTO READY DEL PRINCIPIO
-    readyTitle(){
+    readyTitle() {
         //console.log("READY?");
         this.readyText = this.add.text(config.width / 2, config.height / 2, 'READY?', { font: '192px japaneseFont' });
         this.readyText.setStroke('#ff5757', 16);
@@ -478,7 +478,7 @@ class GameScene extends Phaser.Scene {
     }
 
     //FUNCION PARA EL TEXTO SET DEL PRINCIPIO
-    setTitle(){
+    setTitle() {
         //console.log("SET?");
         this.readyText.setVisible(false);
         this.setText = this.add.text(config.width / 2, config.height / 2, 'SET?', { font: '192px japaneseFont' });
@@ -489,7 +489,7 @@ class GameScene extends Phaser.Scene {
     }
 
     //FUNCION PARA EL TEXTO GO DEL PRINCIPIO
-    goTitle(){
+    goTitle() {
         //console.log("GO!");
         this.gongSFX.play();
         this.setText.setVisible(false);
@@ -503,10 +503,10 @@ class GameScene extends Phaser.Scene {
         this.goText.setVisible(false);
 
         //BARRA DE PROGRESO
-        this.progressBar = this.time.addEvent({delay: 60000});
-        this.progressStartBarText = this.add.text(32, 32, 'START',{ font: '32px japaneseFont' });
+        this.progressBar = this.time.addEvent({ delay: 60000 });
+        this.progressStartBarText = this.add.text(32, 32, 'START', { font: '32px japaneseFont' });
         this.progressStartBarText.setStroke('#ff5757', 8);
-        this.progressFinishBarText = this.add.text(1200, 32, 'FINISH',{ font: '32px japaneseFont' });
+        this.progressFinishBarText = this.add.text(1200, 32, 'FINISH', { font: '32px japaneseFont' });
         this.progressFinishBarText.setStroke('#ff5757', 8);
         this.progressBarBorder = this.add.rectangle(680, 52, 1000, 20, 0xffffff);
         this.graphics = this.add.graphics({ x: 180, y: 32 });
@@ -515,49 +515,49 @@ class GameScene extends Phaser.Scene {
         this.gameBGM.play();
         this.startGameBool = true;
         this.powerUpSpawner = this.time.now;
-        this.timedPlatforms = this.time.addEvent({delay: this.platformSpawnSpeed, callback: this.createPlatform, callbackScope: this, loop: true});
+        this.timedPlatforms = this.time.addEvent({ delay: this.platformSpawnSpeed, callback: this.createPlatform, callbackScope: this, loop: true });
         this.timedStartPowerUp = this.time.delayedCall(240, this.StartPowerUp, [], this);
         this.timedWaitForFinishLine = this.time.delayedCall(60000, this.waitForFinishLine, [], this);
 
         this.spawnObjects = true;
     }
 
-    StartPowerUp(){
-        this.timedPowerups = this.time.addEvent({delay: this.powerupSpawnSpeed, callback: this.createPowerup, callbackScope: this, loop: true});
+    StartPowerUp() {
+        this.timedPowerups = this.time.addEvent({ delay: this.powerupSpawnSpeed, callback: this.createPowerup, callbackScope: this, loop: true });
     }
 
-    takeNoodles1(){
+    takeNoodles1() {
         //console.log("1 cogio los noodles")
         this.hasNoodles = 1;
         this.noodlesHolder.destroy();
     }
 
-    takeNoodles2(){
+    takeNoodles2() {
         //console.log("2 cogio los noodles")
         this.hasNoodles = 2;
         this.noodlesHolder.destroy();
     }
 
-    playersCrush(){
-        if(this.startGameBool){
-            if(!this.p2canAtack){
-                if(this.attackTimerP2<=this.time.now){
+    playersCrush() {
+        if (this.startGameBool) {
+            if (!this.p2canAtack) {
+                if (this.attackTimerP2 <= this.time.now) {
                     this.p2canAtack = true;
                 }
             }
-            if(!this.p1canAtack){
-                if(this.attackTimerP1<=this.time.now){
+            if (!this.p1canAtack) {
+                if (this.attackTimerP1 <= this.time.now) {
                     this.p1canAtack = true;
                 }
             }
 
-            if(this.keyENTER.isDown && this.p2canAtack){
+            if (this.enterDown && this.p2canAtack) {
                 this.punchSFX.play();
-                if( this.hasNoodles==1){
+                if (this.hasNoodles == 1) {
                     this.hasNoodles = 2;
                 }
 
-                if(this.player2.x > this.player1.x){
+                if (this.player2.x > this.player1.x) {
                     this.player1.setVelocityX(-700);
                 } else {
                     this.player1.setVelocityX(700);
@@ -570,12 +570,12 @@ class GameScene extends Phaser.Scene {
                 this.p2canAtack = false;
                 //console.log(this.timerP1);
 
-            }else if(this.keyE.isDown && this.p1canAtack){
+            } else if (this.eDown && this.p1canAtack) {
                 this.punchSFX.play();
-                if( this.hasNoodles==2){
+                if (this.hasNoodles == 2) {
                     this.hasNoodles = 1;
                 }
-                if(this.player2.x > this.player1.x){
+                if (this.player2.x > this.player1.x) {
                     this.player2.setVelocityX(700);
                 } else {
                     this.player2.setVelocityX(-700);
@@ -583,23 +583,23 @@ class GameScene extends Phaser.Scene {
                 this.player2.play('P2_stand', true);
                 this.timerP2 = this.time.now + this.stunTime;
                 this.p2Moving = false;
-                
+
                 this.attackTimerP1 = this.time.now + this.atackTime;
                 this.p1canAtack = false;
                 //console.log(this.timerP2);
             }
         }
     }
-    reactivateP1(){
+    reactivateP1() {
         //console.log("p1 reactivado");
         this.p1Moving = true;
     }
-    reactivateP2(){
+    reactivateP2() {
         //console.log("p2 reactivado");
         this.p2Moving = true;
     }
-    
-    badEnding(){
+
+    badEnding() {
         //console.log('bad gameOver FUNCIONA');
 
         //Los jugadores ya no pueden moverse
@@ -610,34 +610,34 @@ class GameScene extends Phaser.Scene {
         this.player2.play('P2_stand');
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
-        
+
         this.scene.start('BADENDING_SCENE_KEY');
     }
-    
-    destruirPlataforma(samurai, platafroma){
+
+    destruirPlataforma(samurai, platafroma) {
         //console.log("destruyendo platadormas");
         platafroma.destroy();
     }
 
-    todomiticoWait(player, powerup){
+    todomiticoWait(player, powerup) {
         //this.scene.resume('GAME_SCENE_KEY');
         this.elTodoMitico.setVisible(false);
         this.punchSFX.play();
 
-        if(player == this.player1){
+        if (player == this.player1) {
             this.p2Moving = false;
             this.player2.setVelocityX(-1000);
             this.timerP2 = this.time.now + this.stunTime;
-            
+
             //console.log(this.timerP2);
-           
-        }else if (player == this.player2){
+
+        } else if (player == this.player2) {
             this.p1Moving = false;
             this.player1.setVelocityX(-1000);
             this.timerP1 = this.time.now + this.stunTime;
-            
+
             //console.log(this.timerP2);
-        }else{
+        } else {
             this.player2.setVelocityX(-1000);
             this.timerP2 = this.time.now + this.stunTime;
             this.p2Moving = false;
@@ -645,59 +645,58 @@ class GameScene extends Phaser.Scene {
             this.timerP1 = this.time.now + this.stunTime;
             this.p1Moving = false;
         }
-        
+
     }
 
-    powerUpTodoMitico(player, powerup){
+    powerUpTodoMitico(player, powerup) {
         //this.scene.pause('GAME_SCENE_KEY');
         powerup.destroy();
         this.elTodoMitico.setVisible(true);
         this.samuraiSFX.play();
         this.time.delayedCall(300, this.todomiticoWait, [player, powerup], this);
     }
-    
-    createPlatform()
-    {
-        if (this.spawnObjects){
+
+    createPlatform() {
+        if (this.spawnObjects) {
             let random = this.randomNumber();
 
             //console.log(random);
             let randomPlat;
-            switch(random){
+            switch (random) {
                 case 0:
                     //console.log("Plataforma 0 creada");
                     let plat1 = this.platforms.create(1600, 800 - 200 + 86, 'OBSTACLE');
                     plat1.setVelocityX(-this.worldSpeed);
-                    plat1.setOrigin(0,0);
+                    plat1.setOrigin(0, 0);
                     this.randomPlat = 0;
                     break;
                 case 1:
                     //console.log("Plataforma 1 creada");
-                    let plat2 = this.platforms.create(1600, 700- 200 + 86, 'OBSTACLE');
+                    let plat2 = this.platforms.create(1600, 700 - 200 + 86, 'OBSTACLE');
                     plat2.setVelocityX(-this.worldSpeed);
                     this.randomPlat = 1;
-                    plat2.setOrigin(0,0);
+                    plat2.setOrigin(0, 0);
                     break;
                 case 2:
                     //console.log("Plataforma 2 creada");
-                    let plat3 = this.platforms.create(1600, 600- 200 + 86, 'OBSTACLE');
+                    let plat3 = this.platforms.create(1600, 600 - 200 + 86, 'OBSTACLE');
                     plat3.setVelocityX(-this.worldSpeed);
                     this.randomPlat = 2;
-                    plat3.setOrigin(0,0);
+                    plat3.setOrigin(0, 0);
                     break;
                 case 3:
                     //console.log("Plataforma 3 creada");
-                    let plat4 = this.platforms.create(1600, 500- 200 + 86, 'OBSTACLE');
+                    let plat4 = this.platforms.create(1600, 500 - 200 + 86, 'OBSTACLE');
                     plat4.setVelocityX(-this.worldSpeed);
                     this.randomPlat = 3;
-                    plat4.setOrigin(0,0);
+                    plat4.setOrigin(0, 0);
                     break;
                 case 4:
                     //console.log("Plataforma 4 creada");
-                    let plat5 = this.platforms.create(1600, 400- 200 + 86, 'OBSTACLE');
+                    let plat5 = this.platforms.create(1600, 400 - 200 + 86, 'OBSTACLE');
                     plat5.setVelocityX(-this.worldSpeed);
                     this.randomPlat = 4;
-                    plat5.setOrigin(0,0);
+                    plat5.setOrigin(0, 0);
                     break;
             }
             return randomPlat;
@@ -709,63 +708,63 @@ class GameScene extends Phaser.Scene {
         return x - Math.floor(x);
     }
 
-    randomNumber(){
-        
+    randomNumber() {
+
         //console.log("randomNumber FUNCIONA");
         let random2 = Math.floor(this.random() * 5);
         //console.log(random2);
         return random2;
     }
 
-    createPowerup(){
-        if (this.spawnObjects){
-            switch(this.randomPlat){
+    createPowerup() {
+        if (this.spawnObjects) {
+            switch (this.randomPlat) {
                 case 0:
                     //console.log("Powerup 0 creada");
 
-                    let power0 = this.powerUps.create(1600, 800- 200 + 86, 'POWERUP');
-                  
+                    let power0 = this.powerUps.create(1600, 800 - 200 + 86, 'POWERUP');
+
                     power0.setScale(0.1, 0.1);
-                    power0.y = power0.y-power0.height*0.1 - 1;
+                    power0.y = power0.y - power0.height * 0.1 - 1;
                     power0.setVelocityX(-this.worldSpeed);
 
                     //console.log(power0.height);
                     break;
                 case 1:
                     //console.log("Powerup 1 creada");
-                    let power1 = this.powerUps.create(1600, 700- 200 + 86 , 'POWERUP');
+                    let power1 = this.powerUps.create(1600, 700 - 200 + 86, 'POWERUP');
 
-                    
+
                     power1.setScale(0.1, 0.1);
-                    power1.y = power1.y-power1.height*0.1  - 1;
+                    power1.y = power1.y - power1.height * 0.1 - 1;
                     power1.setVelocityX(-this.worldSpeed);
 
                     //console.log(power1.height);
                     break;
                 case 2:
                     //console.log("Powerup 2 creada");
-                    let power2 = this.powerUps.create(1600, 600- 200 + 86, 'POWERUP');
+                    let power2 = this.powerUps.create(1600, 600 - 200 + 86, 'POWERUP');
 
-                   
+
                     power2.setScale(0.1, 0.1);
-                    power2.y = power2.y-power2.height*0.1  - 1;
+                    power2.y = power2.y - power2.height * 0.1 - 1;
                     power2.setVelocityX(-this.worldSpeed);
 
                     //console.log(power2.height);
                     break;
                 case 3:
                     //console.log("Powerup 3 creada");
-                    let power3 = this.powerUps.create(1600, 500- 200 + 86, 'POWERUP');
+                    let power3 = this.powerUps.create(1600, 500 - 200 + 86, 'POWERUP');
                     power3.setScale(0.1, 0.1);
-                    power3.y = power3.y-power3.height*0.1  - 1;
+                    power3.y = power3.y - power3.height * 0.1 - 1;
                     power3.setVelocityX(-this.worldSpeed);
                     //console.log(power3.height);
                     break;
                 case 4:
                     //console.log("Powerup 4 creada");
-                    let power4 = this.powerUps.create(1600, 400- 200 + 86, 'POWERUP');
+                    let power4 = this.powerUps.create(1600, 400 - 200 + 86, 'POWERUP');
                     power4.setScale(0.1, 0.1);
-                    power4.y = power4.y-power4.height*0.1  - 1;
+                    power4.y = power4.y - power4.height * 0.1 - 1;
                     power4.setVelocityX(-this.worldSpeed);
                     //console.log(power4.height);
                     break;
@@ -774,16 +773,15 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    waitForFinishLine(){
+    waitForFinishLine() {
         this.spawnObjects = false;
         this.timedCreateFinishLine = this.time.delayedCall(5000, this.createFinishLine, [], this);
     }
 
-    createFinishLine()
-    {
+    createFinishLine() {
         if (this.startGameBool) {
             console.log("createFinishLine FUNCIONA");
-           
+
             this.samurai.setVelocityX(this.worldSpeed);
             this.finishLine = this.physics.add.sprite(1550, 200, 'FINISHLINE');
             this.finishLine.setScale(1, 1);
@@ -796,31 +794,29 @@ class GameScene extends Phaser.Scene {
             this.fondoSpeed2 = 0;
             this.fondoSpeed1 = 0;
             this.platforms.children.iterate(function (child) {
- 
-                child.setVelocityX(0); 
+
+                child.setVelocityX(0);
             });
         }
 
     }
 
-    decideWinner(player, finishLine)
-    {
-        if((player == this.player1) && (this.hasNoodles == 1)){
-        this.physics.pause();
-        this.gameOver = true;                                                   //Fin del juego
-
-        //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
-        this.player2.play('P2_stand');
-        this.player1.play('P1_stand');
-        this.gameoverSFX.play();
-            this.scene.start('WINNER_P1_SCENE');
-        }
-        else if((player == this.player2) && (this.hasNoodles == 2))
-        {
-            
+    decideWinner(player, finishLine) {
+        if ((player == this.player1) && (this.hasNoodles == 1)) {
             this.physics.pause();
             this.gameOver = true;                                                   //Fin del juego
-    
+
+            //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
+            this.player2.play('P2_stand');
+            this.player1.play('P1_stand');
+            this.gameoverSFX.play();
+            this.scene.start('WINNER_P1_SCENE');
+        }
+        else if ((player == this.player2) && (this.hasNoodles == 2)) {
+
+            this.physics.pause();
+            this.gameOver = true;                                                   //Fin del juego
+
             //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
             this.player2.play('P2_stand');
             this.player1.play('P1_stand');
@@ -829,7 +825,7 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    sendMessage( positionX, positionY, speedX, speedY/*, attacking, saltando*/){
+    sendMessage(positionX, positionY, speedX, speedY/*, attacking, saltando*/) {
         var chatMessage = {
             name: "movimiento",
             player: nick,
@@ -842,25 +838,25 @@ class GameScene extends Phaser.Scene {
             saltando: saltando,
             player: nick*/
         };
-        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage)); 
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
-    onMessageReceived(message){
+    onMessageReceived(message) {
         var messageObj = JSON.parse(message.body);
         //this.boolOnlineAtacking = messageObj.attacking;
         //this.boolOnlineJumping = messageObj.saltando;
-        if(messageObj.name == "movimiento" && nick!=messageObj.player)
+        if (messageObj.name == "movimiento" && nick != messageObj.player)
             this.actualizarJugadorOnline(jugador, messageObj.info);
     }
 
-    actualizarJugadorOnline(player, messageInfo){
+    actualizarJugadorOnline(player, messageInfo) {
         var info = messageInfo.split("%");
-        if(player == 1){
+        if (player == 1) {
             this.player2.x = info[0];
-            this.player2.y =info[1];
+            this.player2.y = info[1];
             this.player2.setVelocityX(info[2]);
             this.player2.setVelocityY(info[3]);
-        }else{
+        } else {
             this.player1.x = info[0];
             this.player1.y = info[1]
             this.player1.setVelocityX(info[2]);
@@ -868,6 +864,6 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    
-    
+
+
 }
