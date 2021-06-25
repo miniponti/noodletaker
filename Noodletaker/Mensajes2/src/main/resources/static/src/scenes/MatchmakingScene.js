@@ -34,13 +34,9 @@ class MatchmakingScene extends Phaser.Scene {
     onConnected(){
         stompClient.subscribe('/topic/searching', onMessage , { id: nick});
         var chatMessage = {
-            positionX: 0,
-            positionY: 0,
-            speedX: 0,
-            speedY: 0,
-            attacking: false,
-            saltando: false,
-            player: nick
+            name: "movimiento",
+            player: nick,
+            info: 0 + "%" + 0 + "%" + 0 + "%" + 0
         };
         stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
         
@@ -65,6 +61,7 @@ function onMessage(message){
             jugador = 0;
             server = ids[2];
             stompClient.unsubscribe( nick);
+            seed = ids[3];
             //console.log("Pasando a escena de juego");
             //this.scene.start('GAME_SCENE_KEY');
             //this.titleBGM.stop();
@@ -74,6 +71,7 @@ function onMessage(message){
             jugador = 1;
             server = ids[2];
             stompClient.unsubscribe( nick);
+            seed = ids[3];
             //console.log("Pasando a escena de juego");
             //this.scene.start('GAME_SCENE_KEY');
             //this.titleBGM.stop();

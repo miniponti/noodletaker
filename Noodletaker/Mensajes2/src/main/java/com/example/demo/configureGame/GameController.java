@@ -25,7 +25,7 @@ public class GameController{
 		ids.add(message.getPlayer());
 		if(ids.size()>=2) {
 			sala++;
-			String aux = ids.get(0) + "%" + ids.get(1) + "%" + sala;
+			String aux = ids.get(0) + "%" + ids.get(1) + "%" + sala + "%" + Math.random()*100000;
 			ids.remove(0);
 			ids.remove(0);
 			return aux;

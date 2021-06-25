@@ -259,25 +259,28 @@ class GameScene extends Phaser.Scene {
         this.readyTitleCall = this.time.delayedCall(1000, this.readyTitle, [], this);
         this.startGameCall = this.time.delayedCall(5000, this.startGame, [], this);
 
+        /*
         if(jugador == 1){
             this.onlinePlayer = {positionX: this.player2.x,
                 positionY: this.player2.y,
                 speedX: 0,
                 speedY: 0,
-                attacking: false,
-                saltando: false,
+                //attacking: false,
+                //saltando: false,
                 player: ""};
-        }else{
+        }
+
+        if(jugador == 0){
             this.onlinePlayer = {positionX: this.player1.x,
                 positionY: this.player1.y,
                 speedX: 0,
                 speedY: 0,
-                attacking: false,
-                saltando: false,
+                //attacking: false,
+                //saltando: false,
                 player: ""};
-        }
-        this.boolOnlineAtacking = false;
-        this.boolOnlineJumping = false;
+        }*/
+        //this.boolOnlineAtacking = false;
+        //this.boolOnlineJumping = false;
 
         stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick});
     }
@@ -330,89 +333,86 @@ class GameScene extends Phaser.Scene {
                 this.p1Jump = true;
             }
         }
+
         if(!this.p2Jump){
             if(this.jumpTimerP2<=this.time.now){
                 this.p2Jump = true;
             }
         }
         //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
-        if(jugador == 1 || jugador == -1){
-                if(this.p1Moving){
-                    if (this.keyW.isDown && this.player1.body.touching.down && this.p1Jump) {
-                        this.jumpSFX.play();
-                        this.player1.setVelocityY(-this.jumpSpeed);
-                        this.p1Jump = false;
-                        this.jumpTimerP1 = this.time.now+this.jumpTime;
-                    } else if (this.keyA.isDown) {
-                        this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
-                        this.player1.play('P1_anim', true);
-                        this.player1.setFlip(true, false)
-                    } else if (this.keyS.isDown) {
-                        this.player1.play('P1_stand', true);
-                        this.player1.setVelocityX(-this.worldSpeed);
-                    } else if (this.keyD.isDown) {
+        
+        if(this.p1Moving){
+            if (this.keyW.isDown && this.player1.body.touching.down && this.p1Jump) {
+                this.jumpSFX.play();
+                this.player1.setVelocityY(-this.jumpSpeed);
+                this.p1Jump = false;
+                this.jumpTimerP1 = this.time.now+this.jumpTime;
+            } else if (this.keyA.isDown) {
+                this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
+                this.player1.play('P1_anim', true);
+                this.player1.setFlip(true, false)
+            } else if (this.keyS.isDown) {
+                this.player1.play('P1_stand', true);
+                this.player1.setVelocityX(-this.worldSpeed);
+            } else if (this.keyD.isDown) {
 
-                        if(this.player1.x > this.player2.x){
-                            this.player1.setVelocityX(this.playerSpeed - this.worldSpeed);
-                        }else{
-                            this.player1.setVelocityX(this.fastSpeed - this.worldSpeed);
-                        }
-                        this.player1.play('P1_anim', true);
-
-                        this.player1.setFlip(false, false)
-                    } else {
-                        this.player1.play('P1_stand', true);
-                        this.player1.setVelocityX(-this.worldSpeed);
-                    }
-                    this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY, false, false);
+                if(this.player1.x > this.player2.x){
+                    this.player1.setVelocityX(this.playerSpeed - this.worldSpeed);
                 }else{
-                    //console.log(this.temporizadorP1);
-                    if(this.time.now> this.timerP1){
-                        this.reactivateP1();
-                    }
+                    this.player1.setVelocityX(this.fastSpeed - this.worldSpeed);
                 }
+                this.player1.play('P1_anim', true);
+
+                this.player1.setFlip(false, false)
+            } else {
+                this.player1.play('P1_stand', true);
+                this.player1.setVelocityX(-this.worldSpeed);
+            }
+            //this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY, false, false);
         }else{
-            
+            //console.log(this.temporizadorP1);
+            if(this.time.now> this.timerP1){
+                this.reactivateP1();
+            }
         }
+        
         //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
-        if(jugador == 2 || jugador == -1 ){
-            if(this.p2Moving){
-                if (this.keyUP.isDown && this.player2.body.touching.down && this.p2Jump) {
-                    this.jumpSFX.play();
-                    this.player2.setVelocityY(-this.jumpSpeed);
-                    this.p2Jump = false;
-                    this.jumpTimerP2 = this.time.now+this.jumpTime;
-                } else if (this.keyLEFT.isDown) {
-                    this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
-                    this.player2.play('P2_anim', true);
-                    this.player2.setFlip(true, false)
-                } else if (this.keyDOWN.isDown) {
-                    this.player2.play('P2_stand', true);
-                    this.player2.setVelocityX(-this.worldSpeed);
-                } else if (this.keyRIGHT.isDown) {
+        
+        if(this.p2Moving){
+            if (this.keyUP.isDown && this.player2.body.touching.down && this.p2Jump) {
+                this.jumpSFX.play();
+                this.player2.setVelocityY(-this.jumpSpeed);
+                this.p2Jump = false;
+                this.jumpTimerP2 = this.time.now+this.jumpTime;
+            } else if (this.keyLEFT.isDown) {
+                this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
+                this.player2.play('P2_anim', true);
+                this.player2.setFlip(true, false)
+            } else if (this.keyDOWN.isDown) {
+                this.player2.play('P2_stand', true);
+                this.player2.setVelocityX(-this.worldSpeed);
+            } else if (this.keyRIGHT.isDown) {
 
-                    if(this.player1.x > this.player2.x){
-                        this.player2.setVelocityX(this.fastSpeed - this.worldSpeed);
-                    }else{
-                        this.player2.setVelocityX(this.playerSpeed - this.worldSpeed);
-                    }
-                    this.player2.play('P2_anim', true);
+                if(this.player1.x > this.player2.x){
+                    this.player2.setVelocityX(this.fastSpeed - this.worldSpeed);
+                }else{
+                    this.player2.setVelocityX(this.playerSpeed - this.worldSpeed);
+                }
+                this.player2.play('P2_anim', true);
 
-                    this.player2.setFlip(false, false)
-                } else {
-                    this.player2.play('P2_stand', true);
-                    this.player2.setVelocityX(-this.worldSpeed);
-                }
-                this.sendMessage(this.player2.x, this.player2.y, this.player2.velocityX, this.player2.velocityY, false, false);
-            }else{
-                //console.log(this.temporizadorP2);
-                if(this.time.now> this.timerP2){
-                    this.reactivateP2();
-                }
-            }  
+                this.player2.setFlip(false, false)
+            } else {
+                this.player2.play('P2_stand', true);
+                this.player2.setVelocityX(-this.worldSpeed);
+            }
+            //this.sendMessage(this.player2.x, this.player2.y, this.player2.velocityX, this.player2.velocityY, false, false);
         }else{
-
-        }
+            //console.log(this.temporizadorP2);
+            if(this.time.now> this.timerP2){
+                this.reactivateP2();
+            }
+        }  
+        
 
         if(this.hasNoodles==0){
             console.log(this.noodlesHolder.y);
@@ -704,9 +704,15 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    random() {
+        var x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+    }
+
     randomNumber(){
+        
         //console.log("randomNumber FUNCIONA");
-        let random2 = Math.floor(Math.random() * 5);
+        let random2 = Math.floor(this.random() * 5);
         //console.log(random2);
         return random2;
     }
@@ -823,44 +829,45 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    sendMessage( positionX, positionY, speedX, speedY, attacking, saltando){
+    sendMessage( positionX, positionY, speedX, speedY/*, attacking, saltando*/){
         var chatMessage = {
-            positionX: positionX,
+            name: "movimiento",
+            player: nick,
+            info: positionX + "%" + positionY + "%" + speedX + "%" + speedY
+            /*positionX: positionX,
             positionY: positionY,
             speedX: speedX,
             speedY: speedY,
             attacking: attacking,
             saltando: saltando,
-            player: nick
+            player: nick*/
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage)); 
     }
 
     onMessageReceived(message){
         var messageObj = JSON.parse(message.body);
-        this.boolOnlineAtacking = messageObj.attacking;
-        this.boolOnlineJumping = messageObj.saltando;
-        this.actualizarJugador(jugador, messageObj);
-        
-
+        //this.boolOnlineAtacking = messageObj.attacking;
+        //this.boolOnlineJumping = messageObj.saltando;
+        if(messageObj.name == "movimiento" && nick!=messageObj.player)
+            this.actualizarJugadorOnline(jugador, messageObj.info);
     }
 
-    actualizarJugador(player, messageObj){
-        this.onlinePlayer = messageObj;
+    actualizarJugadorOnline(player, messageInfo){
+        var info = messageInfo.split("%");
         if(player == 1){
-            this.player2.x = messageObj.positionX;
-            this.player2.y = messageObj.positionY
-            this.player2.setVelocityX(messageObj.sppedX);
-            this.player2.setVelocityY(messageObj.speedY);
+            this.player2.x = info[0];
+            this.player2.y =info[1];
+            this.player2.setVelocityX(info[2]);
+            this.player2.setVelocityY(info[3]);
         }else{
-            this.player1.x = messageObj.positionX;
-            this.player1.y = messageObj.positionY
-            this.player1.setVelocityX(messageObj.sppedX);
-            this.player1.setVelocityY(messageObj.speedY);
+            this.player1.x = info[0];
+            this.player1.y = info[1]
+            this.player1.setVelocityX(info[2]);
+            this.player1.setVelocityY(info[3]);
         }
     }
 
-    seguro(){
-        
-    }
+    
+    
 }

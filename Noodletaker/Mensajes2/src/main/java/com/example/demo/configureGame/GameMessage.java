@@ -1,12 +1,41 @@
 package com.example.demo.configureGame;
 
 public class GameMessage {
+	private String name;
+	private String player;
+	private String info;
+	
+	
+	
+	
+	public String getPlayer() {
+		return player;
+	}
+	public void setPlayer(String player) {
+		this.player = player;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
+	
+	
+	/*
 	private float positionX;
 	private float positionY;
 	private float speedX;
 	private float speedY;
-	private boolean attacking;
-	private boolean saltando;
+	//private boolean attacking;
+	//private boolean saltando;
 	private String player;
 	
 
@@ -42,6 +71,7 @@ public class GameMessage {
 		this.speedY = speedY;
 	}
 
+	/*
 	public boolean isAttacking() {
 		return attacking;
 	}
@@ -65,7 +95,7 @@ public class GameMessage {
 	public void setPlayer(String player) {
 		this.player = player;
 	}
-	
+	*/
 	
 
 	

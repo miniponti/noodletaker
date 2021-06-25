@@ -4,6 +4,7 @@ var nick = Math.floor(Math.random() * 999999).toString();
 var jugador = -1;
 var server = -1;
 var online = false;
+var seed = 1;
 //var phaserTS = false;
 class TitleScene extends Phaser.Scene {
 
@@ -217,6 +218,7 @@ class TitleScene extends Phaser.Scene {
         //conexion();
         this.offlineButtonDown.setVisible(false);
         this.scene.start('GAME_SCENE_KEY');
+        seed = Math.floor(Math.random() * 100000);
         this.titleBGM.stop();
     }
 
