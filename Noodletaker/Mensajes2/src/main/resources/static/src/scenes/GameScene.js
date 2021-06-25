@@ -174,38 +174,58 @@ class GameScene extends Phaser.Scene {
         this.elTodoMitico.setVisible(false);
         
         //TECLAS
-       
         this.wDown = false;
         this.aDown = false;
+        this.sDown = false;
+        this.dDown = false;
+        this.eDown = false;
 
+        this.upDown = false;
+        this.leftDown = false;
+        this.downDown = false;
+        this.rightDown = false;
+        this.enterDown = false;
 
         if(!online || jugador == 0){
         this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W,false);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A,false);
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S,false);
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D,false);
-        this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP,false);
+        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E,false);
 
         this.keyW.on('down', this.wDown = true, this);
+        this.keyA.on('down', this.aDown = true, this);
+        this.keyS.on('down', this.sDown = true, this);
+        this.keyD.on('down', this.dDown = true, this);
+        this.keyE.on('down', this.eDown = true, this);
+
         this.keyW.on('up', this.wDown = false, this);
-    
+        this.keyA.on('up', this.aDown = false, this);
+        this.keyS.on('up', this.sDown = false, this);
+        this.keyD.on('up', this.dDown = false, this);
+        this.keyE.on('up', this.dDown = false, this);
         }
 
         if(!online || jugador == 1){
+        this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP,false);
         this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT,false);
         this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN,false);
         this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT,false);
-        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E,false);
         this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER,false);
-    
+        
+        this.keyUP.on('down', this.upDown = true, this);
+        this.keyLEFT.on('down', this.leftDown = true, this);
+        this.keyDOWN.on('down', this.downDown = true, this);
+        this.keyRIGHT.on('down', this.rightDown = true, this);
+        this.keyENTER.on('down', this.enterDown = true, this);
+
+        this.keyW.on('up', this.upDown = false, this);
+        this.keyA.on('up', this.leftDown = false, this);
+        this.keyS.on('up', this.downDown = false, this);
+        this.keyD.on('up', this.rightDown = false, this);
+        this.keyE.on('up', this.enterDown = false, this);
         }
         
-       
-
-
-        
-
-
         //Colisiones con los límites del canvas
         this.player1.setCollideWorldBounds(true);
         this.player2.setCollideWorldBounds(true);
