@@ -283,6 +283,19 @@ class GameScene extends Phaser.Scene {
         //this.boolOnlineAtacking = false;
         //this.boolOnlineJumping = false;
 
+        if (online) {
+            this.intervaloMensajes = window.setInterval(function () {
+                if (jugador == 0) {
+                    this.sendMessage(positionX, positionY, speedX, speedY, attacking, saltando);
+                }
+
+                if (jugador == 1) {
+                    this.sendMessage(positionX, positionY, speedX, speedY, attacking, saltando);
+                }
+
+            }, 100);
+        }
+
         stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick });
     }
 
