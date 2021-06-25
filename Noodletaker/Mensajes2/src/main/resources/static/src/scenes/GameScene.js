@@ -174,16 +174,37 @@ class GameScene extends Phaser.Scene {
         this.elTodoMitico.setVisible(false);
         
         //TECLAS
+       
+        this.wDown = false;
+        this.aDown = false;
+
+
+        if(!online || jugador == 0){
         this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W,false);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A,false);
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S,false);
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D,false);
         this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP,false);
+
+        this.keyW.on('down', this.wDown = true, this);
+        this.keyW.on('up', this.wDown = false, this);
+    
+        }
+
+        if(!online || jugador == 1){
         this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT,false);
         this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN,false);
         this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT,false);
         this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E,false);
         this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER,false);
+    
+        }
+        
+       
+
+
+        
+
 
         //Colisiones con los límites del canvas
         this.player1.setCollideWorldBounds(true);

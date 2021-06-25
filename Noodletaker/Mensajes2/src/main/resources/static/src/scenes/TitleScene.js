@@ -3,6 +3,7 @@ var socket = null;
 var nick = Math.floor(Math.random() * 999999).toString();
 var jugador = -1;
 var server = -1;
+var online = false;
 //var phaserTS = false;
 class TitleScene extends Phaser.Scene {
 
@@ -302,6 +303,7 @@ class TitleScene extends Phaser.Scene {
     }
 
     startOnlineGame(){
+        online = true;
         this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }
