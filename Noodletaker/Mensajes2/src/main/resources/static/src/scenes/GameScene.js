@@ -231,6 +231,7 @@ class GameScene extends Phaser.Scene {
         this.player2.setCollideWorldBounds(true);
         this.samurai.setCollideWorldBounds(true);
         this.noodlesHolder.setCollideWorldBounds(true);
+
         //COLISIONES CON SUELO
         this.physics.add.collider(this.samurai, this.suelo);
         this.physics.add.collider(this.player2, this.suelo);
@@ -338,19 +339,19 @@ class GameScene extends Phaser.Scene {
         //MOVIMIENTOS DEL JUGADOR 1 (NINJA AZUL)
         if(jugador == 1 || jugador == -1){
                 if(this.p1Moving){
-                    if (this.keyW.isDown && this.player1.body.touching.down && this.p1Jump) {
+                    if (this.wDown && this.player1.body.touching.down && this.p1Jump) {
                         this.jumpSFX.play();
                         this.player1.setVelocityY(-this.jumpSpeed);
                         this.p1Jump = false;
                         this.jumpTimerP1 = this.time.now+this.jumpTime;
-                    } else if (this.keyA.isDown) {
+                    } else if (this.aDown) {
                         this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                         this.player1.play('P1_anim', true);
                         this.player1.setFlip(true, false)
-                    } else if (this.keyS.isDown) {
+                    } else if (this.sDown) {
                         this.player1.play('P1_stand', true);
                         this.player1.setVelocityX(-this.worldSpeed);
-                    } else if (this.keyD.isDown) {
+                    } else if (this.dDown) {
 
                         if(this.player1.x > this.player2.x){
                             this.player1.setVelocityX(this.playerSpeed - this.worldSpeed);
@@ -377,19 +378,19 @@ class GameScene extends Phaser.Scene {
         //MOVIMIENTOS DEL JUGADOR 2 (NINJA VERDE)
         if(jugador == 2 || jugador == -1 ){
             if(this.p2Moving){
-                if (this.keyUP.isDown && this.player2.body.touching.down && this.p2Jump) {
+                if (this.upDown && this.player2.body.touching.down && this.p2Jump) {
                     this.jumpSFX.play();
                     this.player2.setVelocityY(-this.jumpSpeed);
                     this.p2Jump = false;
                     this.jumpTimerP2 = this.time.now+this.jumpTime;
-                } else if (this.keyLEFT.isDown) {
+                } else if (this.leftDown) {
                     this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                     this.player2.play('P2_anim', true);
                     this.player2.setFlip(true, false)
-                } else if (this.keyDOWN.isDown) {
+                } else if (this.downDown) {
                     this.player2.play('P2_stand', true);
                     this.player2.setVelocityX(-this.worldSpeed);
-                } else if (this.keyRIGHT.isDown) {
+                } else if (this.rightDown) {
 
                     if(this.player1.x > this.player2.x){
                         this.player2.setVelocityX(this.fastSpeed - this.worldSpeed);
@@ -551,7 +552,7 @@ class GameScene extends Phaser.Scene {
                 }
             }
 
-            if(this.keyENTER.isDown && this.p2canAtack){
+            if(this.enterDown && this.p2canAtack){
                 this.punchSFX.play();
                 if( this.hasNoodles==1){
                     this.hasNoodles = 2;
@@ -570,7 +571,7 @@ class GameScene extends Phaser.Scene {
                 this.p2canAtack = false;
                 //console.log(this.timerP1);
 
-            }else if(this.keyE.isDown && this.p1canAtack){
+            }else if(this.eDown && this.p1canAtack){
                 this.punchSFX.play();
                 if( this.hasNoodles==2){
                     this.hasNoodles = 1;
