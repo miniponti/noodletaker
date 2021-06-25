@@ -190,6 +190,7 @@ class TitleScene extends Phaser.Scene {
     onlineUp() {
         //console.log('POR QUE NO FUNCIONAS PUTA');
         this.onlineButtonDown.setVisible(false);
+        online = true;
         //console.log('online up');
         //this.conexion();
         this.scene.start('MATCHMAKING_SCENE_KEY');
@@ -305,7 +306,7 @@ class TitleScene extends Phaser.Scene {
     }
 
     startOnlineGame(){
-        online = true;
+       
         this.scene.start('GAME_SCENE_KEY');
         this.titleBGM.stop();
     }

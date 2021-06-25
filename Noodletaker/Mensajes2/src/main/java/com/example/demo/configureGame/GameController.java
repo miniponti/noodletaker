@@ -21,8 +21,8 @@ public class GameController{
 	@MessageMapping("/search")
 	@SendTo("/topic/searching")
 	public String findServer(@Payload GameMessage message) {
-		//System.out.println(message.getPlayer());
 		ids.add(message.getPlayer());
+		System.out.println(message.getPlayer() + " " + ids.size());
 		if(ids.size()>=2) {
 			sala++;
 			String aux = ids.get(0) + "%" + ids.get(1) + "%" + sala + "%" + Math.random()*100000;

@@ -185,7 +185,7 @@ class GameScene extends Phaser.Scene {
         this.downDown = false;
         this.rightDown = false;
         this.enterDown = false;
-
+        console.log(online + " " + jugador);
         if (!online || jugador == 0) {
             this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W, false);
             this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A, false);
@@ -193,17 +193,17 @@ class GameScene extends Phaser.Scene {
             this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D, false);
             this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E, false);
 
-            this.keyW.on('down', this.wDown = true, this);
-            this.keyA.on('down', this.aDown = true, this);
-            this.keyS.on('down', this.sDown = true, this);
-            this.keyD.on('down', this.dDown = true, this);
-            this.keyE.on('down', this.eDown = true, this);
+            this.keyW.on('down', function (){this.wDown = true}, this);
+            this.keyA.on('down', function (){this.aDown = true}, this);
+            this.keyS.on('down', function (){this.sDown = true}, this);
+            this.keyD.on('down', function (){this.dDown = true}, this);
+            this.keyE.on('down', function (){this.eDown = true}, this);
 
-            this.keyW.on('up', this.wDown = false, this);
-            this.keyA.on('up', this.aDown = false, this);
-            this.keyS.on('up', this.sDown = false, this);
-            this.keyD.on('up', this.dDown = false, this);
-            this.keyE.on('up', this.dDown = false, this);
+            this.keyW.on('up', function (){this.wDown = false}, this);
+            this.keyA.on('up', function (){this.aDown = false}, this);
+            this.keyS.on('up', function (){this.sDown = false}, this);
+            this.keyD.on('up', function (){this.dDown = false}, this);
+            this.keyE.on('up', function (){this.eDown = false}, this);
         }
 
         if (!online || jugador == 1) {
@@ -213,17 +213,17 @@ class GameScene extends Phaser.Scene {
             this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT, false);
             this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
 
-            this.keyUP.on('down', this.upDown = true, this);
-            this.keyLEFT.on('down', this.leftDown = true, this);
-            this.keyDOWN.on('down', this.downDown = true, this);
-            this.keyRIGHT.on('down', this.rightDown = true, this);
-            this.keyENTER.on('down', this.enterDown = true, this);
+            this.keyUP.on('down', function (){this.upDown = true}, this);
+            this.keyLEFT.on('down', function (){this.leftDown = true}, this);
+            this.keyDOWN.on('down', function (){this.downDown = true}, this);
+            this.keyRIGHT.on('down', function (){this.rightDown = true}, this);
+            this.keyENTER.on('down', function (){this.enterDown = true}, this);
 
-            this.keyW.on('up', this.upDown = false, this);
-            this.keyA.on('up', this.leftDown = false, this);
-            this.keyS.on('up', this.downDown = false, this);
-            this.keyD.on('up', this.rightDown = false, this);
-            this.keyE.on('up', this.enterDown = false, this);
+            this.keyUP.on('up', function (){this.upDown = false}, this);
+            this.keyLEFT.on('up', function (){this.leftDown = false}, this);
+            this.keyDOWN.on('up', function (){this.downDown = false}, this);
+            this.keyRIGHT.on('up', function (){this.rightDown = false}, this);
+            this.keyENTER.on('up', function (){this.enterDown = false}, this);
         }
 
         //Colisiones con los límites del canvas
@@ -286,18 +286,20 @@ class GameScene extends Phaser.Scene {
         if (online) {
             this.intervaloMensajes = window.setInterval(function () {
                 if (jugador == 0) {
-                    this.sendMessage(positionX, positionY, speedX, speedY, attacking, saltando);
+                    this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY);
                 }
 
                 if (jugador == 1) {
-                    this.sendMessage(positionX, positionY, speedX, speedY, attacking, saltando);
+                    this.sendMessage(this.player2.x, this.player2.y, this.player2.velocityX, this.player2.velocityY);
                 }
 
             }, 100);
+
+            stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick });
+        }
         }
 
-        stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick });
-    }
+       
 
     update() {
         if (!this.gameOver && this.startGameBool) {
@@ -446,6 +448,7 @@ class GameScene extends Phaser.Scene {
 
     gameOverP1() {
         //Los jugadores ya no pueden moverse
+        
         console.log('gameOverP1 FUNCIONA');
 
         //this.P2Winner = new ResumeScene();
@@ -459,6 +462,7 @@ class GameScene extends Phaser.Scene {
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
 
+        this.restartGame();
         this.scene.start('WINNER_P2_SCENE');
     }
 
@@ -477,6 +481,7 @@ class GameScene extends Phaser.Scene {
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
 
+        this.restartGame();
         this.scene.start('WINNER_P1_SCENE');
     }
 
@@ -565,6 +570,10 @@ class GameScene extends Phaser.Scene {
             }
 
             if (this.enterDown && this.p2canAtack) {
+                this.golpearJugador(2);
+                if(online)
+                    this.sendGolpe();
+                /*
                 this.punchSFX.play();
                 if (this.hasNoodles == 1) {
                     this.hasNoodles = 2;
@@ -581,9 +590,13 @@ class GameScene extends Phaser.Scene {
 
                 this.attackTimerP2 = this.time.now + this.atackTime;
                 this.p2canAtack = false;
-                //console.log(this.timerP1);
+                //console.log(this.timerP1);*/
 
             } else if (this.eDown && this.p1canAtack) {
+                this.golpearJugador(1);
+                if(online)
+                    this.sendGolpe();
+                /*
                 this.punchSFX.play();
                 if (this.hasNoodles == 2) {
                     this.hasNoodles = 1;
@@ -599,7 +612,7 @@ class GameScene extends Phaser.Scene {
 
                 this.attackTimerP1 = this.time.now + this.atackTime;
                 this.p1canAtack = false;
-                //console.log(this.timerP2);
+                //console.log(this.timerP2);*/
             }
         }
     }
@@ -624,6 +637,7 @@ class GameScene extends Phaser.Scene {
         this.player1.play('P1_stand');
         this.gameoverSFX.play();
 
+        this.restartGame();
         this.scene.start('BADENDING_SCENE_KEY');
     }
 
@@ -823,6 +837,7 @@ class GameScene extends Phaser.Scene {
             this.player2.play('P2_stand');
             this.player1.play('P1_stand');
             this.gameoverSFX.play();
+            this.restartGame();
             this.scene.start('WINNER_P1_SCENE');
         }
         else if ((player == this.player2) && (this.hasNoodles == 2)) {
@@ -834,6 +849,7 @@ class GameScene extends Phaser.Scene {
             this.player2.play('P2_stand');
             this.player1.play('P1_stand');
             this.gameoverSFX.play();
+            this.restartGame();
             this.scene.start('WINNER_P2_SCENE');
         }
     }
@@ -854,14 +870,69 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
+    sendGolpe(){
+        var chatMessage = {
+            name: "golpe",
+            player: nick,
+            info: ""
+        };
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
+    }
+
     onMessageReceived(message) {
         var messageObj = JSON.parse(message.body);
         //this.boolOnlineAtacking = messageObj.attacking;
         //this.boolOnlineJumping = messageObj.saltando;
-        if (messageObj.name == "movimiento" && nick != messageObj.player)
-            this.actualizarJugadorOnline(jugador, messageObj.info);
+        if (nick != messageObj.player) {
+            switch (messageObj.name) {
+                case "movimiento":
+                    this.actualizarJugadorOnline(jugador, messageObj.info);
+                    break;
+                case "golpe":
+                    this.golpearJugador(jugador);
+                    break;
+            }
+        }
+            
     }
 
+    golpearJugador(player){
+
+        if(player == 0){
+            this.punchSFX.play();
+            if (this.hasNoodles == 2) {
+                this.hasNoodles = 1;
+            }
+            if (this.player2.x > this.player1.x) {
+                this.player2.setVelocityX(700);
+            } else {
+                this.player2.setVelocityX(-700);
+            }
+            this.player2.play('P2_stand', true);
+            this.timerP2 = this.time.now + this.stunTime;
+            this.p2Moving = false;
+
+            this.attackTimerP1 = this.time.now + this.atackTime;
+            this.p1canAtack = false;
+        }else{
+            this.punchSFX.play();
+            if (this.hasNoodles == 1) {
+                this.hasNoodles = 2;
+            }
+
+            if (this.player2.x > this.player1.x) {
+                this.player1.setVelocityX(-700);
+            } else {
+                this.player1.setVelocityX(700);
+            }
+            this.player1.play('P1_stand', true);
+            this.timerP1 = this.time.now + this.stunTime;
+            this.p1Moving = false;
+
+            this.attackTimerP2 = this.time.now + this.atackTime;
+            this.p2canAtack = false;
+        }
+    }
     actualizarJugadorOnline(player, messageInfo) {
         var info = messageInfo.split("%");
         if (player == 1) {
@@ -877,6 +948,19 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    restartGame(){
+        if(online){
+            conexionEstablished = false;
+            clearInterval(this.intervaloMensajes);
+            player = -1;
+            stompClient = null;
+            socket = null;
+            jugador = -1;
+            server = -1;
+            online = false;
+            seed = 1;
+        }
+    }
 
 
 }
