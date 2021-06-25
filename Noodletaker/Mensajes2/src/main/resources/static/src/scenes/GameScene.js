@@ -54,7 +54,7 @@ class GameScene extends Phaser.Scene {
         //Variables
         this.playerSpeed = 375;
         this.fastSpeed = 400;
-        this.worldSpeed = 298;
+        this.worldSpeed = 10;
         this.jumpSpeed = 450;
         this.platformSpawnSpeed = 1500;
         this.powerupSpawnSpeed = 6000;
@@ -114,6 +114,9 @@ class GameScene extends Phaser.Scene {
         this.player1 = this.physics.add.sprite(600, 550 + 86, 'P1');  //INICIALIZACION J1
         this.player1.setScale(0.15, 0.15);                        //ESCALADO J1
 
+        this.player1.setVelocityX(0);
+        this.player1.setVelocityY(0);
+
         //ANIMACIONES JUGADOR 1
         this.anims.create({
             key: 'P1_anim',
@@ -133,7 +136,9 @@ class GameScene extends Phaser.Scene {
         //JUGADOR 2-----------------------------------------------------------------------------------------------------
         this.player2 = this.physics.add.sprite(650, 550 + 86, 'P2');  //INICIALIZACION J2
 
-        this.player2.setScale(0.15, 0.15);                        //ESCALADO J2
+        this.player2.setScale(0.15, 0.15);                        //ESCALADO J2`
+        this.player2.setVelocityX(0);
+        this.player2.setVelocityY(0);
 
         //ANIMACIONES JUGADOR 2
         this.anims.create({
@@ -284,22 +289,23 @@ class GameScene extends Phaser.Scene {
         //this.boolOnlineJumping = false;
 
         if (online) {
-            this.intervaloMensajes = window.setInterval(function () {
-                if (jugador == 0) {
-                    this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY);
-                }
-
-                if (jugador == 1) {
-                    this.sendMessage(this.player2.x, this.player2.y, this.player2.velocityX, this.player2.velocityY);
-                }
-
-            }, 100);
+            this.intervaloMensajes = window.setInterval(this.bucleMensajes.bind(this), 100);
 
             stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick });
         }
+    }
+
+    bucleMensajes(){
+        //console.log("MENSAJE;" + this.player1.x + " " +  this.player1.y + " " +  this.player1.velocityX + " " +  this.player1.velocityY)
+        if (jugador == 0) {
+            this.sendMessage(this.player1.x, this.player1.y, this.player1.body.velocity.x, this.player1.body.velocity.y);
         }
 
-       
+        if (jugador == 1) {
+            this.sendMessage(this.player2.x, this.player2.y, this.player2.body.velocity.x, this.player2.body.velocity.y);
+        }
+
+    }
 
     update() {
         if (!this.gameOver && this.startGameBool) {
@@ -896,9 +902,9 @@ class GameScene extends Phaser.Scene {
             
     }
 
-    golpearJugador(player){
+    golpearJugador(playerJ){
 
-        if(player == 0){
+        if(playerJ == 1){
             this.punchSFX.play();
             if (this.hasNoodles == 2) {
                 this.hasNoodles = 1;
@@ -936,23 +942,24 @@ class GameScene extends Phaser.Scene {
     actualizarJugadorOnline(player, messageInfo) {
         var info = messageInfo.split("%");
         if (player == 1) {
-            this.player2.x = info[0];
-            this.player2.y = info[1];
-            this.player2.setVelocityX(info[2]);
-            this.player2.setVelocityY(info[3]);
+            this.player2.x = parseFloat(info[0]);
+            this.player2.y = parseFloat(info[1]);
+            this.player2.setVelocityX(parseFloat(info[2]));
+            this.player2.setVelocityY(parseFloat(info[3]));
         } else {
-            this.player1.x = info[0];
-            this.player1.y = info[1]
-            this.player1.setVelocityX(info[2]);
-            this.player1.setVelocityY(info[3]);
+            this.player1.x = parseFloat(info[0]);
+            this.player1.y = parseFloat(info[1]);
+            this.player1.setVelocityX(parseFloat(info[2]));
+            this.player1.setVelocityY(parseFloat(info[3]));
         }
     }
 
     restartGame(){
         if(online){
+
             conexionEstablished = false;
             clearInterval(this.intervaloMensajes);
-            player = -1;
+            //stompClient.unsuscribe(nick);
             stompClient = null;
             socket = null;
             jugador = -1;
