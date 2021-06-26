@@ -110,13 +110,17 @@ NoodleTaker consta de los siguientes estados:
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAME_SCENE.png" width="50%" height="50%">
 
-* **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
+* **Pantalla de fin de juego:** aparece cuando los dos jugadores han sido capturados por el samurái.
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BAD_ENDING.png" width="50%" height="50%">
 
 * **Pantalla de nivel completado:** sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le han impedido seguir jugando. Cuando esto ocurre, aparece quién es el ganador del nivel y un botón patra reiniciar la partida.
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/P1_WINS_SCENE.PNG" width="50%" height="50%">
+
+* **Pantalla de desconexión:** sale cuando uno de los jugadores se ha desconectado.
+
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/DISCONNECTION.png" width="50%" height="50%">
 
 #### 4.2.- Personajes
 * Jugables
