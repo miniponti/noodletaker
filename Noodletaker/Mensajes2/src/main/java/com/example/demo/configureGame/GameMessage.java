@@ -8,6 +8,13 @@ public class GameMessage {
 	
 	
 	
+	public GameMessage() {
+	}
+	public GameMessage(String name, String player, String info) {
+		this.name = name;
+		this.player = player;
+		this.info = info;
+	}
 	public String getPlayer() {
 		return player;
 	}

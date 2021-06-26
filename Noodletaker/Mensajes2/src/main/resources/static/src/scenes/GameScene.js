@@ -81,6 +81,10 @@ class GameScene extends Phaser.Scene {
         this.winner;
 
 
+        //CONEXION WEB
+        this.serverTimeout = 5000;
+        this.pinged = false;
+
         //AUDIO
         this.gameBGM = this.sound.add('GAME_AUDIO');
         this.gameoverSFX = this.sound.add('GAMEOVER_AUDIO');
@@ -310,8 +314,18 @@ class GameScene extends Phaser.Scene {
 
         if (online) {
             this.intervaloMensajes = window.setInterval(this.bucleMensajes.bind(this), 100);
-
             stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick });
+            this.intervaloServidor = window.setInterval(this.checkServer.bind(this), this.serverTimeout);
+
+        }
+    }
+
+    checkServer(){
+        if(this.pinged==false){
+            this.restartGame();
+            this.scene.start('DISCONNECTION_SCENE_KEY');
+        }else{
+            this.pinged = false;
         }
     }
 
@@ -964,9 +978,11 @@ class GameScene extends Phaser.Scene {
 
     onMessageReceived(message) {
         var messageObj = JSON.parse(message.body);
+      
         //this.boolOnlineAtacking = messageObj.attacking;
         //this.boolOnlineJumping = messageObj.saltando;
         if (nick != messageObj.player) {
+            this.pinged = true;
             switch (messageObj.name) {
                 case "movimiento":
                     this.actualizarJugadorOnline(jugador, messageObj.info);
@@ -1087,8 +1103,10 @@ class GameScene extends Phaser.Scene {
 
             conexionEstablished = false;
             clearInterval(this.intervaloMensajes);
+            clearInterval(this.intervaloServidor);
             //stompClient.unsuscribe(nick);
             stompClient.unsubscribe(nick);
+            stompClient.disconnect();
 
         }
         stompClient = null;
