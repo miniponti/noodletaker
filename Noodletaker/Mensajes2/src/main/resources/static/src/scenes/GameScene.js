@@ -898,8 +898,7 @@ class GameScene extends Phaser.Scene {
                     this.golpearJugador(jugador);
                     break;
             }
-        }
-            
+        } 
     }
 
     golpearJugador(playerJ){
