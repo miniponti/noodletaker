@@ -50,7 +50,7 @@ __Cámara neutra__: La cámara toma una perspectiva lateral, perpendicular a la 
 	* → = Moverse a la derecha.
 	* Tecla Enter = Atacar y robar noodles.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/CONTROLS_MENU.png" width="50%" height="50%" align="center">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/CONTROLS_MENU.png" width="50%" height="50%">
 
 #### 2.3.- Jugabilidad
 * **Movimiento de los jugadores**: la jugabilidad se basa en un espacio de dos dimensiones en el que se puede avanzar horizontal y verticalmente, creando un entorno similar al de los juegos de plataformas.
@@ -123,8 +123,8 @@ NoodleTaker consta de los siguientes estados:
 	* Ninja 1
 	
 	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BLUE_SPRITESHEET.png" width="50%" height="50%">
-	* Ninja 2
 	
+	* Ninja 2
 	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/GREEN_SPRITESHEET.png" width="50%" height="50%">
 	
 * No jugables
@@ -142,7 +142,7 @@ Debido a que los objetos que se han diseñado se basan en un sistema de “invoc
 Hay un único escenario divido en dos capas para usar el efecto de parallax scrolling.
 
 * **Fondos** El fondo es dinamico conforme el avance del nivel.
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background3.png" width="50%" height="50%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background3.png" width="75%" height="75%">
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
 
