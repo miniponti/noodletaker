@@ -118,6 +118,10 @@ NoodleTaker consta de los siguientes estados:
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/P1_WINS_SCENE.PNG" width="50%" height="50%">
 
+* **Pantalla de desconexión:** sale cuando uno de los jugadores se ha desconectado.
+
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/DISCONNECTION.png" width="50%" height="50%">
+
 #### 4.2.- Personajes
 * Jugables
 	* Ninja 1
