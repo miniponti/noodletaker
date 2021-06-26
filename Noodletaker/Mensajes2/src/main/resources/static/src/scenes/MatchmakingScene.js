@@ -34,9 +34,9 @@ class MatchmakingScene extends Phaser.Scene {
     onConnected(){
         stompClient.subscribe('/topic/searching', onMessage , { id: nick});
         var chatMessage = {
-            name: "movimiento",
+            name: "conexion",
             player: nick,
-            info: 0 + "%" + 0 + "%" + 0 + "%" + 0
+            info: nick
         };
         stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
         

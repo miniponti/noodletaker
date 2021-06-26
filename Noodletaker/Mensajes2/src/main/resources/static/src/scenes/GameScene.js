@@ -904,7 +904,7 @@ class GameScene extends Phaser.Scene {
 
     golpearJugador(playerJ){
 
-        if(playerJ == 1){
+        if(playerJ == 0){
             this.punchSFX.play();
             if (this.hasNoodles == 2) {
                 this.hasNoodles = 1;
@@ -941,7 +941,7 @@ class GameScene extends Phaser.Scene {
     }
     actualizarJugadorOnline(player, messageInfo) {
         var info = messageInfo.split("%");
-        if (player == 1) {
+        if (player == 0) {
             this.player2.x = parseFloat(info[0]);
             this.player2.y = parseFloat(info[1]);
             this.player2.setVelocityX(parseFloat(info[2]));
@@ -960,13 +960,15 @@ class GameScene extends Phaser.Scene {
             conexionEstablished = false;
             clearInterval(this.intervaloMensajes);
             //stompClient.unsuscribe(nick);
-            stompClient = null;
-            socket = null;
-            jugador = -1;
-            server = -1;
-            online = false;
-            seed = 1;
+            stompClient.unsubscribe( nick);
+            
         }
+        stompClient = null;
+        socket = null;
+        jugador = -1;
+        server = -1;
+        online = false;
+        seed = 1;
     }
 
 
