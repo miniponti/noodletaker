@@ -162,9 +162,18 @@ class GameScene extends Phaser.Scene {
         });
         this.player2.play('P2_stand');
 
-        this.animP1 = this.anims.get('P1_anim');
-        this.animP2 = this.anims.get('P2_anim');
-
+        //this.animP1 = this.anims.get('P1_anim');
+        //this.animP2 = this.anims.get('P2_anim');
+        this.animP1 = 0;
+        this.animP2 = 0;
+        this.flipP1 = 0;
+        this.flipP2 = 0;
+        /*
+        0 -> stand
+        1 -> move
+        0 -> no flip
+        1 -> si flip
+        */
         //SAMURAI
         this.samurai = this.physics.add.sprite(100, 545 + 86, 'SAMURAI');  //INICIALIZACION SAMURAI
         this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
@@ -209,17 +218,17 @@ class GameScene extends Phaser.Scene {
             this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D, false);
             this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E, false);
 
-            this.keyW.on('down', function (){this.wDown = true}, this);
-            this.keyA.on('down', function (){this.aDown = true}, this);
-            this.keyS.on('down', function (){this.sDown = true}, this);
-            this.keyD.on('down', function (){this.dDown = true}, this);
-            this.keyE.on('down', function (){this.eDown = true}, this);
+            this.keyW.on('down', function () { this.wDown = true }, this);
+            this.keyA.on('down', function () { this.aDown = true }, this);
+            this.keyS.on('down', function () { this.sDown = true }, this);
+            this.keyD.on('down', function () { this.dDown = true }, this);
+            this.keyE.on('down', function () { this.eDown = true }, this);
 
-            this.keyW.on('up', function (){this.wDown = false}, this);
-            this.keyA.on('up', function (){this.aDown = false}, this);
-            this.keyS.on('up', function (){this.sDown = false}, this);
-            this.keyD.on('up', function (){this.dDown = false}, this);
-            this.keyE.on('up', function (){this.eDown = false}, this);
+            this.keyW.on('up', function () { this.wDown = false }, this);
+            this.keyA.on('up', function () { this.aDown = false }, this);
+            this.keyS.on('up', function () { this.sDown = false }, this);
+            this.keyD.on('up', function () { this.dDown = false }, this);
+            this.keyE.on('up', function () { this.eDown = false }, this);
         }
 
         if (!online || jugador == 1) {
@@ -229,17 +238,17 @@ class GameScene extends Phaser.Scene {
             this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT, false);
             this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER, false);
 
-            this.keyUP.on('down', function (){this.upDown = true}, this);
-            this.keyLEFT.on('down', function (){this.leftDown = true}, this);
-            this.keyDOWN.on('down', function (){this.downDown = true}, this);
-            this.keyRIGHT.on('down', function (){this.rightDown = true}, this);
-            this.keyENTER.on('down', function (){this.enterDown = true}, this);
+            this.keyUP.on('down', function () { this.upDown = true }, this);
+            this.keyLEFT.on('down', function () { this.leftDown = true }, this);
+            this.keyDOWN.on('down', function () { this.downDown = true }, this);
+            this.keyRIGHT.on('down', function () { this.rightDown = true }, this);
+            this.keyENTER.on('down', function () { this.enterDown = true }, this);
 
-            this.keyUP.on('up', function (){this.upDown = false}, this);
-            this.keyLEFT.on('up', function (){this.leftDown = false}, this);
-            this.keyDOWN.on('up', function (){this.downDown = false}, this);
-            this.keyRIGHT.on('up', function (){this.rightDown = false}, this);
-            this.keyENTER.on('up', function (){this.enterDown = false}, this);
+            this.keyUP.on('up', function () { this.upDown = false }, this);
+            this.keyLEFT.on('up', function () { this.leftDown = false }, this);
+            this.keyDOWN.on('up', function () { this.downDown = false }, this);
+            this.keyRIGHT.on('up', function () { this.rightDown = false }, this);
+            this.keyENTER.on('up', function () { this.enterDown = false }, this);
         }
 
         //Colisiones con los límites del canvas
@@ -306,14 +315,14 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    bucleMensajes(){
+    bucleMensajes() {
         //console.log("MENSAJE;" + this.player1.x + " " +  this.player1.y + " " +  this.player1.velocityX + " " +  this.player1.velocityY)
         if (jugador == 0) {
-            this.sendMessage(this.player1.x, this.player1.y, this.player1.body.velocity.x, this.player1.body.velocity.y, animP1);
+            this.sendMessage(this.player1.x, this.player1.y, this.player1.body.velocity.x, this.player1.body.velocity.y, this.animP1, this.flipP1);
         }
 
         if (jugador == 1) {
-            this.sendMessage(this.player2.x, this.player2.y, this.player2.body.velocity.x, this.player2.body.velocity.y, animP2);
+            this.sendMessage(this.player2.x, this.player2.y, this.player2.body.velocity.x, this.player2.body.velocity.y, this.animP2, this.flipP2);
         }
 
     }
@@ -384,9 +393,12 @@ class GameScene extends Phaser.Scene {
                 this.player1.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                 this.player1.play('P1_anim', true);
                 this.player1.setFlip(true, false)
+                this.animP1 = 1;
+                this.flipP1 = 1;
             } else if (this.sDown) {
                 this.player1.play('P1_stand', true);
                 this.player1.setVelocityX(-this.worldSpeed);
+                this.animP1 = 0;
             } else if (this.dDown) {
 
                 if (this.player1.x > this.player2.x) {
@@ -395,11 +407,13 @@ class GameScene extends Phaser.Scene {
                     this.player1.setVelocityX(this.fastSpeed - this.worldSpeed);
                 }
                 this.player1.play('P1_anim', true);
-
                 this.player1.setFlip(false, false)
-            } else {
+                this.animP1 = 1;
+                this.flipP1 = 0;
+            } else if(!online || jugador == 0){
                 this.player1.play('P1_stand', true);
                 this.player1.setVelocityX(-this.worldSpeed);
+                this.animP1 = 0;
             }
             //this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY, false, false)
             /*this.animsP1key = this.anims.getCurrentKey();
@@ -424,9 +438,12 @@ class GameScene extends Phaser.Scene {
                 this.player2.setVelocityX(-(this.playerSpeed + this.worldSpeed));
                 this.player2.play('P2_anim', true);
                 this.player2.setFlip(true, false)
+                this.animP2 = 1;
+                this.flipP2 = 1;
             } else if (this.downDown) {
                 this.player2.play('P2_stand', true);
                 this.player2.setVelocityX(-this.worldSpeed);
+                this.animP2 = 0;
             } else if (this.rightDown) {
 
                 if (this.player1.x > this.player2.x) {
@@ -435,11 +452,13 @@ class GameScene extends Phaser.Scene {
                     this.player2.setVelocityX(this.playerSpeed - this.worldSpeed);
                 }
                 this.player2.play('P2_anim', true);
-
-                this.player2.setFlip(false, false)
-            } else {
+                this.player2.setFlip(false, false);
+                this.animP2 = 1;
+                this.flipP2 = 0;
+            } else if(!online || jugador==1){
                 this.player2.play('P2_stand', true);
                 this.player2.setVelocityX(-this.worldSpeed);
+                this.animP2 = 0;
             }
             //this.sendMessage(this.player2.x, this.player2.y, this.player2.velocityX, this.player2.velocityY, false, false);
             /*this.animsP2key = this.anims.getCurrentKey();
@@ -473,7 +492,7 @@ class GameScene extends Phaser.Scene {
 
     gameOverP1() {
         //Los jugadores ya no pueden moverse
-        
+
         console.log('gameOverP1 FUNCIONA');
 
         //this.P2Winner = new ResumeScene();
@@ -485,6 +504,8 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play('P2_stand');
         this.player1.play('P1_stand');
+        this.animP2 = 0;
+        this.animP1 = 0;
         this.gameoverSFX.play();
 
         this.restartGame();
@@ -504,6 +525,8 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play('P2_stand');
         this.player1.play('P1_stand');
+        this.animP2 = 0;
+        this.animP1 = 0;
         this.gameoverSFX.play();
 
         this.restartGame();
@@ -596,7 +619,7 @@ class GameScene extends Phaser.Scene {
 
             if (this.enterDown && this.p2canAtack) {
                 this.golpearJugador(1);
-                if(online)
+                if (online)
                     this.sendGolpe();
                 /*
                 this.punchSFX.play();
@@ -619,7 +642,7 @@ class GameScene extends Phaser.Scene {
 
             } else if (this.eDown && this.p1canAtack) {
                 this.golpearJugador(0);
-                if(online)
+                if (online)
                     this.sendGolpe();
                 /*
                 this.punchSFX.play();
@@ -660,6 +683,8 @@ class GameScene extends Phaser.Scene {
         //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
         this.player2.play('P2_stand');
         this.player1.play('P1_stand');
+        this.animP2 = 0;
+        this.animP1 = 0;
         this.gameoverSFX.play();
 
         this.restartGame();
@@ -862,29 +887,43 @@ class GameScene extends Phaser.Scene {
             //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
             this.player2.play('P2_stand');
             this.player1.play('P1_stand');
+            this.animP2 = 0;
+            this.animP1 = 0;
             this.gameoverSFX.play();
             this.restartGame();
             this.scene.start('WINNER_P1_SCENE');
         }
         else if ((player == this.player2) && (this.hasNoodles == 2)) {
-            this.winner = 
-            this.physics.pause();
+            this.winner =
+                this.physics.pause();
             this.gameOver = true;                                                   //Fin del juego
 
             //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
             this.player2.play('P2_stand');
             this.player1.play('P1_stand');
+            this.animP2 = 0;
+            this.animP1 = 0;
             this.gameoverSFX.play();
             this.restartGame();
             this.scene.start('WINNER_P2_SCENE');
         }
     }
 
-    sendMessage(positionX, positionY, speedX, speedY/*, attacking, saltando*/, animPlayer) {
+    sendMessage(positionX, positionY, speedX, speedY/*, attacking, saltando*/, animPlayer, flip) {
+
+        var info = {
+            positionX: positionX,
+            positionY: positionY,
+            speedX: speedX,
+            speedY: speedY,
+            anim: animPlayer,
+            flip: flip
+        }
+        var infoTxt = JSON.stringify(info)
         var chatMessage = {
             name: "movimiento",
             player: nick,
-            info: positionX + "%" + positionY + "%" + speedX + "%" + speedY + "%"  + animPlayer
+            info: infoTxt
             /*positionX: positionX,
             positionY: positionY,
             speedX: speedX,
@@ -896,7 +935,7 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
-    sendGolpe(){
+    sendGolpe() {
         //var info = 1;
         //if(jugador == 1){
         //    info = 0;
@@ -922,12 +961,12 @@ class GameScene extends Phaser.Scene {
                     this.golpearJugador(parseInt(messageObj.info));
                     break;
             }
-        } 
+        }
     }
 
-    golpearJugador(playerJ){
+    golpearJugador(playerJ) {
 
-        if(playerJ == 0){
+        if (playerJ == 0) {
             this.punchSFX.play();
             if (this.hasNoodles == 2) {
                 this.hasNoodles = 1;
@@ -938,12 +977,13 @@ class GameScene extends Phaser.Scene {
                 this.player2.setVelocityX(-700);
             }
             this.player2.play('P2_stand', true);
+            this.animP2 = 0;
             this.timerP2 = this.time.now + this.stunTime;
             this.p2Moving = false;
 
             this.attackTimerP1 = this.time.now + this.atackTime;
             this.p1canAtack = false;
-        }else{
+        } else {
             this.punchSFX.play();
             if (this.hasNoodles == 1) {
                 this.hasNoodles = 2;
@@ -955,6 +995,7 @@ class GameScene extends Phaser.Scene {
                 this.player1.setVelocityX(700);
             }
             this.player1.play('P1_stand', true);
+            this.animP1 = 0;
             this.timerP1 = this.time.now + this.stunTime;
             this.p1Moving = false;
 
@@ -964,28 +1005,48 @@ class GameScene extends Phaser.Scene {
     }
 
     actualizarJugadorOnline(player, messageInfo) {
-        var info = messageInfo.split("%");
+        var objInfo = JSON.parse(messageInfo);
+        //var info = messageInfo.split("%");
+        var txtP;
+        var playerOnline;
         if (player == 0) {
-            this.player2.x = parseFloat(info[0]);
-            this.player2.y = parseFloat(info[1]);
-            this.player2.setVelocityX(parseFloat(info[2]));
-            this.player2.setVelocityY(parseFloat(info[3]));
+            playerOnline = this.player2;
+            txtP = 'P2';
         } else {
-            this.player1.x = parseFloat(info[0]);
-            this.player1.y = parseFloat(info[1]);
-            this.player1.setVelocityX(parseFloat(info[2]));
-            this.player1.setVelocityY(parseFloat(info[3]));
+            playerOnline = this.player1;
+            txtP = 'P1';
+        }
+        playerOnline.x = objInfo.positionX//parseFloat(info[0]);
+        playerOnline.y = objInfo.positionY//parseFloat(info[1]);
+        playerOnline.setVelocityX(objInfo.speedX/*parseFloat(info[2])*/);
+        playerOnline.setVelocityY(objInfo.speedY/*parseFloat(info[3])*/);
+        switch (objInfo.anim) {
+            case 0:
+                playerOnline.play(txtP + '_stand', true);
+                break;
+            case 1:
+                playerOnline.play(txtP + '_anim', true);
+                break;
+        }
+        switch (objInfo.flip) {
+            case 0:
+                playerOnline.setFlip(false, false);
+                break;
+            case 1:
+                playerOnline.setFlip(true, false)
+                break;
         }
     }
 
-    restartGame(){
-        if(online){
+
+    restartGame() {
+        if (online) {
 
             conexionEstablished = false;
             clearInterval(this.intervaloMensajes);
             //stompClient.unsuscribe(nick);
-            stompClient.unsubscribe( nick);
-            
+            stompClient.unsubscribe(nick);
+
         }
         stompClient = null;
         socket = null;
