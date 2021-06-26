@@ -110,7 +110,7 @@ NoodleTaker consta de los siguientes estados:
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAME_SCENE.png" width="50%" height="50%">
 
-* **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
+* **Pantalla de fin de juego:** aparece cuando los dos jugadores han sido capturados por el samurái.
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BAD_ENDING.png" width="50%" height="50%">
 
