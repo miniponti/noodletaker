@@ -128,10 +128,8 @@ NoodleTaker consta de los siguientes estados:
 	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/GREEN_SPRITESHEET.png" width="1080" height="720">
 * No jugables
 	* Samurai
-
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/samurai.png" width="1080" height="720">
 	* El Todo Mítico
-	
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/ETM.png" width="1080" height="720">
 	
 #### 4.3.- Objetos
