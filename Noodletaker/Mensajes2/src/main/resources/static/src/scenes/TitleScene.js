@@ -305,11 +305,6 @@ class TitleScene extends Phaser.Scene {
         //console.log('start title funciona');
     }
 
-    startOnlineGame(){
-       
-        this.scene.start('GAME_SCENE_KEY');
-        this.titleBGM.stop();
-    }
     
     
 }

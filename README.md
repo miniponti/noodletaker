@@ -35,21 +35,22 @@ Esta licencia permite a otras personas, mezclar, adaptar y construir a partir de
 
 ### 2.- Mecánicas del juego
 #### 2.1.- Tipo de cámara
-__Cámara neutra__: La cámara toma una perspectiva lateral, perpendicular a la dirección en la que los jugadores se mueven (es decir, la cámara está apuntando hacia delante según la perspectiva del jugador y los personajes se mueven de izquierda a derecha). Se asemeja a las cámaras usadas en los videojuegos “Super Mario Bros” y “Hollow Knight” o de categoría “plataforma”. 
+__Cámara neutra__: La cámara toma una perspectiva lateral, perpendicular a la dirección en la que los jugadores se mueven (es decir, la cámara está apuntando hacia delante según la perspectiva del usuario y los personajes se mueven de izquierda a derecha). Se asemeja a las cámaras usadas en los videojuegos “Super Mario Bros” y “Hollow Knight”.
 
 #### 2.2.- Controles
-* Offline (desde un mismo ordenador)
-	* Jugador 1 usa las teclas WASD
-		* W = Saltar.
-		* A = Moverse a la izquierda.
-		* D = Moverse a la derecha.
-		* E = Atacar y robar noodles.
-	* Jugador 2 usa las flechas
-		* ↑ = Saltar.
-		* ← = Moverse a la izquierda
-		* → = Moverse a la derecha.
-		* Tecla Enter = Atacar y robar noodles.
 
+* Jugador 1 usa las teclas WASD
+	* W = Saltar.
+	* A = Moverse a la izquierda.
+	* D = Moverse a la derecha.
+	* E = Atacar y robar noodles.
+* Jugador 2 usa las flechas
+	* ↑ = Saltar.
+	* ← = Moverse a la izquierda
+	* → = Moverse a la derecha.
+	* Tecla Enter = Atacar y robar noodles.
+
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/CONTROLS_MENU.png" width="1080" height="720">
 
 #### 2.3.- Jugabilidad
 * **Movimiento de los jugadores**: la jugabilidad se basa en un espacio de dos dimensiones en el que se puede avanzar horizontal y verticalmente, creando un entorno similar al de los juegos de plataformas.
@@ -78,40 +79,62 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 * **Plataformas**: Las plataformas son el único obstáculo del juego, aparecen por la derecha de la pantalla y van hacia el jugador de derecha a izquierda (siguiendo el autoscroll del nivel) y se esquivan saltando sobre ellas o yendo por debajo (si es posible).
 
 #### 2.7.- Habilidades
-* **Sumashu (Smash)**: si un jugador toca esta habilidad, en la pantalla se muestra un mensaje de emergencia y, a continuación, sale un personaje llamado Todo Mítico que le da un puñetazo al ninja controlado por el otro jugador y lo empuja hacia atrás.
+* **Sumashu (Smash)**: si un jugador toca esta habilidad, en la pantalla se muestra un mensaje de emergencia y, a continuación, sale un personaje llamado Todo Mítico que le da un golpe al ninja controlado por el otro jugador y lo empuja hacia atrás.
 
 #### 2.8.- Guía
 En la pantalla del título, se le da la opción al jugador de pulsar un botón que muestre un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
 
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/TUTORIAL_1.png" width="1080" height="720">
+
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/TUTORIAL_2.png" width="1080" height="720">
+
 ### 3.- Estados del juego
 NoodleTaker consta de los siguientes estados:
-	* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
-	* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
-	* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
-	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="1080" height="720">
-	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/esquema.png" width="1080" height="720">
+* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
+
+* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
+
+* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
+
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="1080" height="720">
+	
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/esquema.png" width="1080" height="720">
 	
 ### 4.- Arte
 #### 4.1.- Interfaz
 * **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “START”, el cual si se pulsa, el juego se pone en funcionamiento.
 
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/START_SCENE.PNG" width="1080" height="720">
+
 * **Durante el juego:** una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
+
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAME_SCENE.png" width="1080" height="720">
 
 * **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
 
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BAD_ENDING.png" width="1080" height="720">
+
 * **Pantalla de nivel completado:** sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le han impedido seguir jugando. Cuando esto ocurre, aparece quién es el ganador del nivel y un botón patra reiniciar la partida.
+
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/P1_WINS_SCENE.PNG" width="1080" height="720">
 
 #### 4.2.- Personajes
 * Jugables
 	* Ninja 1
+	
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BLUE_SPRITESHEET.png" width="1080" height="720">
 	* Ninja 2
+	
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/GREEN_SPRITESHEET.png" width="1080" height="720">
 * No jugables
 	* Samurai
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/samurai.png" width="1080" height="720">
 	* El Todo Mítico
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/ETM.png" width="1080" height="720">
 	
 #### 4.3.- Objetos
 Aparecen a lo largo del escenario de manera “semialeatoria” (tendrán unas posiciones determinadas en las que podrán o no aparecer), son de un solo uso y se utilizan en el momento en el que un jugador entra en contacto con la imagen que representa al objeto, afectando al otro jugador (si son perjudiciales) o al jugador que los obtiene (si son beneficiosos) . 
-Debido a que los objetos que se han diseñado se basan en un sistema de “invocaciones” a ayudantes, estos se mostrarán en pantalla para ambos jugadores antes de hacer efecto en el mismo. De esta forma el jugador que es afectado se puede preparar ante el ataque inminente según el tipo de objeto que haya obtenido el rival.
+Debido a que los objetos que se han diseñado se basan en un sistema de “invocaciones” a ayudantes, éstos se mostrarán en pantalla para ambos jugadores antes de hacer efecto en el mismo. De esta forma el jugador que es afectado se puede preparar ante el ataque inminente según el tipo de objeto que haya obtenido el rival.
 
 #### 4.4.- Escenarios
 Hay un único escenario divido en dos capas para usar el efecto de parallax scrolling.
