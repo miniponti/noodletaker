@@ -509,6 +509,10 @@ class GameScene extends Phaser.Scene {
         this.gameoverSFX.play();
 
         this.restartGame();
+        this.winner = 2;
+        if(online){
+            this.EscenaFinalOnline(this.winner);
+        }
         this.scene.start('WINNER_P2_SCENE');
     }
 
@@ -530,6 +534,10 @@ class GameScene extends Phaser.Scene {
         this.gameoverSFX.play();
 
         this.restartGame();
+        this.winner = 1;
+        if(online){
+            this.EscenaFinalOnline(this.winner);
+        }
         this.scene.start('WINNER_P1_SCENE');
     }
 
@@ -688,7 +696,11 @@ class GameScene extends Phaser.Scene {
         this.gameoverSFX.play();
 
         this.restartGame();
-        this.scene.start('BADENDING_SCENE_KEY');
+        this.winner = 3;
+        if(online){
+            this.EscenaFinalOnline(this.winner);
+        }
+        this.VictoryHandler(this.winner);
     }
 
     destruirPlataforma(samurai, platafroma) {
@@ -890,18 +902,14 @@ class GameScene extends Phaser.Scene {
             this.animP1 = 0;
             this.gameoverSFX.play();
             this.restartGame();
+            this.winner = 1;
             if(online){
-                this.EscenaFinalOnline(player);
+                this.EscenaFinalOnline(this.winner);
             }
-            this.scene.start('WINNER_P1_SCENE');
+            this.VictoryHandler(this.winner);
         }
         else if ((player == this.player2) && (this.hasNoodles == 2)) {
-<<<<<<< Updated upstream
-            this.winner =
                 this.physics.pause();
-=======
-            this.physics.pause();
->>>>>>> Stashed changes
             this.gameOver = true;                                                   //Fin del juego
 
             //Ponemos animaciones de un solo frame para que el jugador no se siga moviendo
@@ -911,10 +919,11 @@ class GameScene extends Phaser.Scene {
             this.animP1 = 0;
             this.gameoverSFX.play();
             this.restartGame();
+            this.winner = 2;
             if(online){
-                this.EscenaFinalOnline(player);
+                this.EscenaFinalOnline(this.winner);
             }
-            this.scene.start('WINNER_P2_SCENE');
+            this.VictoryHandler(this.winner);
         }
     }
 
@@ -970,7 +979,8 @@ class GameScene extends Phaser.Scene {
                     this.golpearJugador(parseInt(messageObj.info));
                     break;
                 case "victoria":
-                    this.EscenaFinalOnline(parseInt(messageObj.info));
+                    //this.EscenaFinalOnline(parseInt(messageObj.info));
+                    break;
             }
         }
     }
@@ -1049,11 +1059,6 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-<<<<<<< Updated upstream
-
-    restartGame() {
-        if (online) {
-=======
     EscenaFinalOnline(ganador){
         var chatMessage = {
             name: "victoria",
@@ -1063,9 +1068,24 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
+    VictoryHandler(ganador){
+        switch(ganador){
+            case 1:
+                this.scene.start('WINNER_P1_SCENE');
+                break;
+            
+            case 2:
+                this.scene.start('WINNER_P2_SCENE');
+                break;
+
+            case 3:
+                this.scene.start('BADENDING_SCENE_KEY');
+                break;
+        }
+    }
+
     restartGame(){
         if(online){
->>>>>>> Stashed changes
 
             conexionEstablished = false;
             clearInterval(this.intervaloMensajes);
