@@ -1,6 +1,6 @@
 var stompClient = null;
 var socket = null;
-var nick = Math.floor(Math.random() * 999999).toString();
+var nick =  Math.floor(Math.random() * 999999).toString();
 var jugador = -1;
 var server = -1;
 var online = false;

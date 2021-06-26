@@ -1114,6 +1114,7 @@ class GameScene extends Phaser.Scene {
         jugador = -1;
         server = -1;
         online = false;
+        nick = -1;
         seed = 1;
     }
 
