@@ -513,7 +513,7 @@ class GameScene extends Phaser.Scene {
         if(online){
             this.EscenaFinalOnline(this.winner);
         }
-        this.scene.start('WINNER_P2_SCENE');
+        this.VictoryHandler(this.winner);
     }
 
     gameOverP2() {
@@ -533,12 +533,11 @@ class GameScene extends Phaser.Scene {
         this.animP1 = 0;
         this.gameoverSFX.play();
 
-        this.restartGame();
         this.winner = 1;
         if(online){
             this.EscenaFinalOnline(this.winner);
         }
-        this.scene.start('WINNER_P1_SCENE');
+        this.VictoryHandler(this.winner);
     }
 
     //FUNCION PARA EL TEXTO READY DEL PRINCIPIO
@@ -695,7 +694,6 @@ class GameScene extends Phaser.Scene {
         this.animP1 = 0;
         this.gameoverSFX.play();
 
-        this.restartGame();
         this.winner = 3;
         if(online){
             this.EscenaFinalOnline(this.winner);
@@ -901,7 +899,6 @@ class GameScene extends Phaser.Scene {
             this.animP2 = 0;
             this.animP1 = 0;
             this.gameoverSFX.play();
-            this.restartGame();
             this.winner = 1;
             if(online){
                 this.EscenaFinalOnline(this.winner);
@@ -918,7 +915,6 @@ class GameScene extends Phaser.Scene {
             this.animP2 = 0;
             this.animP1 = 0;
             this.gameoverSFX.play();
-            this.restartGame();
             this.winner = 2;
             if(online){
                 this.EscenaFinalOnline(this.winner);
@@ -980,6 +976,7 @@ class GameScene extends Phaser.Scene {
                     break;
                 case "victoria":
                     //this.EscenaFinalOnline(parseInt(messageObj.info));
+                    this.EscenaFinalOnline(messageObj.info);
                     break;
             }
         }
@@ -1069,6 +1066,7 @@ class GameScene extends Phaser.Scene {
     }
 
     VictoryHandler(ganador){
+        this.restartGame();
         switch(ganador){
             case 1:
                 this.scene.start('WINNER_P1_SCENE');
