@@ -110,7 +110,7 @@ NoodleTaker consta de los siguientes estados:
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAME_SCENE.png" width="50%" height="50%">
 
-* **Pantalla de fin de juego:** aparece cuando los dos jugadores han sido capturados por el samurái.
+* **Pantalla de fin de juego:** aparece cuando ninguno de los jugadores han cogido el bol de fideos, por tanto el samurái gana.
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BAD_ENDING.png" width="50%" height="50%">
 

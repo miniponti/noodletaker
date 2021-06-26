@@ -78,6 +78,7 @@ class GameScene extends Phaser.Scene {
         this.stunTime = 200; //ms
         this.jumpTime = 1000;
         this.randomPlat;
+        this.winner;
 
 
         //AUDIO
@@ -161,8 +162,8 @@ class GameScene extends Phaser.Scene {
         });
         this.player2.play('P2_stand');
 
-        var animP1 = this.anims.get('P1_anim');
-        var animP2 = this.anims.get('P2_anim');
+        this.animP1 = this.anims.get('P1_anim');
+        this.animP2 = this.anims.get('P2_anim');
 
         //SAMURAI
         this.samurai = this.physics.add.sprite(100, 545 + 86, 'SAMURAI');  //INICIALIZACION SAMURAI
@@ -400,7 +401,11 @@ class GameScene extends Phaser.Scene {
                 this.player1.play('P1_stand', true);
                 this.player1.setVelocityX(-this.worldSpeed);
             }
-            //this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY, false, false);
+            //this.sendMessage(this.player1.x, this.player1.y, this.player1.velocityX, this.player1.velocityY, false, false)
+            /*this.animsP1key = this.anims.getCurrentKey();
+            this.animsP1frames = this.anims.getTotalFrames();
+            this.animsP1frameRate = this.anims.frameRate;
+            this.animsP1repeat = this.anims.getRepeat();*/
         } else {
             //console.log(this.temporizadorP1);
             if (this.time.now > this.timerP1) {
@@ -437,6 +442,10 @@ class GameScene extends Phaser.Scene {
                 this.player2.setVelocityX(-this.worldSpeed);
             }
             //this.sendMessage(this.player2.x, this.player2.y, this.player2.velocityX, this.player2.velocityY, false, false);
+            /*this.animsP2key = this.anims.getCurrentKey();
+            this.animsP2frames = this.anims.getTotalFrames();
+            this.animsP2frameRate = this.anims.frameRate;
+            this.animsP2repeat = this.anims.getRepeat();*/
         } else {
             //console.log(this.temporizadorP2);
             if (this.time.now > this.timerP2) {
@@ -846,6 +855,7 @@ class GameScene extends Phaser.Scene {
 
     decideWinner(player, finishLine) {
         if ((player == this.player1) && (this.hasNoodles == 1)) {
+            this.winner = player1;
             this.physics.pause();
             this.gameOver = true;                                                   //Fin del juego
 
@@ -857,7 +867,7 @@ class GameScene extends Phaser.Scene {
             this.scene.start('WINNER_P1_SCENE');
         }
         else if ((player == this.player2) && (this.hasNoodles == 2)) {
-
+            this.winner = 
             this.physics.pause();
             this.gameOver = true;                                                   //Fin del juego
 
@@ -874,8 +884,7 @@ class GameScene extends Phaser.Scene {
         var chatMessage = {
             name: "movimiento",
             player: nick,
-            info: positionX + "%" + positionY + "%" + speedX + "%" + speedY,
-            animations: animPlayer
+            info: positionX + "%" + positionY + "%" + speedX + "%" + speedY + "%"  + animPlayer
             /*positionX: positionX,
             positionY: positionY,
             speedX: speedX,
