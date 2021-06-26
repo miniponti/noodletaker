@@ -142,6 +142,7 @@ Debido a que los objetos que se han diseñado se basan en un sistema de “invoc
 Hay un único escenario divido en dos capas para usar el efecto de parallax scrolling.
 
 * **Fondos** El fondo es dinamico conforme el avance del nivel.
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background1.png" width="75%" height="75%">
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background3.png" width="75%" height="75%">
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
