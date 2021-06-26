@@ -50,7 +50,7 @@ __Cámara neutra__: La cámara toma una perspectiva lateral, perpendicular a la 
 	* → = Moverse a la derecha.
 	* Tecla Enter = Atacar y robar noodles.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/CONTROLS_MENU.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/CONTROLS_MENU.png" width="50%" height="50%">
 
 #### 2.3.- Jugabilidad
 * **Movimiento de los jugadores**: la jugabilidad se basa en un espacio de dos dimensiones en el que se puede avanzar horizontal y verticalmente, creando un entorno similar al de los juegos de plataformas.
@@ -84,9 +84,9 @@ Es una única partida en la que se decide el ganador. Un jugador sale victorioso
 #### 2.8.- Guía
 En la pantalla del título, se le da la opción al jugador de pulsar un botón que muestre un pequeño tutorial para que los jugadores entiendan desde el principio cuál es su objetivo, cuáles son los controles para interactuar con el juego y cuáles son las condiciones de victoria y de derrota.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/TUTORIAL_1.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/TUTORIAL_1.png" width="50%" height="50%">
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/TUTORIAL_2.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/TUTORIAL_2.png" width="50%" height="50%">
 
 ### 3.- Estados del juego
 NoodleTaker consta de los siguientes estados:
@@ -96,41 +96,43 @@ NoodleTaker consta de los siguientes estados:
 
 * **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="50%" height="50%">
 	
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/esquema.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/esquema.png" width="50%" height="50%">
 	
 ### 4.- Arte
 #### 4.1.- Interfaz
 * **Pantalla de inicio:** al arrancar el juego y antes de empezar a poder jugar, aparece un menú de inicio en el que hay un botón que pone “START”, el cual si se pulsa, el juego se pone en funcionamiento.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/START_SCENE.PNG" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/START_SCENE.PNG" width="50%" height="50%">
 
 * **Durante el juego:** una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAME_SCENE.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAME_SCENE.png" width="50%" height="50%">
 
 * **Pantalla de fin de juego:** aparece cuando se han superado el nivel. En esta parte hay un botón para reiniciar la partida y comenzar una nueva.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BAD_ENDING.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BAD_ENDING.png" width="50%" height="50%">
 
 * **Pantalla de nivel completado:** sale cuando se ha completado el nivel, bien sea porque un jugador ha llegado al final de la meta o bien porque los obstáculos le han impedido seguir jugando. Cuando esto ocurre, aparece quién es el ganador del nivel y un botón patra reiniciar la partida.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/P1_WINS_SCENE.PNG" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/P1_WINS_SCENE.PNG" width="50%" height="50%">
 
 #### 4.2.- Personajes
 * Jugables
 	* Ninja 1
 	
-	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BLUE_SPRITESHEET.png" width="1080" height="720">
-	* Ninja 2
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/BLUE_SPRITESHEET.png" width="50%" height="50%">
 	
-	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/GREEN_SPRITESHEET.png" width="1080" height="720">
+	* Ninja 2
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/GREEN_SPRITESHEET.png" width="50%" height="50%">
+	
 * No jugables
 	* Samurai
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/samurai.png" width="1080" height="720">
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/samurai.png" width="25%" height="25%">
+	
 	* El Todo Mítico
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/ETM.png" width="1080" height="720">
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/ETM.png" width="50%" height="50%">
 	
 #### 4.3.- Objetos
 Aparecen a lo largo del escenario de manera “semialeatoria” (tendrán unas posiciones determinadas en las que podrán o no aparecer), son de un solo uso y se utilizan en el momento en el que un jugador entra en contacto con la imagen que representa al objeto, afectando al otro jugador (si son perjudiciales) o al jugador que los obtiene (si son beneficiosos) . 
@@ -140,12 +142,13 @@ Debido a que los objetos que se han diseñado se basan en un sistema de “invoc
 Hay un único escenario divido en dos capas para usar el efecto de parallax scrolling.
 
 * **Fondos** El fondo es dinamico conforme el avance del nivel.
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background3.png" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background1.png" width="75%" height="75%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/Background3.png" width="75%" height="75%">
 	
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
 
 ### 5.- Diagrama de clases
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DiagramaDeClases.jpg" width="1080" height="720">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DiagramaDeClases.jpg" width="75%" height="75%">
 
 ### 6.- Gestion de cliente/servidor
 El servidor está formado por una sala principal que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
