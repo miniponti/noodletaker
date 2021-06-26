@@ -576,7 +576,7 @@ class GameScene extends Phaser.Scene {
             }
 
             if (this.enterDown && this.p2canAtack) {
-                this.golpearJugador(2);
+                this.golpearJugador(1);
                 if(online)
                     this.sendGolpe();
                 /*
@@ -599,7 +599,7 @@ class GameScene extends Phaser.Scene {
                 //console.log(this.timerP1);*/
 
             } else if (this.eDown && this.p1canAtack) {
-                this.golpearJugador(1);
+                this.golpearJugador(0);
                 if(online)
                     this.sendGolpe();
                 /*
@@ -877,10 +877,14 @@ class GameScene extends Phaser.Scene {
     }
 
     sendGolpe(){
+        //var info = 1;
+        //if(jugador == 1){
+        //    info = 0;
+        //}
         var chatMessage = {
             name: "golpe",
             player: nick,
-            info: ""
+            info: jugador
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
@@ -895,7 +899,7 @@ class GameScene extends Phaser.Scene {
                     this.actualizarJugadorOnline(jugador, messageObj.info);
                     break;
                 case "golpe":
-                    this.golpearJugador(jugador);
+                    this.golpearJugador(parseInt(messageObj.info));
                     break;
             }
         }
@@ -939,6 +943,7 @@ class GameScene extends Phaser.Scene {
             this.p2canAtack = false;
         }
     }
+
     actualizarJugadorOnline(player, messageInfo) {
         var info = messageInfo.split("%");
         if (player == 0) {
