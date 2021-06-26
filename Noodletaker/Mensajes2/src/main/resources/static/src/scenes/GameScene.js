@@ -110,12 +110,15 @@ class GameScene extends Phaser.Scene {
         });
 
         //JUGADOR 1-----------------------------------------------------------------------------------------------------
-
-        this.player1 = this.physics.add.sprite(600, 550 + 86, 'P1');  //INICIALIZACION J1
-        this.player1.setScale(0.15, 0.15);                        //ESCALADO J1
-
+        this.player1 = this.physics.add.sprite(600, 550 + 86, 'P1');    //INICIALIZACION J1
+        this.player1.setScale(0.15, 0.15);                              //ESCALADO J1
         this.player1.setVelocityX(0);
         this.player1.setVelocityY(0);
+
+        this.animsP1key;
+        this.animsP1frames;
+        this.animsP1frameRate;
+        this.animsP1repeat;
 
         //ANIMACIONES JUGADOR 1
         this.anims.create({
@@ -134,11 +137,15 @@ class GameScene extends Phaser.Scene {
 
 
         //JUGADOR 2-----------------------------------------------------------------------------------------------------
-        this.player2 = this.physics.add.sprite(650, 550 + 86, 'P2');  //INICIALIZACION J2
-
-        this.player2.setScale(0.15, 0.15);                        //ESCALADO J2`
+        this.player2 = this.physics.add.sprite(650, 550 + 86, 'P2');    //INICIALIZACION J2
+        this.player2.setScale(0.15, 0.15);                              //ESCALADO J2`
         this.player2.setVelocityX(0);
         this.player2.setVelocityY(0);
+
+        this.animsP2key;
+        this.animsP2frames;
+        this.animsP2frameRate;
+        this.animsP2repeat;
 
         //ANIMACIONES JUGADOR 2
         this.anims.create({
@@ -154,9 +161,10 @@ class GameScene extends Phaser.Scene {
         });
         this.player2.play('P2_stand');
 
+        var animP1 = this.anims.get('P1_anim');
+        var animP2 = this.anims.get('P2_anim');
 
         //SAMURAI
-
         this.samurai = this.physics.add.sprite(100, 545 + 86, 'SAMURAI');  //INICIALIZACION SAMURAI
         this.samurai.setScale(0.15, 0.15);                          //ESCALADO SAMURA
 
@@ -190,7 +198,9 @@ class GameScene extends Phaser.Scene {
         this.downDown = false;
         this.rightDown = false;
         this.enterDown = false;
+
         console.log(online + " " + jugador);
+
         if (!online || jugador == 0) {
             this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W, false);
             this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A, false);
@@ -298,11 +308,11 @@ class GameScene extends Phaser.Scene {
     bucleMensajes(){
         //console.log("MENSAJE;" + this.player1.x + " " +  this.player1.y + " " +  this.player1.velocityX + " " +  this.player1.velocityY)
         if (jugador == 0) {
-            this.sendMessage(this.player1.x, this.player1.y, this.player1.body.velocity.x, this.player1.body.velocity.y);
+            this.sendMessage(this.player1.x, this.player1.y, this.player1.body.velocity.x, this.player1.body.velocity.y, animP1);
         }
 
         if (jugador == 1) {
-            this.sendMessage(this.player2.x, this.player2.y, this.player2.body.velocity.x, this.player2.body.velocity.y);
+            this.sendMessage(this.player2.x, this.player2.y, this.player2.body.velocity.x, this.player2.body.velocity.y, animP2);
         }
 
     }
@@ -860,11 +870,12 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    sendMessage(positionX, positionY, speedX, speedY/*, attacking, saltando*/) {
+    sendMessage(positionX, positionY, speedX, speedY/*, attacking, saltando*/, animPlayer) {
         var chatMessage = {
             name: "movimiento",
             player: nick,
-            info: positionX + "%" + positionY + "%" + speedX + "%" + speedY
+            info: positionX + "%" + positionY + "%" + speedX + "%" + speedY,
+            animations: animPlayer
             /*positionX: positionX,
             positionY: positionY,
             speedX: speedX,
