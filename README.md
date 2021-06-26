@@ -50,7 +50,7 @@ __Cámara neutra__: La cámara toma una perspectiva lateral, perpendicular a la 
 	* → = Moverse a la derecha.
 	* Tecla Enter = Atacar y robar noodles.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/CONTROLS_MENU.png" width="50%" height="50%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/CONTROLS_MENU.png" width="50%" height="50%" align="center">
 
 #### 2.3.- Jugabilidad
 * **Movimiento de los jugadores**: la jugabilidad se basa en un espacio de dos dimensiones en el que se puede avanzar horizontal y verticalmente, creando un entorno similar al de los juegos de plataformas.
@@ -129,10 +129,10 @@ NoodleTaker consta de los siguientes estados:
 	
 * No jugables
 	* Samurai
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/samurai.png" width="50%" height="50%">
-	*
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/samurai.png" width="25%" height="25%">
+	
 	* El Todo Mítico
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/ETM.png" width="50%" height="50%">
+	<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/sprites/ETM.png" width="50%" height="50%">
 	
 #### 4.3.- Objetos
 Aparecen a lo largo del escenario de manera “semialeatoria” (tendrán unas posiciones determinadas en las que podrán o no aparecer), son de un solo uso y se utilizan en el momento en el que un jugador entra en contacto con la imagen que representa al objeto, afectando al otro jugador (si son perjudiciales) o al jugador que los obtiene (si son beneficiosos) . 
@@ -147,7 +147,7 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
 
 ### 5.- Diagrama de clases
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DiagramaDeClases.jpg" width="50%" height="50%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DiagramaDeClases.jpg" width="75%" height="75%">
 
 ### 6.- Gestion de cliente/servidor
 El servidor está formado por una sala principal que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
