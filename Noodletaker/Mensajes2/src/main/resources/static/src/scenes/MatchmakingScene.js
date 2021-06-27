@@ -48,7 +48,7 @@ class MatchmakingScene extends Phaser.Scene {
 
     onError(){
         console.log("Ha habido un error en la conexion");
-        this.scene.start('TITLE_SCENE_KEY');
+        this.scene.start('CONNECTION_LOST_SCENE_KEY');
     }
 
     pong(){
@@ -59,7 +59,7 @@ class MatchmakingScene extends Phaser.Scene {
         }else{
             clearInterval(pingPongTimer);
             stompClient.disconnect();
-            this.scene.start('TITLE_SCENE_KEY');
+            this.scene.start('CONNECTION_LOST_SCENE_KEY');
         }
     }
 
