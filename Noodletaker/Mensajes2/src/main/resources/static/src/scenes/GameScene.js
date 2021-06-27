@@ -221,6 +221,15 @@ class GameScene extends Phaser.Scene {
         console.log("online: " + online + "\njugador: " + jugador + "\nsevidor: "  + server + "\nsemilla: " + seed + "\nstompClient: " + stompClient) + "\nsocket: " + socket;
 
         if (!online || jugador == 0) {
+
+            if(online){
+                this.add.text(0, 0, 'You are player 1 (blue), use wasd keys to move!', {
+                    fontFamily: 'japaneseFont',
+                    fontSize: '30px',
+                    color: 'blue',
+                    backgroundColor : 'black'
+                })
+            }
             this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W, false);
             this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A, false);
             this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S, false);
@@ -241,6 +250,14 @@ class GameScene extends Phaser.Scene {
         }
 
         if (!online || jugador == 1) {
+            if(online){
+                this.add.text(0, 0, 'You are player 2 (green), use arrow keys to move!', {
+                    fontFamily: 'japaneseFont',
+                    fontSize: '30px',
+                    color: 'green', 
+                    backgroundColor: 'black'
+                })
+            }
             this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP, false);
             this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT, false);
             this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN, false);
@@ -597,10 +614,13 @@ class GameScene extends Phaser.Scene {
     }
 
     startGame() {
-        this.EnviarSincronizacion();
-        if(!online)
+        if(online){
+            this.EnviarSincronizacion();
+        }else{
             this.startGameReal();
+        }
     }
+
     startGameReal() {
         //console.log('startGame FUNCIONA');
 

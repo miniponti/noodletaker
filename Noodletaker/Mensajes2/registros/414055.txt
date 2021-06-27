@@ -1,0 +1,12 @@
+SERVER#21:39:29#Dake se conectó
+SERVER#21:39:37#Isma se conectó
+Isma#21:39:43#Hola
+SERVER#21:39:48#elena se conectó
+elena#21:39:57#holaaaaaaaaaaaaaaaa
+SERVER#21:40:10#elena se desconectó
+Dake#21:40:12#Holi darling
+SERVER#21:40:15#27062021 se conectó
+27062021#21:40:25#hola
+SERVER#21:40:38#Dake se desconectó
+SERVER#21:40:44#Isma se desconectó
+SERVER#21:40:46#27062021 se desconectó
