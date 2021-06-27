@@ -87,8 +87,8 @@ class GameScene extends Phaser.Scene {
         //CONEXION WEB
         this.serverTimeout = 5000;
         this.pinged = false;
-        //this.localReady = false;
-        //this.onlineReady = false;
+        this.localReady = false;
+        this.onlineReady = false;
 
         //AUDIO
         this.gameBGM = this.sound.add('GAME_AUDIO');
@@ -597,7 +597,13 @@ class GameScene extends Phaser.Scene {
     }
 
     startGame() {
+        this.EnviarSincronizacion();
+        if(!online)
+            this.startGameReal();
+    }
+    startGameReal() {
         //console.log('startGame FUNCIONA');
+
         this.goText.setVisible(false);
 
         //BARRA DE PROGRESO
@@ -1005,9 +1011,9 @@ class GameScene extends Phaser.Scene {
                     //this.EscenaFinalOnline(parseInt(messageObj.info));
                     this.VictoryHandler(messageObj.info);
                     break;
-                /*case "sync":
+                case "sync":
                     this.RecibirSincronizacion();
-                    break;*/
+                    break;
             }
         }
     }
@@ -1096,10 +1102,15 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
-    /*
+    
     EnviarSincronizacion(){
         console.log("ready");
         this.localReady = true;
+        if(this.onlineReady){
+            this.localReady = false;
+            this.onlineReady = false;
+            this.startGameReal();
+        }
         var chatMessage={
             name: "sync",
             player: nick,
@@ -1111,7 +1122,12 @@ class GameScene extends Phaser.Scene {
     RecibirSincronizacion(){
         console.log("started");
         this.onlineReady = true;
-    }*/
+        if(this.localReady){
+            this.localReady = false;
+            this.onlineReady = false;
+            this.startGameReal();
+        }
+    }
 
     VictoryHandler(ganador){
         if(online){
