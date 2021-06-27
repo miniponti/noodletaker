@@ -12,7 +12,8 @@ class GameScene extends Phaser.Scene {
 
     preload() {
 
-
+        
+        
         //CARGA DE TODAS LAS IMAGENES
         this.load.image('BG1', 'assets/sprites/Background1.png');
         this.load.image('BG2', 'assets/sprites/Background3.png');
@@ -52,6 +53,11 @@ class GameScene extends Phaser.Scene {
 
     create() {
 
+        if(this.keyA != undefined || this.keyDOWN != undefined){
+            console.log("Reseteando escena");
+            this.resetKeys();
+        }
+        
         console.log(jugador + " " + online);
         //Variables
         this.playerSpeed = 375;
@@ -1194,5 +1200,38 @@ class GameScene extends Phaser.Scene {
         seed = 1;
     }
 
+    resetKeys(){
+        try{
+            this.keyW.removeAllListeners();
+            this.keyA.removeAllListeners();     
+            this.keyS.removeAllListeners();   
+            this.keyD.removeAllListeners();
+            this.keyE.removeAllListeners();
 
+            this.keyW.remove();
+            this.keyA.remove();     
+            this.keyS.remove();   
+            this.keyD.remove();
+            this.keyE.remove();
+        }catch(a){
+            console.log(a);
+        }
+
+        try{
+
+            this.keyUP.removeAllListeners();
+            this.keyLEFT.removeAllListeners();
+            this.keyDOWN.removeAllListeners();
+            this.keyRIGHT.removeAllListeners();
+            this.keyENTER.removeAllListeners();
+
+            this.keyUP.remove();
+            this.keyLEFT.remove();
+            this.keyDOWN.remove();
+            this.keyRIGHT.remove();
+            this.keyENTER.remove();
+        }catch(a){
+            console.log(a);
+        }
+    }
 }
