@@ -1,6 +1,7 @@
 
 class GameScene extends Phaser.Scene {
 
+    
     constructor() {
         super('GAME_SCENE_KEY');
     }
@@ -51,6 +52,7 @@ class GameScene extends Phaser.Scene {
 
     create() {
 
+        console.log(jugador + " " + online);
         //Variables
         this.playerSpeed = 375;
         this.fastSpeed = 400;
@@ -213,7 +215,7 @@ class GameScene extends Phaser.Scene {
         this.rightDown = false;
         this.enterDown = false;
 
-        console.log(online + " " + jugador);
+        console.log("online: " + online + "\njugador: " + jugador + "\nsevidor: "  + server + "\nsemilla: " + seed + "\nstompClient: " + stompClient) + "\nsocket: " + socket;
 
         if (!online || jugador == 0) {
             this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W, false);
@@ -488,7 +490,7 @@ class GameScene extends Phaser.Scene {
 
 
         if (this.hasNoodles == 0) {
-            console.log(this.noodlesHolder.y);
+            //console.log(this.noodlesHolder.y);
             this.noodlesHolder.setVelocityX(-this.worldSpeed);
             this.noodles.x = this.noodlesHolder.x;
             this.noodles.y = this.noodlesHolder.y;
@@ -1114,7 +1116,6 @@ class GameScene extends Phaser.Scene {
         jugador = -1;
         server = -1;
         online = false;
-        nick = -1;
         seed = 1;
     }
 

@@ -70,7 +70,7 @@ public class GameController{
 	@MessageMapping("/ping/{player}")
 	@SendTo("/topic/searching/{player}")
 	public boolean pingFunction(@DestinationVariable String player, @Payload boolean ping) {
-		System.out.println("ping");
+		//System.out.println("ping");
 		findPLayer(player).setPing(true);
 		return true;
 	}

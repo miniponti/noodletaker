@@ -41,7 +41,7 @@ class MatchmakingScene extends Phaser.Scene {
             info: nick
         };
         stompClient.subscribe('/topic/searching/' + nick,  this.ping.bind(this), {id: nick+'a'});
-        pingPongTimer = window.setInterval(this.pong.bind(this), 250);
+        pingPongTimer = window.setInterval(this.pong.bind(this), 500);
         stompClient.send("/app/search", {}, JSON.stringify(chatMessage)); 
         
     }
