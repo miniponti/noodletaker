@@ -56,7 +56,7 @@ class GameScene extends Phaser.Scene {
         //Variables
         this.playerSpeed = 375;
         this.fastSpeed = 400;
-        this.worldSpeed = 10;
+        this.worldSpeed = 298;
         this.jumpSpeed = 450;
         this.platformSpawnSpeed = 1500;
         this.powerupSpawnSpeed = 6000;
@@ -82,10 +82,13 @@ class GameScene extends Phaser.Scene {
         this.randomPlat;
         this.winner;
 
+        console.log(this.keyA + " " + this.keyLEFT);
 
         //CONEXION WEB
         this.serverTimeout = 5000;
         this.pinged = false;
+        //this.localReady = false;
+        //this.onlineReady = false;
 
         //AUDIO
         this.gameBGM = this.sound.add('GAME_AUDIO');
@@ -344,6 +347,11 @@ class GameScene extends Phaser.Scene {
     }
 
     update() {
+        /*if(!this.localReady || !this.onlineReady){
+            //this.EnviarSincronizacion();
+            console.log("esperando");
+        }
+        else */
         if (!this.gameOver && this.startGameBool) {
             //ACTUALIZAR BARRA DE PROGRESO
             //this.progressBarText.setText(this.progressBarText + this.progressBar.getProgress().toString().substr(0, 4));
@@ -524,11 +532,11 @@ class GameScene extends Phaser.Scene {
         this.animP1 = 0;
         this.gameoverSFX.play();
 
-        this.restartGame();
+        //this.restartGame();
         this.winner = 2;
-        if(online){
+        /*if(online){
             this.EscenaFinalOnline(this.winner);
-        }
+        }*/
         this.VictoryHandler(this.winner);
     }
 
@@ -550,9 +558,9 @@ class GameScene extends Phaser.Scene {
         this.gameoverSFX.play();
 
         this.winner = 1;
-        if(online){
+        /*if(online){
             this.EscenaFinalOnline(this.winner);
-        }
+        }*/
         this.VictoryHandler(this.winner);
     }
 
@@ -585,6 +593,7 @@ class GameScene extends Phaser.Scene {
         this.goText = this.add.text(config.width / 2, config.height / 2, 'GO!', { font: '192px japaneseFont' });
         this.goText.setStroke('#ff5757', 16);
         Phaser.Display.Align.In.Center(this.goText, this.bg1);
+        //this.EnviarSincronizacion();
     }
 
     startGame() {
@@ -711,9 +720,9 @@ class GameScene extends Phaser.Scene {
         this.gameoverSFX.play();
 
         this.winner = 3;
-        if(online){
+        /*if(online){
             this.EscenaFinalOnline(this.winner);
-        }
+        }*/
         this.VictoryHandler(this.winner);
     }
 
@@ -916,9 +925,9 @@ class GameScene extends Phaser.Scene {
             this.animP1 = 0;
             this.gameoverSFX.play();
             this.winner = 1;
-            if(online){
+            /*if(online){
                 this.EscenaFinalOnline(this.winner);
-            }
+            }*/
             this.VictoryHandler(this.winner);
         }
         else if ((player == this.player2) && (this.hasNoodles == 2)) {
@@ -932,9 +941,9 @@ class GameScene extends Phaser.Scene {
             this.animP1 = 0;
             this.gameoverSFX.play();
             this.winner = 2;
-            if(online){
+            /*if(online){
                 this.EscenaFinalOnline(this.winner);
-            }
+            }*/
             this.VictoryHandler(this.winner);
         }
     }
@@ -994,8 +1003,11 @@ class GameScene extends Phaser.Scene {
                     break;
                 case "victoria":
                     //this.EscenaFinalOnline(parseInt(messageObj.info));
-                    this.EscenaFinalOnline(messageObj.info);
+                    this.VictoryHandler(messageObj.info);
                     break;
+                /*case "sync":
+                    this.RecibirSincronizacion();
+                    break;*/
             }
         }
     }
@@ -1075,6 +1087,7 @@ class GameScene extends Phaser.Scene {
     }
 
     EscenaFinalOnline(ganador){
+        console.log("enviando victoria");
         var chatMessage = {
             name: "victoria",
             player: nick,
@@ -1083,7 +1096,33 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
+    /*
+    EnviarSincronizacion(){
+        console.log("ready");
+        this.localReady = true;
+        var chatMessage={
+            name: "sync",
+            player: nick,
+            info: "ready"
+        }
+        stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
+    }
+
+    RecibirSincronizacion(){
+        console.log("started");
+        this.onlineReady = true;
+    }*/
+
     VictoryHandler(ganador){
+        if(online){
+            console.log("Victoria - Partida online");
+            this.EscenaFinalOnline(ganador);
+        }
+
+        console.log("Victoria - general");
+            
+
+
         this.restartGame();
         switch(ganador){
             case 1:
