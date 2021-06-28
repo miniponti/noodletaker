@@ -94,9 +94,9 @@ NoodleTaker consta de los siguientes estados:
 
 * **Matchmaking:** tras pulsar el botón "ONLINE", los jugadores son dirigidos a una escena en la que se espera la conexión de otro jugador. Una vez conectado, se procede a comenzar la partida.
 
-* **Partida empezada:** tras haber pulsado el botón de comienzo, los jugadores ya pueden comenzar a jugar.
+* **Partida empezada:** tras haber pulsado el botón correspondiente, los jugadores ya pueden comenzar a jugar.
 
-* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
+* **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador, o la condición de derrota ha dado lugar.
 
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="75%" height="75%">
 	
