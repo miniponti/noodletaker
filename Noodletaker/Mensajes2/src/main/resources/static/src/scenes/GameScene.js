@@ -58,7 +58,7 @@ class GameScene extends Phaser.Scene {
             this.resetKeys();
         }
         
-        console.log(jugador + " " + online);
+        console.log("Jugador: " + jugador + " online?:" + online);
         //Variables
         this.playerSpeed = 375;
         this.fastSpeed = 400;
@@ -88,7 +88,7 @@ class GameScene extends Phaser.Scene {
         this.randomPlat;
         this.winner;
 
-        console.log(this.keyA + " " + this.keyLEFT);
+        //console.log(this.keyA + " " + this.keyLEFT);
 
         //CONEXION WEB
         this.serverTimeout = 5000;
@@ -540,7 +540,7 @@ class GameScene extends Phaser.Scene {
     gameOverP1() {
         //Los jugadores ya no pueden moverse
 
-        console.log('gameOverP1 FUNCIONA');
+        //console.log('gameOverP1 FUNCIONA');
 
         //this.P2Winner = new ResumeScene();
         //this.P2Winner.setWinnerText(2);
@@ -564,7 +564,7 @@ class GameScene extends Phaser.Scene {
     }
 
     gameOverP2() {
-        console.log('gameOverP2 FUNCIONA');
+        //console.log('gameOverP2 FUNCIONA');
 
         //this.P1Winner = new ResumeScene();
         //this.P1Winner.setWinnerText(1);
@@ -924,7 +924,7 @@ class GameScene extends Phaser.Scene {
 
     createFinishLine() {
         if (this.startGameBool) {
-            console.log("createFinishLine FUNCIONA");
+            //console.log("createFinishLine FUNCIONA");
 
             this.samurai.setVelocityX(this.worldSpeed);
             this.finishLine = this.physics.add.sprite(1550, 200, 'FINISHLINE');
@@ -1119,7 +1119,7 @@ class GameScene extends Phaser.Scene {
     }
 
     EscenaFinalOnline(ganador){
-        console.log("enviando victoria");
+        //console.log("enviando victoria");
         var chatMessage = {
             name: "victoria",
             player: nick,
@@ -1156,30 +1156,21 @@ class GameScene extends Phaser.Scene {
     }
 
     VictoryHandler(ganador){
-        console.log(ganador);
         if(online){
-            console.log("Victoria - Partida online");
             this.EscenaFinalOnline(ganador);
         }
-
-        console.log("Victoria - general");
-            
-
-
         this.restartGame();
+
         switch(ganador){
             case 1:
-                console.log("jugador 1");
                 this.scene.start('WINNER_P1_SCENE');
                 break;
             
             case 2:
-                console.log("jugador 2");
                 this.scene.start('WINNER_P2_SCENE');
                 break;
 
             case 3:
-                console.log("samurai");
                 this.scene.start('BADENDING_SCENE_KEY');
                 break;
         }
@@ -1218,7 +1209,7 @@ class GameScene extends Phaser.Scene {
             this.keyD.remove();
             this.keyE.remove();
         }catch(a){
-            console.log(a);
+            //console.log(a);
         }
 
         try{
@@ -1235,7 +1226,7 @@ class GameScene extends Phaser.Scene {
             this.keyRIGHT.remove();
             this.keyENTER.remove();
         }catch(a){
-            console.log(a);
+           // console.log(a);
         }
     }
 }

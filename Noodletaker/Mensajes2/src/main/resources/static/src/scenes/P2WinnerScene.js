@@ -6,7 +6,7 @@ class P2WinnerScene extends Phaser.Scene {
     
     preload() {
         //IMAGENES
-        this.load.image('BACKGROUND', 'assets/sprites/P2_WINS.png');
+        this.load.image('BACKGROUND_P2', 'assets/sprites/P2_WINS.png');
         this.load.image('RESTART_BUTTON','assets/sprites/buttons/RESTART_BUTTON.png');
 
         //AUDIO
@@ -14,7 +14,7 @@ class P2WinnerScene extends Phaser.Scene {
     }
     
     create() {
-        let bg = this.add.sprite(0, 0, 'BACKGROUND');
+        let bg = this.add.sprite(0, 0, 'BACKGROUND_P2');
         bg.setOrigin(0,0);
 
         //AUDIO
@@ -24,8 +24,6 @@ class P2WinnerScene extends Phaser.Scene {
         let restartButton = this.add.image(config.width / 2, 650, 'RESTART_BUTTON');
         restartButton.setInteractive({useHandCursor: true});
         restartButton.on('pointerdown', () => this.restartGame());
-
-        console.log("ESCENA JUGADOR 2");
     }
     
     restartGame(){

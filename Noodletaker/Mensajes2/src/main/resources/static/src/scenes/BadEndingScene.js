@@ -6,7 +6,7 @@ class BadEndingScene extends Phaser.Scene {
     
     preload() {
         //IMAGENES
-        this.load.image('BACKGROUND', 'assets/sprites/BAD_ENDING.png');
+        this.load.image('BACKGROUND_BE', 'assets/sprites/BAD_ENDING.png');
         this.load.image('RESTART_BUTTON','assets/sprites/buttons/RESTART_BUTTON.png');
 
         //AUDIO
@@ -14,7 +14,7 @@ class BadEndingScene extends Phaser.Scene {
     }
     
     create() {
-        let bg = this.add.sprite(0, 0, 'BACKGROUND');
+        let bg = this.add.sprite(0, 0, 'BACKGROUND_BE');
         bg.setOrigin(0,0);
 
         //AUDIO
@@ -24,9 +24,6 @@ class BadEndingScene extends Phaser.Scene {
         let restartButton = this.add.image(config.width / 2, 600, 'RESTART_BUTTON');
         restartButton.setInteractive({useHandCursor: true});
         restartButton.on('pointerdown', () => this.restartGame());
-
-        console.log("ESCENA SAMURAI");
-
     }
     
     restartGame(){
