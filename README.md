@@ -165,7 +165,7 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 * **Plataformas** Las plataformas irán apareciendo por la parte derecha del nivel y se moverán hacia la izquierda conforme los personajes se muevan por el escenario.
 
 ### 5.- Diagrama de clases
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DiagramaDeClases.jpg" width="75%" height="75%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/DiagramaDeClases.jpg" width="75%" height="75%">
 
 ### 6.- Gestion de cliente/servidor - Sala de chat
 El servidor está formado por una sala principal que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
