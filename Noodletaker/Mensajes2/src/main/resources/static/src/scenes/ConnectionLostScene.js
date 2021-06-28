@@ -6,7 +6,7 @@ class ConnectionLostScene extends Phaser.Scene {
     
     preload() {
         //IMAGENES
-        this.load.image('DISCONNECTION', 'assets/interface/LOST_CONNECTION.png');
+        this.load.image('DISCONNECTION', 'assets/interface/scenes/LOST_CONNECTION.png');
         this.load.image('RESTART_BUTTON','assets/sprites/buttons/RESTART_BUTTON.png');
         //AUDIO
         this.load.audio("START_SFX","assets/audio/TITLE_BGM.mp3");
