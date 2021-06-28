@@ -175,8 +175,8 @@ Algo de lo que si se encarga el servidor es el matchmaking. Los clientes se subs
 Respecto a la comunicación entre clientes, estos enviaran mensajes formados por 3 atributos, el tipo de mensaje, el usuario que lo envio y la información que contiene (como campo de texto). Esto permite enviar e interpretar todo tipo de mensajes sin una gran complicación. Lo más básico que sincronizan los clientes es su movimiento. Cada cliente envia cada pocos milisegundos un mensaje de tipo movimiento que contiene en la información un objeto JSON con su posicion, velocidad, y atributos de visualización (número de animación y flip). Al recibir un mensaje de este tipo, se aplicaran los cambios que corresponden al jugador contrario. 
 
 Otros tipos de mensajes que se pueden encontrar son: 
-	* golpe: cuando un jugador golpea el otro se envia este mensaje para indicarle que ha recibido un golpe y tiene que desplazarse.
-	* victoria: si un jugador consigue llegar a cualquier escena de victoria, se envia un mensaje con el tipo de victoria conseguida para mostrarla tambien en el otro cliente
-	* sincronizacion: este tipo de mensaje se envia cuando un jugado esta listo para empezar. Cuando ambos jugadores han enviado y recibido este mensaje, se comienza el juego.
+* golpe: cuando un jugador golpea el otro se envia este mensaje para indicarle que ha recibido un golpe y tiene que desplazarse.
+* victoria: si un jugador consigue llegar a cualquier escena de victoria, se envia un mensaje con el tipo de victoria conseguida para mostrarla tambien en el otro cliente
+* sincronizacion: este tipo de mensaje se envia cuando un jugado esta listo para empezar. Cuando ambos jugadores han enviado y recibido este mensaje, se comienza el juego.
 
 Los jugadores solo interpretan mensajes provenientes de jugadores distintos a ellos mismos. Si no reciben mensajes de otros jugadores en una cierta cantidad de tiempo, se interpretara que se han desconectado y se saldra a una pantalla de desconexión.
