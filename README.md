@@ -106,7 +106,7 @@ NoodleTaker consta de los siguientes estados:
 #### 4.1.- Interfaz
 * **Pantalla de inicio**
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/START_SCENE.PNG" width="50%" height="50%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/STARTSCENE.PNG" width="50%" height="50%">
 
 * **Pantalla de matchmaking:** aparece cuando el jugador ha pulsado el botón "ONLINE" y está a la espera de otro jugador.
 
