@@ -1,4 +1,3 @@
-
 class GameScene extends Phaser.Scene {
 
     
@@ -1203,7 +1202,7 @@ class GameScene extends Phaser.Scene {
         online = false;
         seed = 1;
     }
-
+    
     resetKeys(){
         try{
             this.keyW.removeAllListeners();
