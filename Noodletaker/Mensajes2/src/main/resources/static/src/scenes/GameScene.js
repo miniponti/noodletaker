@@ -1146,6 +1146,7 @@ class GameScene extends Phaser.Scene {
         if(online){
             this.EscenaFinalOnline(ganador);
         }
+        console.log(ganador);
         this.restartGame();
 
         switch(ganador){
