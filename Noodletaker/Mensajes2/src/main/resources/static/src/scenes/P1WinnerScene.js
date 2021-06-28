@@ -6,7 +6,7 @@ class P1WinnerScene extends Phaser.Scene {
     
     preload() {
         //IMAGENES
-        this.load.image('BACKGROUND_P1', 'assets/sprites/P1_WINS.png');
+        this.load.image('BACKGROUND_P1', 'assets/interface/P1_WINS.png');
         this.load.image('RESTART_BUTTON','assets/sprites/buttons/RESTART_BUTTON.png');
 
         //AUDIO
