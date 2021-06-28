@@ -90,13 +90,15 @@ En la pantalla del título, se le da la opción al jugador de pulsar un botón q
 
 ### 3.- Estados del juego
 NoodleTaker consta de los siguientes estados:
-* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de un botón de empezar partida "START", uno para el tutorial "HOW TO PLAY", otro para 	los controles "CONTROLS" y por último uno para el audio.
+* **Menú de inicio:** es lo primero que ve el jugador al arrancar el juego. Consta de dos botones para empezar una partida tanto offline ("OFFLINE"), como online ("ONLINE"). Además se ha incorporado uno para el tutorial ("HOW TO PLAY"), otro para saber cuáles son los controles ("CONTROLS") y por último uno para silenciar o desilenciar el audio.
 
-* **Partida empezada:** tras pulsar el botón de comienzo, los jugadores ya pueden comenzar a jugar.
+* **Matchmaking:** tras pulsar el botón "ONLINE", los jugadores son dirigidos a una escena en la que se espera la conexión de otro jugador. Una vez conectado, se procede a comenzar la partida.
+
+* **Partida empezada:** tras haber pulsado el botón de comienzo, los jugadores ya pueden comenzar a jugar.
 
 * **Menú de fin de juego:** aparece cuando se ha superado el nivel y ya se ha establecido el ganador.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="50%" height="50%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DIAGRAMA.png" width="75%" height="75%">
 	
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/esquema.png" width="50%" height="50%">
 	
