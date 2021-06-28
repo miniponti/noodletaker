@@ -165,8 +165,6 @@ class GameScene extends Phaser.Scene {
         });
         this.player2.play('P2_stand');
 
-        //this.animP1 = this.anims.get('P1_anim');
-        //this.animP2 = this.anims.get('P2_anim');
         this.animP1 = 0;
         this.animP2 = 0;
         this.flipP1 = 0;
@@ -306,29 +304,6 @@ class GameScene extends Phaser.Scene {
         this.readyTitleCall = this.time.delayedCall(1000, this.readyTitle, [], this);
         this.startGameCall = this.time.delayedCall(5000, this.startGame, [], this);
 
-        /*
-        if(jugador == 1){
-            this.onlinePlayer = {positionX: this.player2.x,
-                positionY: this.player2.y,
-                speedX: 0,
-                speedY: 0,
-                //attacking: false,
-                //saltando: false,
-                player: ""};
-        }
-
-        if(jugador == 0){
-            this.onlinePlayer = {positionX: this.player1.x,
-                positionY: this.player1.y,
-                speedX: 0,
-                speedY: 0,
-                //attacking: false,
-                //saltando: false,
-                player: ""};
-        }*/
-        //this.boolOnlineAtacking = false;
-        //this.boolOnlineJumping = false;
-
         if (online) {
             this.intervaloMensajes = window.setInterval(this.bucleMensajes.bind(this), 100);
             stompClient.subscribe('/topic/gameId/' + server, this.onMessageReceived.bind(this), { id: nick });
@@ -359,11 +334,7 @@ class GameScene extends Phaser.Scene {
     }
 
     update() {
-        /*if(!this.localReady || !this.onlineReady){
-            //this.EnviarSincronizacion();
-            console.log("esperando");
-        }
-        else */
+
         if (!this.gameOver && this.startGameBool) {
             //ACTUALIZAR BARRA DE PROGRESO
             //this.progressBarText.setText(this.progressBarText + this.progressBar.getProgress().toString().substr(0, 4));
@@ -373,16 +344,7 @@ class GameScene extends Phaser.Scene {
 
             this.movePlayers();
             this.bg.tilePositionX += this.fondoSpeed;
-            /*
-            if(this.powerUpSpawner <= this.time.now){
-                this.powerUpSpawner+=10000;
-                this.todoMitico = this.powerUps.create(1375, 550, 'powerup');
-                this.todoMitico.setScale(0.15, 0.15);
-                this.todoMitico.setVelocityX(-this.worldSpeed);
-                //this.todoMitico.setCollideWorldBounds(true);
-                
-            }
-            */
+          
             var childs = [];
             var contador = 0;
             this.platforms.children.iterate(function (child) {
@@ -607,6 +569,8 @@ class GameScene extends Phaser.Scene {
         //this.EnviarSincronizacion();
     }
 
+    //Funcion para iniciar el juego, en el caso de estar en offline lo inicia directamente,
+    //Si esta online se enviara un mensaje de sincronizacion y se esperara a recibir el del rival
     startGame() {
         if(online){
             this.EnviarSincronizacion();
@@ -615,6 +579,7 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Inicia el juego en si mismo
     startGameReal() {
         //console.log('startGame FUNCIONA');
 
@@ -656,6 +621,8 @@ class GameScene extends Phaser.Scene {
         this.noodlesHolder.destroy();
     }
 
+
+    //Funcion para el manejo de los choques entre jugadores.
     playersCrush() {
         if (this.startGameBool) {
             if (!this.p2canAtack) {
@@ -673,46 +640,11 @@ class GameScene extends Phaser.Scene {
                 this.golpearJugador(1);
                 if (online)
                     this.sendGolpe();
-                /*
-                this.punchSFX.play();
-                if (this.hasNoodles == 1) {
-                    this.hasNoodles = 2;
-                }
-
-                if (this.player2.x > this.player1.x) {
-                    this.player1.setVelocityX(-700);
-                } else {
-                    this.player1.setVelocityX(700);
-                }
-                this.player1.play('P1_stand', true);
-                this.timerP1 = this.time.now + this.stunTime;
-                this.p1Moving = false;
-
-                this.attackTimerP2 = this.time.now + this.atackTime;
-                this.p2canAtack = false;
-                //console.log(this.timerP1);*/
 
             } else if (this.eDown && this.p1canAtack) {
                 this.golpearJugador(0);
                 if (online)
                     this.sendGolpe();
-                /*
-                this.punchSFX.play();
-                if (this.hasNoodles == 2) {
-                    this.hasNoodles = 1;
-                }
-                if (this.player2.x > this.player1.x) {
-                    this.player2.setVelocityX(700);
-                } else {
-                    this.player2.setVelocityX(-700);
-                }
-                this.player2.play('P2_stand', true);
-                this.timerP2 = this.time.now + this.stunTime;
-                this.p2Moving = false;
-
-                this.attackTimerP1 = this.time.now + this.atackTime;
-                this.p1canAtack = false;
-                //console.log(this.timerP2);*/
             }
         }
     }
@@ -835,11 +767,13 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Funcion que genera un numero random entre 0 y 1 dada una semilla.
     random() {
         var x = Math.sin(seed++) * 10000;
         return x - Math.floor(x);
     }
 
+    //Devuelve un numero aleatorio
     randomNumber() {
 
         //console.log("randomNumber FUNCIONA");
@@ -967,7 +901,9 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    sendMessage(positionX, positionY, speedX, speedY/*, attacking, saltando*/, animPlayer, flip) {
+
+    //Funcioin que maneja el envio de la informacion del personaje, crea un objeto con la posicion, velocidad, animacion y flip del jugador y lo comparte en el WebSocket.
+    sendMessage(positionX, positionY, speedX, speedY, animPlayer, flip) {
 
         var info = {
             positionX: positionX,
@@ -982,22 +918,12 @@ class GameScene extends Phaser.Scene {
             name: "movimiento",
             player: nick,
             info: infoTxt
-            /*positionX: positionX,
-            positionY: positionY,
-            speedX: speedX,
-            speedY: speedY,
-            attacking: attacking,
-            saltando: saltando,
-            player: nick*/
         };
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
+    //Funcion que envia un mensaje indicando que un jugador a golpeado a otro. 
     sendGolpe() {
-        //var info = 1;
-        //if(jugador == 1){
-        //    info = 0;
-        //}
         var chatMessage = {
             name: "golpe",
             player: nick,
@@ -1006,11 +932,11 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
+    //Funcion que maneja la recepcion de mensajes.
+    //Comprueba que el mensaje no haya sido enviado por el mismo y de ser asi llama a la funcion correspondiente a cada tipo de mensaje
     onMessageReceived(message) {
         var messageObj = JSON.parse(message.body);
       
-        //this.boolOnlineAtacking = messageObj.attacking;
-        //this.boolOnlineJumping = messageObj.saltando;
         if (nick != messageObj.player) {
             this.pinged = true;
             switch (messageObj.name) {
@@ -1021,7 +947,6 @@ class GameScene extends Phaser.Scene {
                     this.golpearJugador(parseInt(messageObj.info));
                     break;
                 case "victoria":
-                    //this.EscenaFinalOnline(parseInt(messageObj.info));
                     this.VictoryHandler(messageObj.info);
                     break;
                 case "sync":
@@ -1031,6 +956,7 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Funcion que controla el golpe dado por un jugador indicado
     golpearJugador(playerJ) {
 
         if (playerJ == 0) {
@@ -1071,9 +997,10 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Funcion que maneja la recepcion del mensaje de informacion del otro jugador online. 
+    //Aplica los cambios al personaje que el jugador no controla
     actualizarJugadorOnline(player, messageInfo) {
         var objInfo = JSON.parse(messageInfo);
-        //var info = messageInfo.split("%");
         var txtP;
         var playerOnline;
         if (player == 0) {
@@ -1083,10 +1010,14 @@ class GameScene extends Phaser.Scene {
             playerOnline = this.player1;
             txtP = 'P1';
         }
-        playerOnline.x = objInfo.positionX//parseFloat(info[0]);
-        playerOnline.y = objInfo.positionY//parseFloat(info[1]);
-        playerOnline.setVelocityX(objInfo.speedX/*parseFloat(info[2])*/);
-        playerOnline.setVelocityY(objInfo.speedY/*parseFloat(info[3])*/);
+
+        //Actualizar posicion y velocidad
+        playerOnline.x = objInfo.positionX;
+        playerOnline.y = objInfo.positionY;
+        playerOnline.setVelocityX(objInfo.speedX);
+        playerOnline.setVelocityY(objInfo.speedY);
+
+        //Actualizar orientacion y animacion
         switch (objInfo.anim) {
             case 0:
                 playerOnline.play(txtP + '_stand', true);
@@ -1105,8 +1036,8 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Funcion que envia un mensaje a la red con el resultado de la partida cuando termina el juego.
     EscenaFinalOnline(ganador){
-        //console.log("enviando victoria");
         var chatMessage = {
             name: "victoria",
             player: nick,
@@ -1115,7 +1046,8 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
-    
+    //Funcion que maneja el envio de mensajes de sincronzacion. Envia un mensaje marcando como preparado al cliente.
+    //Si ambos jugadores estan preparados empieza la partida.
     EnviarSincronizacion(){
         console.log("ready");
         this.localReady = true;
@@ -1132,6 +1064,8 @@ class GameScene extends Phaser.Scene {
         stompClient.send("/app/playing.send/" + server, {}, JSON.stringify(chatMessage));
     }
 
+
+    //Funcion que maneja la ecepcion de mensajes de sincronizacion. Si ambos jugadores estan preaprados empieza la partida.
     RecibirSincronizacion(){
         console.log("started");
         this.onlineReady = true;
@@ -1142,6 +1076,7 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Funcion para manejar el final de la partida. SI la partida es online se envia un mensaje indicando que tipo de fin se ha alcanzado.
     VictoryHandler(ganador){
         if(online){
             this.EscenaFinalOnline(ganador);
@@ -1164,6 +1099,7 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Reinicia las variables y contadores de la partida para evitar problemas al jugar por segunda vez
     restartGame(){
         if(online){
 
@@ -1183,6 +1119,7 @@ class GameScene extends Phaser.Scene {
         seed = 1;
     }
 
+    //reinicia las teclas y los eventos asociadas a ellas
     resetKeys(){
         try{
             this.keyW.removeAllListeners();
