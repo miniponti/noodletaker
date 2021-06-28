@@ -6,7 +6,7 @@ class BadEndingScene extends Phaser.Scene {
     
     preload() {
         //IMAGENES
-        this.load.image('BACKGROUND_BE', 'assets/sprites/BAD_ENDING.png');
+        this.load.image('BACKGROUND_BE', 'assets/interface/BAD_ENDING.png');
         this.load.image('RESTART_BUTTON','assets/sprites/buttons/RESTART_BUTTON.png');
 
         //AUDIO
