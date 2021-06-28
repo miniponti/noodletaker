@@ -1156,6 +1156,7 @@ class GameScene extends Phaser.Scene {
     }
 
     VictoryHandler(ganador){
+        console.log(ganador);
         if(online){
             console.log("Victoria - Partida online");
             this.EscenaFinalOnline(ganador);
@@ -1168,14 +1169,17 @@ class GameScene extends Phaser.Scene {
         this.restartGame();
         switch(ganador){
             case 1:
+                console.log("jugador 1");
                 this.scene.start('WINNER_P1_SCENE');
                 break;
             
             case 2:
+                console.log("jugador 2");
                 this.scene.start('WINNER_P2_SCENE');
                 break;
 
             case 3:
+                console.log("samurai");
                 this.scene.start('BADENDING_SCENE_KEY');
                 break;
         }
