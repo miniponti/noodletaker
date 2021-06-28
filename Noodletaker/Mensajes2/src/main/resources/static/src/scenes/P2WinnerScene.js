@@ -24,6 +24,8 @@ class P2WinnerScene extends Phaser.Scene {
         let restartButton = this.add.image(config.width / 2, 650, 'RESTART_BUTTON');
         restartButton.setInteractive({useHandCursor: true});
         restartButton.on('pointerdown', () => this.restartGame());
+
+        console.log("ESCENA JUGADOR 2");
     }
     
     restartGame(){

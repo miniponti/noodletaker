@@ -25,6 +25,8 @@ class BadEndingScene extends Phaser.Scene {
         restartButton.setInteractive({useHandCursor: true});
         restartButton.on('pointerdown', () => this.restartGame());
 
+        console.log("ESCENA SAMURAI");
+
     }
     
     restartGame(){
