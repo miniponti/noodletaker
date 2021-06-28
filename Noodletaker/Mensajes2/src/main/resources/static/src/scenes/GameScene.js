@@ -111,8 +111,8 @@ class GameScene extends Phaser.Scene {
         // this.bg2.setScrollFactor(0);
         // this.bg2.setScale(1, 1);
         this.bgcalero = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'BGCALERO')
-        this.bg1.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
-        this.bg1.setScrollFactor(0);
+        this.bgcalero.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
+        this.bgcalero.setScrollFactor(0);
 
         //SUELO ESTATICO
         this.suelo = this.physics.add.staticGroup();
