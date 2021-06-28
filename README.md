@@ -116,7 +116,7 @@ NoodleTaker consta de los siguientes estados:
 
 * **Durante el juego:** una vez arranca la partida, el menú de inicio desaparece y en la pantalla aparece una barra de progresión de nivel. Ésta se encuentra en la parte superior de la pantalla e indica a los jugadores lo que llevan recorrido de nivel y cuánto les falta para terminar. Comienza siendo un rectángulo vacío, pero que cuanto más avanza la partida, más se va llenando. Cuando está totalmente llena significa que se ha llegado al final.
 
-<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAMESCENE.png" width="50%" height="50%">
+<img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/GAME_SCENE.png" width="50%" height="50%">
 
 * **Pantalla de fin de juego:** aparece cuando ninguno de los jugadores han cogido el bol de fideos, por tanto el samurái gana.
 
