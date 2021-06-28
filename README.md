@@ -154,7 +154,7 @@ Hay un único escenario divido en dos capas para usar el efecto de parallax scro
 ### 5.- Diagrama de clases
 <img src="https://github.com/miniponti/noodletaker/blob/main/Noodletaker/Mensajes2/src/main/resources/static/assets/interface/scenes/DiagramaDeClases.jpg" width="75%" height="75%">
 
-### 6.- Gestion de cliente/servidor
+### 6.- Gestion de cliente/servidor - Sala de chat
 El servidor está formado por una sala principal que almacena una lista de jugadores conectados y un registro de mensajes almacenado en un txt en memoria local (este txt tiene el nombre de la ID de su sala). 
 
 Los clientes se pueden conectar al servidor con una petición de tipo POST, en la que se incluye en el cuerpo de la petición el ID que va a tener el cliente dentro del servidor. 
@@ -164,3 +164,19 @@ El servidor enviará como respuesta un objeto de la clase Jugador, donde estará
 Una vez que un cliente esté conectado, tendrá que enviar una petición de tipo GET (un ping) constantemente indicando la ID del jugador y la ID de la sala a la que se hace, la cual enviará en el cuerpo de la respuesta un objeto con la lista de jugadores conectados a la sala y la lista de mensajes enviados en la sala. Si alguno de los clientes conectados no envía un ping en un tiempo determinado (2 segundos) se le desconectará de la sala, por lo cual no podrá enviar ni recibir mensajes de la sala hasta que se vuelva a conectar. Si un cliente intenta conectarse con la ID de un jugador ya conectado, el servidor devolverá null, que en el cliente se interpretará como que esa ID ya está registrada. 
 
 Si el servidor no está conectado, el cliente interpretará los fallos en sus peticiones de GET o POST como que el servidor está offline.  
+
+### 7.- Gestion de cliente/servidor - Juego Online
+Para la gestion del multijugado real se ha usado websockets, que permitiran a los clientes subscribirse a un canal y recibir directamente los mensajes que se envien a el. Para lograr esto se ha empleado el protocolo STOMP, que proporciona un manejo sencillo y eficaz de mensajes simples. 
+
+Se ha decidido usar un modelo de cliente autoritativo, donde los clientes informan al servidor de su estado y el cliente se encarga de comunicarle este a los demas, dejando al servidor con una funcionalidad de "eco", donde solo reenvia los mensajes que le llegan. Existira un canal para cada partida y los jugadores enviaran y recibiran mensajes en ese canal. 
+
+Algo de lo que si se encarga el servidor es el matchmaking. Los clientes se subscribian a un canal de matchmaking y el servidor los ira metiendo en una lista segun lo hagan. Una vez que haya 2 o mas jugadores se enviara un mensaje con el id de sala asociada a ellos y se les eliminara de la lista. Los clientes se encargan de desubscribirse de este canal y subscribirse al canal de la sala que se les ha asociado. Para detectar desconexiones en este apartado, su usa un metodo de "ping-pong". El cliente envia cada poco un "ping" que el servidor recibe, marcando al jugador que lo ha recibido. Tras esto devuelve un "pong" al cliente. El cliente al recibirlo marcara que sigue conectado al servidor. Si el cliente intenta enviar un "ping" sin haber recibido el "pong" interpretara que se ha desconectado del servidor y se movera a una pantalla de desconexion. El servidor cada cierto tiempo ejecuta una funcion que elimina a todos los jugadores que no esten marcados, interpretando que se han desconectado, y desmarcara a todos los demas.
+
+Respecto a la comunicación entre clientes, estos enviaran mensajes formados por 3 atributos, el tipo de mensaje, el usuario que lo envio y la información que contiene (como campo de texto). Esto permite enviar e interpretar todo tipo de mensajes sin una gran complicación. Lo más básico que sincronizan los clientes es su movimiento. Cada cliente envia cada pocos milisegundos un mensaje de tipo movimiento que contiene en la información un objeto JSON con su posicion, velocidad, y atributos de visualización (número de animación y flip). Al recibir un mensaje de este tipo, se aplicaran los cambios que corresponden al jugador contrario. 
+
+Otros tipos de mensajes que se pueden encontrar son: 
+	*golpe: cuando un jugador golpea el otro se envia este mensaje para indicarle que ha recibido un golpe y tiene que desplazarse.
+	*victoria: si un jugador consigue llegar a cualquier escena de victoria, se envia un mensaje con el tipo de victoria conseguida para mostrarla tambien en el otro cliente
+	*sincronizacion: este tipo de mensaje se envia cuando un jugado esta listo para empezar. Cuando ambos jugadores han enviado y recibido este mensaje, se comienza el juego.
+
+Los jugadores solo interpretan mensajes provenientes de jugadores distintos a ellos mismos. Si no reciben mensajes de otros jugadores en una cierta cantidad de tiempo, se interpretara que se han desconectado y se saldra a una pantalla de desconexión.
