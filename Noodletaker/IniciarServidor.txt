@@ -1,6 +1,13 @@
 ------------------------------------------------------------
 INSTRUCCIONES PARA EJECUTAR EL SERVIDOR:
 ------------------------------------------------------------
+
+Opcion 1:
+1: Descargar y descomprimir el rar con los archivos del proyecto
+2: Ejecutar EjecutarServidor.cmd
+
+Opcion 2:
+
 1: Descargar y descomprimir el rar con los archivos del proyecto
 2: Abrir la consola de comandos 
 2.5: Si el puerto 8080 del ordenador esta abierto, cerrarlo.
@@ -17,4 +24,11 @@ algun problema
 ------------------------------------------------------------
 INSTRUCCIONES PARA EJECUTAR EL CLIENTE:
 ------------------------------------------------------------
+En la misma maquina que el servidor:
 1: Abrir la direccion http://localhost:8080/ en un navegador web
+
+En una maquina en la red local del servidor:
+1: Abrir la direccion http://localIP:8080/ en un navegador web
+
+En una maquina en la red (el servidor tiene que tener habilitado port-forwarding al puerto 8080)
+1: Abrir la direccion http://publicIP:8080/ en un navegador web
