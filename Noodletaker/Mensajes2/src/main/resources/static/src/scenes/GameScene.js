@@ -12,9 +12,7 @@ class GameScene extends Phaser.Scene {
     preload() {
 
         //CARGA DE TODAS LAS IMAGENES
-        // this.load.image('BG1', 'assets/sprites/Background1.png');
-        // this.load.image('BG2', 'assets/sprites/Background3.png');
-        this.load.image('BGCALERO', 'assets/sprites/Background2.png')
+        this.load.image('BG', 'assets/sprites/Background2.png')
         this.load.image('ROAD', 'assets/sprites/plataforma.png');
         this.load.image('OBSTACLE', 'assets/sprites/PLATFORM2.png');
         this.load.image('FINISHLINE', 'assets/sprites/FINISHLINE.png');
@@ -64,8 +62,7 @@ class GameScene extends Phaser.Scene {
         this.jumpSpeed = 450;
         this.platformSpawnSpeed = 1500;
         this.powerupSpawnSpeed = 6000;
-        this.fondoSpeed1 = 3;
-        this.fondoSpeed2 = 5;
+        this.fondoSpeed = 5;
         this.gameOver = false;
         this.startGameBool = false;
         this.p1Moving = true;
@@ -102,17 +99,9 @@ class GameScene extends Phaser.Scene {
         this.samuraiSFX = this.sound.add('SAMURAI_SFX');
 
         //FONDO DEL JUEGO
-        // this.bg1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'BG1');
-        // this.bg1.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
-        // this.bg1.setScrollFactor(0);
-        // this.bg1.setScale(1.75, 1.75);
-        // this.bg2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'BG2');
-        // this.bg2.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
-        // this.bg2.setScrollFactor(0);
-        // this.bg2.setScale(1, 1);
-        this.bgcalero = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'BGCALERO')
-        this.bgcalero.setOrigin(1, 1);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
-        this.bgcalero.setScrollFactor(0);
+        this.bg = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'BG')
+        this.bg.setOrigin(0, 0);  //SE CAMBIA EL ORIGEN A LA ESQUINA SUPERIOR IZQ
+        this.bg.setScrollFactor(0);
 
         //SUELO ESTATICO
         this.suelo = this.physics.add.staticGroup();
@@ -383,9 +372,7 @@ class GameScene extends Phaser.Scene {
             this.graphics.fillRect(0, 10, 1000 * this.progressBar.getProgress(), 20);
 
             this.movePlayers();
-            // this.bg1.tilePositionX += this.fondoSpeed1; //MOVIMIENTO CONSTANTE DEL FONDO
-            // this.bg2.tilePositionX += this.fondoSpeed2; //MOVIMIENTO CONSTANTE DEL FONDO
-            this.bgcalero.tilePositionX += this.fondoSpeed1;
+            this.bg.tilePositionX += this.fondoSpeed;
             /*
             if(this.powerUpSpawner <= this.time.now){
                 this.powerUpSpawner+=10000;
@@ -593,8 +580,7 @@ class GameScene extends Phaser.Scene {
         //console.log("READY?");
         this.readyText = this.add.text(config.width / 2, config.height / 2, 'READY?', { font: '192px japaneseFont' });
         this.readyText.setStroke('#ff5757', 16);
-        // Phaser.Display.Align.In.Center(this.readyText, this.bg1);
-        Phaser.Display.Align.In.Center(this.readyText, this.bgcalero);
+        Phaser.Display.Align.In.Center(this.readyText, this.bg);
         this.littleGongSFX.play();
         this.setTextCall = this.time.delayedCall(1000, this.setTitle, [], this);
     }
@@ -605,8 +591,7 @@ class GameScene extends Phaser.Scene {
         this.readyText.setVisible(false);
         this.setText = this.add.text(config.width / 2, config.height / 2, 'SET?', { font: '192px japaneseFont' });
         this.setText.setStroke('#ff5757', 16);
-        // Phaser.Display.Align.In.Center(this.setText, this.bg1);
-        Phaser.Display.Align.In.Center(this.setText, this.bgcalero);
+        Phaser.Display.Align.In.Center(this.setText, this.bg);
         this.littleGongSFX.play();
         this.goTextCall = this.time.delayedCall(1000, this.goTitle, [], this);
     }
@@ -618,8 +603,7 @@ class GameScene extends Phaser.Scene {
         this.setText.setVisible(false);
         this.goText = this.add.text(config.width / 2, config.height / 2, 'GO!', { font: '192px japaneseFont' });
         this.goText.setStroke('#ff5757', 16);
-        // Phaser.Display.Align.In.Center(this.goText, this.bg1);
-        Phaser.Display.Align.In.Center(this.goText, this.bgcalero);
+        Phaser.Display.Align.In.Center(this.goText, this.bg);
         //this.EnviarSincronizacion();
     }
 
@@ -939,8 +923,7 @@ class GameScene extends Phaser.Scene {
             this.physics.add.overlap(this.player1, this.finishLine, this.decideWinner, null, this);
             this.physics.add.overlap(this.player2, this.finishLine, this.decideWinner, null, this);
             this.worldSpeed = 0;
-            this.fondoSpeed2 = 0;
-            this.fondoSpeed1 = 0;
+            this.fondoSpeed = 0;
             this.platforms.children.iterate(function (child) {
 
                 child.setVelocityX(0);
