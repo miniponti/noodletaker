@@ -10,6 +10,7 @@ La temática del juego es "Japón moderno mezclado con figuras del Japón feudal
 |    Elena Pontijas Martín   | e.pontijas.2018@alumnos.urjc.es |    miniponti   |
 
 Presentacion fase 4: https://youtu.be/1RtFuDk04MI 
+Link itch.io: https://dakexd.itch.io/noodletaker
 
 
 ### 1.- Introducción
